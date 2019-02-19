@@ -63,10 +63,13 @@
                     [ 8, 1, 2, '$cheeseCount < 2?'],
                     [ 8, 3, 2, 'Nein! 3 ist größer als 2.'],
                     [ 8, 3, 2, 'Die Schleife wird also abgebrochen.'],
+                    [ 8, 3, 2, 'Hätten wir die Bedingung hier erfüllt, würden wir zum Anfang springen.'],
+                    [ 8, 3, 2, 'Haben wir aber nicht, also gehen wir weiter.'],
                     [11, 0, 3, 'Soße drauf.'],
                     [12, 0, 4, 'Burger vollendet und wieder ein Kunde glücklich.'],
                     [12, 0, 4, 'Auf der nächsten Seite geht es spannend weiter.'],
                     [12, 0, 4, 'Wir können unsere Schleifen noch einfacher gestalten.'],
+                    [12, 0, 4, 'Wie das geht, siehst du auf der nächsten Seite.'],
                     [12, 0, 4, 'Schau dir die "For"-Schleifen an!'],
                 ],
                 burgerAnimation: [

@@ -35,7 +35,7 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 3;
+      z-index: 7;
     }
     #content {
       margin-top: 7rem;
