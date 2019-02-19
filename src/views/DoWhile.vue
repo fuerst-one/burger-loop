@@ -14,10 +14,6 @@
                         Zuerst "<u>Tun</u>", dann überprüfen, ob eine weitere Wiederholung gemacht wird.
                     </p>
                 </template>
-                <template slot="anim">
-                    <img src="../assets/img/topbun.svg" alt="" class="img-fluid">
-                    <img src="../assets/img/bottombun.svg" alt="" class="img-fluid">
-                </template>
             </Layout>
         </div>
     </div>
@@ -28,8 +24,6 @@
     export default {
         name: 'While',
         components: {Layout},
-        directives: {},
-        props: {},
         data() {
             return {
                 sourcecode: [
@@ -47,7 +41,6 @@
                     'add(sauce);',
                     'add(topBun);',
                 ],
-                animationStep: 0,
                 animation: [
                     [ 0, 0, 0, 'Unser Kunde hat seinen Burger umbestellt.'],
                     [ 0, 0, 0, 'Wir sollen noch eine Scheibe Käse hinzufügen!'],
@@ -67,8 +60,8 @@
                     [ 8, 3, 2, 'Haben wir aber nicht, also gehen wir weiter.'],
                     [11, 0, 3, 'Soße drauf.'],
                     [12, 0, 4, 'Burger vollendet und wieder ein Kunde glücklich.'],
-                    [12, 0, 4, 'Auf der nächsten Seite geht es spannend weiter.'],
-                    [12, 0, 4, 'Wir können unsere Schleifen noch einfacher gestalten.'],
+                    [12, 0, 4, '..."Do While". Auch ein hilfreicher Partner in der Programmier-Küche.'],
+                    [12, 0, 4, 'Aber wir können unsere Schleifen noch einfacher gestalten!'],
                     [12, 0, 4, 'Wie das geht, siehst du auf der nächsten Seite.'],
                     [12, 0, 4, 'Schau dir die "For"-Schleifen an!'],
                 ],
@@ -80,12 +73,6 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce', 'topBun' ],
                 ]
             }
-        },
-        computed: {},
-        watch: {},
-        methods: {}
+        }
     }
 </script>
-
-<style lang="scss" scoped>
-</style>

@@ -23,11 +23,11 @@ export default new Router({
       name: 'while',
       component: () => import('./views/While.vue')
     },
-      {
-          path: '/do-while',
-          name: 'do-while',
-          component: () => import('./views/DoWhile.vue')
-      },
+    {
+      path: '/do-while',
+      name: 'do-while',
+      component: () => import('./views/DoWhile.vue')
+    },
     {
       path: '/for',
       name: 'for',

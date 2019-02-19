@@ -22,8 +22,6 @@
                         kein anderer Block mehr abgefragt.
                     </p>
                 </template>
-                <template slot="anim">
-                </template>
             </Layout>
         </div>
     </div>
@@ -34,8 +32,6 @@
     export default {
         name: 'If',
         components: {Layout},
-        directives: {},
-        props: {},
         data() {
             return {
                 sourcecode: [
@@ -61,6 +57,7 @@
                     '// Done!'
                 ],
                 animation: [
+                    // sourcecode line, line-indicator status, burger animation frame, line-indicator tooltip
                     [ 0, 0, 0, 'Ok, let\'s go. Braten wir ein paar Burger.'],
                     [ 0, 0, 0, 'Das ist unser Kochbuch.'],
                     [ 0, 0, 0, 'Unser erster Burger: "Double-Cheeseburger"'],
@@ -118,12 +115,6 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                 ]
             }
-        },
-        computed: {},
-        watch: {},
-        methods: {},
+        }
     }
 </script>
-
-<style lang="scss" scoped>
-</style>

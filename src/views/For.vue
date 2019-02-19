@@ -21,10 +21,6 @@
                         "break" oder "return" beendet. Andernfalls wird die Schleife theoretisch unendlich ausgeführt.
                     </p>
                 </template>
-                <template slot="anim">
-                    <img src="../assets/img/topbun.svg" alt="" class="img-fluid">
-                    <img src="../assets/img/bottombun.svg" alt="" class="img-fluid">
-                </template>
             </Layout>
         </div>
     </div>
@@ -35,8 +31,6 @@
     export default {
         name: 'For',
         components: {Layout},
-        directives: {},
-        props: {},
         data() {
             return {
                 sourcecode: [
@@ -48,7 +42,6 @@
                     '',
                     '// Guten Appetit!'
                 ],
-                animationStep: 0,
                 animation: [
                     [0, 0, 0, 'Da hat jemand Hunger. 3 Cheeseburger!'],
                     [0, 0, 0, 'So einen repetitiven Task können wir vereinfachen.'],
@@ -89,12 +82,6 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
                 ]
             }
-        },
-        computed: {},
-        watch: {},
-        methods: {}
+        }
     }
 </script>
-
-<style lang="scss" scoped>
-</style>

@@ -15,10 +15,6 @@
                         nicht mehr zutrifft.
                     </p>
                 </template>
-                <template slot="anim">
-                    <img src="../assets/img/topbun.svg" alt="" class="img-fluid">
-                    <img src="../assets/img/bottombun.svg" alt="" class="img-fluid">
-                </template>
             </Layout>
         </div>
     </div>
@@ -29,8 +25,6 @@
     export default {
         name: 'While',
         components: {Layout},
-        directives: {},
-        props: {},
         data() {
             return {
                 sourcecode: [
@@ -78,8 +72,11 @@
                     [ 6, 3, 3, 'Nope! Das war\'s! Kein Käse mehr auf den Burger!'],
                     [11, 0, 4, 'Also nur noch Soße...'],
                     [12, 0, 5, '...und die obere Brötchenhälfte und wir sind fertig.'],
+                    [12, 0, 5, 'Wir konnten den Käse jetzt mit nur einer Anweisung doppelt hinzufügen!'],
+                    [12, 0, 5, 'Mit der "While"-Schleife kann man also sich wiederholende Aufgaben...'],
+                    [12, 0, 5, '...ganz einfach und zeitsparend notieren! Besser als Copy&Paste!'],
                     [12, 0, 5, 'Die "While"-Schleife hat aber auch einen Bruder.'],
-                    [12, 0, 5, 'Schau dir auf der nächsten Seite den Unterschied zur "Do While"-Schleife an.'],
+                    [12, 0, 5, 'Schau dir auf der nächsten Seite den Unterschied zur "Do While"-Schleife an!'],
                 ],
                 burgerAnimation: [
                     [],
@@ -90,10 +87,7 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
                 ]
             }
-        },
-        computed: {},
-        watch: {},
-        methods: {}
+        }
     }
 </script>
 

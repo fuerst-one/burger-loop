@@ -18,10 +18,6 @@
                         übersprungen werden.
                     </p>
                 </template>
-                <template slot="anim">
-                    <img src="../assets/img/topbun.svg" alt="" class="img-fluid">
-                    <img src="../assets/img/bottombun.svg" alt="" class="img-fluid">
-                </template>
             </Layout>
         </div>
     </div>
@@ -32,8 +28,6 @@
     export default {
         name: 'Foreach',
         components: {Layout},
-        directives: {},
-        props: {},
         data() {
             return {
                 sourcecode: [
@@ -52,7 +46,6 @@
                     '',
                     '// Feierabend! Geil.',
                 ],
-                animationStep: 0,
                 animation: [
                     [ 0, 0, 0, 'Alright, get ready...'],
                     [ 2, 0, 0, 'Wir haben Bestellungen an 3 Tischen!'],
@@ -107,12 +100,6 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
                 ]
             }
-        },
-        computed: {},
-        watch: {},
-        methods: {}
+        }
     }
 </script>
-
-<style lang="scss" scoped>
-</style>

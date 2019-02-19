@@ -1,7 +1,7 @@
 {
-  "name": "webprog-tutorium",
+  "name": "burger-loop",
   "version": "0.1.0",
-  "private": true,
+  "author": "Alexander Fürst <alexander@fuerst.one>, Christiane Pluta <christiane.pluta@student.fhws.de>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -12,8 +12,7 @@
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.22",
     "vue-highlightjs": "^1.3.3",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.0.0-beta.53",
