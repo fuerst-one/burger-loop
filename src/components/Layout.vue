@@ -304,6 +304,7 @@
             width: $size;
             height: $size;
             margin-top: -($size - 1.13)/2;
+            pointer-events: none;
 
             .dot, .true, .false {
                 display: block;
