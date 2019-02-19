@@ -1,7 +1,7 @@
 <template>
     <div id="content">
         <hr>
-        <div class="layout-wrapper row justify-content-between align-items-stretch mt-5">
+        <div class="layout-wrapper row justify-content-between align-items-center align-items-md-stretch mt-5">
 
             <div class="description col-lg-4 mb-3 order-0" :style="{ opacity: desktopViewport && theaterMode ? .3 : 1 }">
                 <h2>Erklärung:</h2>
@@ -10,13 +10,22 @@
                 </div>
             </div>
 
-            <div class="sourcecode col-md-6 col-lg-4 order-2 order-sm-2 order-md-1 mb-3">
+            <div class="tooltip-mobile col-9 order-1 d-md-none mb-3">
+                <div class="tooltip-wrapper">
+                    <p v-if="theaterMode && activeLineMessage !== ''">{{ activeLineMessage }}</p>
+                    <p v-else>Drücke unten auf "Play", um zu beginnen!</p>
+                </div>
+            </div>
+
+            <div class="sourcecode col-md-6 col-lg-4 order-3 order-md-1 mb-3">
                 <h2 class="d-none d-md-block">Code:</h2>
 
                 <div class="sourcecode-animation-wrapper row">
-                    <div class="message-mobile col-12 d-lg-none order-0 mb-3">
-                        <p v-if="theaterMode && activeLineMessage !== ''">{{ activeLineMessage }}</p>
-                        <p v-else>Drücke unten auf "Play", um zu beginnen!</p>
+                    <div class="tooltip-mobile col-12 d-none d-md-block d-lg-none order-1 order-md-1 mb-3">
+                        <div class="tooltip-wrapper">
+                            <p v-if="theaterMode && activeLineMessage !== ''">{{ activeLineMessage }}</p>
+                            <p v-else>Drücke unten auf "Play", um zu beginnen!</p>
+                        </div>
                     </div>
 
                     <div class="col-12 order-1 order-md-0 pl-4">
@@ -58,6 +67,7 @@
 
                     <div class="controls col-12 order-2 order-md-1 mb-3">
                         <div class="row justify-content-center">
+                            <b-button :disabled="animationStep === 0" @click="farPrevStep" variant="secondary" class="mr-2"><svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="white" d="M20.2 247.5L167 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L85.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L184 412.5c-4.7 4.7-12.3 4.7-17 0l-146.8-148c-4.7-4.7-4.7-12.3 0-17zm160 17l146.8 148c4.7 4.7 12.3 4.7 17 0l19.8-19.8c4.7-4.7 4.7-12.3 0-17L245.3 256l118.5-119.7c4.7-4.7 4.7-12.3 0-17L344 99.5c-4.7-4.7-12.3-4.7-17 0l-146.8 148c-4.7 4.7-4.7 12.3 0 17z"></path></svg></b-button>
                             <b-button :disabled="animationStep === 0" @click="prevStep" variant="secondary"><svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg></b-button>
                             <b-button :disabled="animationStep === animation.length-1" @click="togglePlay" :variant="animationInterval ? 'warning' : 'success'" class="mx-2">{{ animationInterval ? 'Pause' : 'Play' }}</b-button>
                             <b-button :disabled="animationStep === animation.length-1" @click="nextStep" variant="secondary" class="mr-2"><svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg></b-button>
@@ -72,8 +82,8 @@
                 </div>
             </div>
 
-            <div class="burger col-md-6 col-lg-4 order-1 order-md-2 mb-3" v-show="desktopViewport || theaterMode">
-                <h2>Burger:</h2>
+            <div class="burger col-3 col-md-6 col-lg-4 order-2 order-md-2 mb-3">
+                <h2 class="d-none d-md-block">Burger:</h2>
                 <div class="burger-animation-wrapper">
                     <div class="burger-animation">
                         <div id="topBun" class="layer in"><img src="../assets/img/burger/topBun.svg" alt=""></div>
@@ -85,6 +95,7 @@
                         <div id="salad" class="layer in"><img src="../assets/img/burger/salad.svg" alt=""></div>
                         <div id="patty" class="layer in"><img src="../assets/img/burger/patty.svg" alt=""></div>
                         <div id="bottomBun" class="layer in"><img src="../assets/img/burger/bottomBun.svg" alt=""></div>
+                        <div id="plate" class="layer"><img src="../assets/img/burger/plate.svg" alt=""></div>
                     </div>
                 </div>
             </div>
@@ -122,7 +133,8 @@
                 playing: false,
                 animationInterval: null,
                 animationSpeed: 2000,
-                animationStep: 0
+                animationStep: 0,
+                busy: false
             }
         },
         computed: {
@@ -175,6 +187,8 @@
                 this.started = true;
             },
             play() {
+                if (this.busy) return;
+
                 this.playing = true;
 
                 if (!this.started) this.start();
@@ -199,15 +213,28 @@
                     obj.className = 'layer in';
                 });
             },
-            prevStep() {
+            farPrevStep() {
                 this.pause();
                 if (this.playing && this.animationStep === 0) {
                     this.playing = false;
                     return;
                 }
-                this.animationStep = this.animationStep === 0 ? (this.animation.length - 2) : (this.animationStep - 1);
+
+                let steps = this.animation;
+                this.animationStep = steps.findIndex(obj => obj[0] === steps[this.animationStep - 1][0]);
+            },
+            prevStep() {
+                this.pause();
+                if (this.busy) return;
+
+                if (this.playing && this.animationStep === 0) {
+                    this.playing = false;
+                    return;
+                }
+                this.animationStep--;
             },
             nextStep() {
+                if (this.busy) return;
                 if (this.animationInterval) this.pause();
 
                 if (!this.started) this.start();
@@ -216,7 +243,7 @@
                     this.playing = true;
                     return;
                 }
-                this.animationStep = (this.animationStep + 1) % this.animation.length;
+                this.animationStep++;
             },
             playFaster() {
                 this.animationSpeed /= 2;
@@ -229,6 +256,8 @@
                 this.play();
             },
             animate(animationTask) {
+                this.busy = true;
+
                 if (animationTask.length === 0) {
                     document.querySelectorAll('.burger-animation .in').forEach(obj => {
                         obj.className = 'layer out-right';
@@ -236,6 +265,7 @@
                             obj.className = 'layer';
                         }, 350);
                     });
+                    this.busy = false;
                     return;
                 }
 
@@ -250,7 +280,7 @@
                     }
                 });
 
-                let delay = (this.animationSpeed - 100) / entering.length;
+                let delay = (this.animationSpeed - 100) / Math.max(entering.length, leaving.length);
 
                 entering.forEach((obj, i) => {
                     setTimeout(() => {
@@ -266,6 +296,8 @@
                         }, 350);
                     }, delay * i);
                 });
+
+                setTimeout(() => { this.busy = false }, this.animationSpeed - 50);
             }
         }
     }
@@ -394,21 +426,6 @@
                 background: #333;
             }
         }
-
-        .message-mobile {
-            height: 3.5rem;
-            background: #eee;
-            border-radius: 5px;
-            text-align: center;
-            vertical-align: middle;
-            margin-bottom: .5rem;
-
-            p {
-                position: relative;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-        }
     }
 
     .burger-animation-wrapper {
@@ -416,7 +433,7 @@
         left: 0;
         right: 0;
         bottom: 8.65rem;
-        width: 315px;
+        max-width: 315px;
         margin: 0 auto;
     }
 
@@ -436,7 +453,7 @@
                 margin: 0 auto;
             }
 
-            &.in {
+            &.in, &#plate {
                 opacity: 1;
                 height: auto;
                 top: 0;
@@ -514,6 +531,13 @@
         }
         #bottomBun {
             &.in, &.out, &.out-right {
+                height: 2.4rem;
+                width: 100%;
+                z-index: 0;
+            }
+        }
+        #plate {
+            &.in, &.out, &.out-right {
                 height: auto;
                 width: 100%;
                 z-index: 0;
@@ -536,19 +560,79 @@
     }
 
     @media screen and (max-width: 991px) {
-        .description, .sourcecode, .animation {
+        .description, .sourcecode, .animation, .burger {
             min-height: unset;
         }
+        .burger {
+            min-height: 5rem;
+        }
+        .description-wrapper {
+            height: unset;
+        }
         .burger-animation-wrapper {
-            bottom: 13rem;
+            bottom: 8rem;
+        }
+        .tooltip-mobile {
+            text-align: center;
+            vertical-align: middle;
+            margin-bottom: .5rem;
+            padding-left: 1.5rem;
+            padding-right: 3rem;
+            width: auto;
+
+            .tooltip-wrapper {
+                height: 3.5rem;
+                background: #eee;
+                border-radius: 5px;
+                margin-right: -4vw;
+
+                p {
+                    width: auto;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
         }
     }
     @media screen and (max-width: 768px) {
         .animation {
             min-height: 21rem;
         }
+        .tooltip-mobile {
+            padding-left: 1rem;
+        }
         .burger-animation-wrapper {
             bottom: 0;
+        }
+
+        .burger-animation {
+            max-width: 80px;
+            margin: 0 auto;
+
+            .layer {
+                top: -.5rem;
+            }
+
+            #topBun { &.in, &.out, &.out-right { height: 1.1rem; } }
+
+            #sauce { &.in, &.out, &.out-right { height: .2rem; } }
+
+            #cheese3 { &.in, &.out, &.out-right { height: .25rem; } }
+
+            #cheese2 { &.in, &.out, &.out-right { height: .2rem; } }
+
+            #cheese1 { &.in, &.out, &.out-right { height: .18rem; } }
+
+            #tomatoes { &.in, &.out, &.out-right { height: .5rem; } }
+
+            #salad { &.in, &.out, &.out-right { height: .2rem; } }
+
+            #patty { &.in, &.out, &.out-right { height: .5rem; } }
+
+            #bottomBun { &.in, &.out, &.out-right { height: .4rem; } }
+
+            #plate { &.in, &.out, &.out-right { height: auto; } }
         }
     }
 </style>
