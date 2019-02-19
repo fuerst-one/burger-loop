@@ -1,23 +1,23 @@
 <template>
     <div id="navbar">
         <b-navbar toggleable="sm" type="dark" variant="dark">
-            <div class="nav-button prev d-sm-none">
+            <b-navbar-brand to="/">Burger-Loop</b-navbar-brand>
+
+            <div class="nav-button prev d-sm-none ml-auto">
                 <router-link :to="prevRoute">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
+                    <svg height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
                 </router-link>
             </div>
 
-            <b-navbar-brand to="/">Burger-Loop</b-navbar-brand>
-
-            <b-navbar-toggle target="nav_collapse" />
+            <b-navbar-toggle target="nav-collapse" class="mx-3" />
 
             <div class="nav-button next d-sm-none">
                 <router-link :to="nextRoute">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
+                    <svg height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
                 </router-link>
             </div>
 
-            <b-collapse is-nav id="nav_collapse" class="ml-2 mr-auto">
+            <b-collapse is-nav id="nav-collapse" class="ml-2 mr-auto text-center text-sm-left">
                 <b-navbar-nav>
                     <b-nav-item to="/if">
                         <b-button :variant="$route.path === '/if' ? 'primary' : 'secondary'">
@@ -85,7 +85,7 @@
         width: 1rem;
         height: 1rem;
         position: relative;
-        top: -.85rem;
+        top: -.5rem;
     }
     .navbar-toggler {
         border: none;
@@ -95,5 +95,33 @@
     }
     .navbar-brand {
         margin-left: 1rem;
+    }
+
+    @media screen and (max-width: 576px){
+        #nav-collapse {
+            position: absolute;
+            top: 3rem;
+            right: 4rem;
+            transform: translateX(50%);
+            text-align: center;
+            background: inherit;
+            padding: .5rem;
+            border-radius: 0 0 5px 5px;
+
+            .nav-item {
+                &:last-child {
+                    .nav-link {
+                        padding-bottom: 0;
+                    }
+                }
+                .nav-link {
+                    padding: 0 0 .5rem;
+
+                    .btn {
+                        width: 100%;
+                    }
+                }
+            }
+        }
     }
 </style>
