@@ -31,7 +31,7 @@
                     <div class="col-12 order-1 order-md-0 pl-4">
                         <div class="sourcecode-animation">
                             <pre v-highlightjs="sourcecode"><code class="php"></code></pre>
-                            <div v-show="theaterMode" id="line-indicator" class="line-indicator" :style="{ top: indicatorPosition }">
+                            <div id="line-indicator" class="line-indicator" :style="{ top: indicatorPosition, opacity: theaterMode ? 1 : .3 }">
                                 <div v-if="activeLineStatus === 0" class="dot"></div>
                                 <div v-if="activeLineStatus === 1" class="question">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -86,15 +86,15 @@
                 <h2 class="d-none d-md-block">Burger:</h2>
                 <div class="burger-animation-wrapper">
                     <div class="burger-animation">
-                        <div id="topBun" class="layer in"><img src="../assets/img/burger/topBun.svg" alt=""></div>
-                        <div id="sauce" class="layer in"><img src="../assets/img/burger/sauce.svg" alt=""></div>
-                        <div id="cheese3" class="layer in"><img src="../assets/img/burger/cheese3.svg" alt=""></div>
-                        <div id="cheese2" class="layer in"><img src="../assets/img/burger/cheese2.svg" alt=""></div>
-                        <div id="cheese1" class="layer in"><img src="../assets/img/burger/cheese.svg" alt=""></div>
-                        <div id="tomatoes" class="layer in"><img src="../assets/img/burger/tomatoes.svg" alt=""></div>
-                        <div id="salad" class="layer in"><img src="../assets/img/burger/salad.svg" alt=""></div>
-                        <div id="patty" class="layer in"><img src="../assets/img/burger/patty.svg" alt=""></div>
-                        <div id="bottomBun" class="layer in"><img src="../assets/img/burger/bottomBun.svg" alt=""></div>
+                        <div id="topBun" class="layer"><img src="../assets/img/burger/topBun.svg" alt=""></div>
+                        <div id="sauce" class="layer"><img src="../assets/img/burger/sauce.svg" alt=""></div>
+                        <div id="cheese3" class="layer"><img src="../assets/img/burger/cheese3.svg" alt=""></div>
+                        <div id="cheese2" class="layer"><img src="../assets/img/burger/cheese2.svg" alt=""></div>
+                        <div id="cheese1" class="layer"><img src="../assets/img/burger/cheese.svg" alt=""></div>
+                        <div id="tomatoes" class="layer"><img src="../assets/img/burger/tomatoes.svg" alt=""></div>
+                        <div id="salad" class="layer"><img src="../assets/img/burger/salad.svg" alt=""></div>
+                        <div id="patty" class="layer"><img src="../assets/img/burger/patty.svg" alt=""></div>
+                        <div id="bottomBun" class="layer"><img src="../assets/img/burger/bottomBun.svg" alt=""></div>
                         <div id="plate" class="layer"><img src="../assets/img/burger/plate.svg" alt=""></div>
                     </div>
                 </div>
@@ -299,6 +299,19 @@
 
                 setTimeout(() => { this.busy = false }, this.animationSpeed - 50);
             }
+        },
+        mounted() {
+            this.busy = true;
+
+            let delay = 120 / this.burgerAnimation[this.burgerAnimation.length-1].length;
+
+            this.burgerAnimation[this.burgerAnimation.length-1].forEach((obj, i) => {
+                setTimeout(() => {
+                    document.getElementById(obj).className = 'layer in';
+                }, delay * i);
+            });
+
+            setTimeout(() => { this.busy = false }, delay * 600);
         }
     }
 </script>
@@ -563,21 +576,21 @@
         .description, .sourcecode, .animation, .burger {
             min-height: unset;
         }
-        .burger {
-            min-height: 5rem;
-        }
         .description-wrapper {
             height: unset;
         }
         .burger-animation-wrapper {
             bottom: 8rem;
         }
+        .burger {
+            min-height: 30rem;
+        }
         .tooltip-mobile {
             text-align: center;
             vertical-align: middle;
             margin-bottom: .5rem;
             padding-left: 1.5rem;
-            padding-right: 3rem;
+            padding-right: 3.5rem;
             width: auto;
 
             .tooltip-wrapper {
@@ -601,6 +614,14 @@
         }
         .tooltip-mobile {
             padding-left: 1rem;
+            padding-right: 1rem;
+
+            .tooltip-wrapper {
+                height: 5rem;
+            }
+        }
+        .burger {
+            min-height: 5rem;
         }
         .burger-animation-wrapper {
             bottom: 0;
