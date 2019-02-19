@@ -173,7 +173,7 @@
             play() {
                 this.playing = true;
 
-                if (!this.started) start();
+                if (!this.started) this.start();
 
                 this.animationInterval = setInterval(() => {
                     this.animationStep = this.animationStep + 1;
@@ -202,7 +202,7 @@
             nextStep() {
                 if (this.animationInterval) this.pause();
 
-                if (!this.started) start();
+                if (!this.started) this.start();
 
                 if (!this.playing && this.animationStep === 0) {
                     this.playing = true;
