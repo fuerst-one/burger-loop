@@ -46,14 +46,18 @@
                             </div>
                             <div v-show="theaterMode" class="line-outline" :style="{ top: indicatorPosition }"></div>
                         </div>
+                        <div v-if="!playing && animationStep === animation.length-1" class="end-screen">
+                            <div @click="reset" class="reset">
+                                <span>Zurück auf Anfang.</span>
+                            </div>
+                            <router-link :to="nextRoute" class="next">
+                                <span>Zur nächsten Seite!</span>
+                            </router-link>
+                        </div>
                     </div>
 
                     <div class="controls col-12 order-2 order-md-1 mb-3">
                         <div class="row justify-content-center">
-                            <b-button v-if="animationStep === animation.length-1 && nextRoute !== '/'" :to="nextRoute" variant="primary">Zur nächsten Seite!</b-button>
-
-                            <div class="w-100 mb-3"></div>
-
                             <b-button :disabled="animationStep === 0" @click="prevStep" variant="secondary"><svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg></b-button>
                             <b-button :disabled="animationStep === animation.length-1" @click="togglePlay" :variant="animationInterval ? 'warning' : 'success'" class="mx-2">{{ animationInterval ? 'Pause' : 'Play' }}</b-button>
                             <b-button :disabled="animationStep === animation.length-1" @click="nextStep" variant="secondary" class="mr-2"><svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg></b-button>
@@ -87,12 +91,12 @@
 
             <div class="nav-button prev d-none d-md-block">
                 <router-link :to="prevRoute">
-                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#777" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
+                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#aaa" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
                 </router-link>
             </div>
             <div class="nav-button next d-none d-md-block">
                 <router-link :to="nextRoute">
-                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#777" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
+                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#aaa" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
                 </router-link>
             </div>
 
@@ -197,6 +201,10 @@
             },
             prevStep() {
                 this.pause();
+                if (this.playing && this.animationStep === 0) {
+                    this.playing = false;
+                    return;
+                }
                 this.animationStep = this.animationStep === 0 ? (this.animation.length - 2) : (this.animationStep - 1);
             },
             nextStep() {
@@ -287,50 +295,104 @@
         }
     }
 
-    .sourcecode-animation {
+    .sourcecode-animation-wrapper {
         position: relative;
 
         $size: 1.3rem;
 
-        .line-indicator {
-            position: absolute;
-            top: .5rem;
-            left: -$size;
-            width: $size;
-            height: $size;
-            margin-top: -($size - 1.13)/2;
-            pointer-events: none;
+        .sourcecode-animation {
+            position: relative;
 
-            .dot, .true, .false {
-                display: block;
-                border-radius: 100%;
+            /* optional fixed-height design:
+            code {
+                min-height: 375px;
             }
-            .true, .false, .question {
-                svg {
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
+            */
+
+            .line-indicator {
+                position: absolute;
+                top: .5rem;
+                left: -$size;
+                width: $size;
+                height: $size;
+                margin-top: -($size - 1.13)/2;
+                pointer-events: none;
+
+                .dot, .true, .false {
+                    display: block;
+                    border-radius: 100%;
+                }
+                .true, .false, .question {
+                    svg {
+                        position: absolute;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .false {
+                    width: 320/512 * 1rem;
+                }
+                .dot {
+                    margin: 16.6%;
+                    width: 66%;
+                    height: 66%;
+                    background: #007bff;
                 }
             }
-            .false {
-                width: 320/512 * 1rem;
-            }
-            .dot {
-                margin: 16.6%;
-                width: 66%;
-                height: 66%;
-                background: #007bff;
+            .line-outline {
+                position: absolute;
+                top: .5rem;
+                left: 0;
+                right: 0;
+                height: $size + .25rem;
+                margin-top: -($size - 0.65)/2;
+                background: rgba(0,0,0,.2);
             }
         }
-        .line-outline {
+
+        .end-screen {
             position: absolute;
-            top: .5rem;
-            left: 0;
-            right: 0;
-            height: $size + .25rem;
-            margin-top: -($size - 0.65)/2;
-            background: rgba(0,0,0,.2);
+            top: 0;
+            left: 1.5rem;
+            right: 1rem;
+            bottom: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+
+            .next, .reset {
+                display: block;
+                position: relative;
+                height: 50%;
+                width: 100%;
+                color: white;
+                text-align: center;
+                font-size: 1.3rem;
+                font-weight: 500;
+                cursor: pointer;
+                opacity: .9;
+
+                transition: opacity .3s;
+
+                span {
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 100%;
+                    transform: translateY(-50%);
+                }
+
+                &:hover {
+                    opacity: 1;
+                    text-decoration: underline;
+                }
+            }
+            .next {
+                background: #007bff;
+            }
+            .reset {
+                background: #333;
+            }
         }
 
         .message-mobile {
