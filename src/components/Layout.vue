@@ -1,7 +1,7 @@
 <template>
     <div>
         <hr>
-        <div class="row justify-content-between mt-5">
+        <div class="row justify-content-between align-items-stretch mt-5">
             <div class="desc col-md-4 mb-3 order-0" :style="{ opacity: theaterMode ? .3 : 1 }">
                 <h2>Erklärung:</h2>
                 <slot name="desc"></slot>
@@ -47,16 +47,37 @@
                         <p v-if="theaterMode && activeLineMessage !== ''">{{ activeLineMessage }}</p>
                         <p v-else>Drücke auf "Play", um zu beginnen!</p>
                     </div>
-                    <b-button :disabled="animationStep === 0" @click="prevStep" variant="secondary">&lt;</b-button>
+
+                    <b-button v-if="animationStep === animation.length-1" :to="nextRoute" variant="primary">Zur nächsten Seite!</b-button>
+
+                    <div class="w-100 mb-3"></div>
+
+                    <b-button :disabled="animationStep === 0" @click="prevStep" variant="secondary"><svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"/></svg></b-button>
                     <b-button :disabled="animationStep === animation.length-1" @click="togglePlay" :variant="animationInterval ? 'warning' : 'success'" class="mx-2">{{ animationInterval ? 'Pause' : 'Play' }}</b-button>
-                    <b-button :disabled="animationStep === animation.length-1" @click="nextStep" variant="secondary" class="mr-2">&gt;</b-button>
+                    <b-button :disabled="animationStep === animation.length-1" @click="nextStep" variant="secondary" class="mr-2"><svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"/></svg></b-button>
                     <b-button :disabled="!theaterMode" @click="reset" variant="dark">Reset</b-button>
+
+                    <div class="w-100 mt-3"></div>
+
+                    <b-button :disabled="!playing || animationStep === animation.length-1 || animationSpeed >= 4000" @click="playSlower" variant="light">langsamer</b-button>
+                    <b-button :disabled="!playing || animationStep === animation.length-1 || animationSpeed <= 500" @click="playFaster" variant="light">schneller</b-button>
                 </div>
             </div>
             <div class="anim col-md-4 order-1 order-md-2 mb-3">
                 <h2>Burger:</h2>
-                <slot name="anim"></slot>
-                <!--<img src="../assets/img/burger.jpg" alt="" class="img-fluid">-->
+                <div class="burger-animation-wrapper">
+                    <div class="burger-animation">
+                        <div id="topBun" class="layer"><img src="../assets/img/burger/topBun.svg" alt=""></div>
+                        <div id="sauce" class="layer"><img src="../assets/img/burger/sauce.svg" alt=""></div>
+                        <div id="cheese3" class="layer"><img src="../assets/img/burger/cheese3.svg" alt=""></div>
+                        <div id="cheese2" class="layer"><img src="../assets/img/burger/cheese2.svg" alt=""></div>
+                        <div id="cheese1" class="layer"><img src="../assets/img/burger/cheese.svg" alt=""></div>
+                        <div id="tomatoes" class="layer"><img src="../assets/img/burger/tomatoes.svg" alt=""></div>
+                        <div id="salad" class="layer"><img src="../assets/img/burger/salad.svg" alt=""></div>
+                        <div id="patty" class="layer"><img src="../assets/img/burger/patty.svg" alt=""></div>
+                        <div id="bottomBun" class="layer"><img src="../assets/img/burger/bottomBun.svg" alt=""></div>
+                    </div>
+                </div>
             </div>
             <div class="nav-button prev d-none d-md-block">
                 <router-link :to="prevRoute">
@@ -82,6 +103,7 @@
         props: {
             sourcecode: String,
             animation: Array,
+            burgerAnimation: Array
         },
         data() {
             return {
@@ -122,9 +144,10 @@
             },
         },
         watch: {
-            animationStep(newVal) {
-                this.$emit('step', newVal);
-            }
+            animationStep(nextStep, prevStep) {
+                if (this.animation[nextStep][2] !== this.animation[prevStep][2])
+                    this.animate(this.burgerAnimation[this.animation[nextStep][2]]);
+            },
         },
         methods: {
             togglePlay() {
@@ -134,11 +157,10 @@
             play() {
                 this.playing = true;
                 this.animationInterval = setInterval(() => {
+                    this.animationStep = this.animationStep + 1;
                     if (this.animationStep === this.animation.length - 1) {
                         this.pause();
-                        return;
                     }
-                    this.animationStep = this.animationStep + 1;
                 }, this.animationSpeed);
             },
             pause() {
@@ -162,6 +184,59 @@
                 }
                 this.animationStep = (this.animationStep + 1) % this.animation.length;
             },
+            playFaster() {
+                this.animationSpeed /= 2;
+                this.pause();
+                this.play();
+            },
+            playSlower() {
+                this.animationSpeed *= 2;
+                this.pause();
+                this.play();
+            },
+            animate(animationTask) {
+                if (animationTask.length === 0) {
+                    document.querySelectorAll('.burger-animation .in').forEach(obj => {
+                        obj.className = 'layer out-right';
+                        setTimeout(() => {
+                            obj.className = 'layer';
+                        }, 350);
+                    });
+                    return;
+                }
+
+                let visibleObjs = Object.values(document.querySelectorAll('.burger-animation .in')).map(obj => obj.id);
+                let entering = [];
+                let leaving = visibleObjs.filter(oldObj => !animationTask.find(obj => obj === oldObj));
+
+                animationTask.forEach(newObj => {
+                    if (!visibleObjs.find(obj => obj === newObj)) {
+                        entering.push(newObj);
+                    }
+                });
+
+                let delay = (this.animationSpeed - 100) / entering.length;
+                let count = 0;
+
+                entering.forEach(obj => {
+                    setTimeout(() => {
+                        document.getElementById(obj).className = 'layer in';
+                    }, delay * count);
+                    count++;
+                });
+
+                count = 0;
+
+                leaving.forEach(obj => {
+                    setTimeout(() => {
+                        document.getElementById(obj).className = 'layer out';
+                        setTimeout(() => {
+                            document.getElementById(obj).className = 'layer';
+                        }, 350);
+                    }, delay * count);
+                    count++;
+                });
+            }
         },
     }
 </script>
@@ -170,6 +245,7 @@
     .desc, .code, .anim {
         position: relative;
         transition: opacity .3s;
+        min-height: 50vh;
     }
     .nav-button {
         position: absolute;
@@ -242,6 +318,114 @@
             position: relative;
             top: 50%;
             transform: translateY(-50%);
+        }
+    }
+
+    .burger-animation-wrapper {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 5rem;
+    }
+
+    .burger-animation {
+        #topBun {
+            &.in, &.out, &.out-right {
+                height: 6.6rem;
+                width: 97%;
+                z-index: 6;
+            }
+        }
+        #sauce {
+            &.in, &.out, &.out-right {
+                height: .6rem;
+                width: 58%;
+                z-index: 5;
+            }
+        }
+        #cheese3 {
+            &.in, &.out, &.out-right {
+                height: 1rem;
+                width: 94%;
+                z-index: 4;
+            }
+        }
+        #cheese2 {
+            &.in, &.out, &.out-right {
+                height: 1rem;
+                width: 93%;
+                z-index: 3;
+            }
+        }
+        #cheese1 {
+            &.in, &.out, &.out-right {
+                height: 1rem;
+                width: 95%;
+                z-index: 2;
+            }
+        }
+        #tomatoes {
+            &.in, &.out, &.out-right {
+                height: 1.1rem;
+                width: 88%;
+                z-index: 1;
+            }
+        }
+        #salad {
+            &.in, &.out, &.out-right {
+                height: 1rem;
+                width: 100%;
+                z-index: 1;
+            }
+        }
+        #patty {
+            &.in, &.out, &.out-right {
+                height: 2.5rem;
+                width: 95%;
+                z-index: 0;
+            }
+        }
+        #bottomBun {
+            &.in, &.out, &.out-right {
+                height: auto;
+                width: 100%;
+                z-index: 0;
+            }
+        }
+
+        .layer {
+            position: relative;
+            margin: 0 auto;
+            transition: top .3s, transform .3s, opacity .3s, height .1s;
+            opacity: 0;
+            height: 0;
+            top: -1rem;
+            max-width: 100%;
+            transform: none;
+
+            img {
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            &.in {
+                opacity: 1;
+                height: auto;
+                top: 0;
+                transform: none;
+            }
+
+            &.out {
+                top: -1rem;
+                height: auto;
+                opacity: 0;
+            }
+            &.out-right {
+                top: 0;
+                height: auto;
+                opacity: 0;
+                transform: translateX(50%);
+            }
         }
     }
 </style>

@@ -4,7 +4,7 @@
             <h1>For-Loop</h1>
             <p class="lead text-black-50">Wie eine While-Schleife die "on-the-go" definiert wird.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" @step="animationStep = $event">
+            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
                 <template slot="desc">
                     <p>
                         Eine "For"-Schleife ist hilfreich, wenn man einen Code-Block eine bestimmte Anzahl oft
@@ -62,27 +62,31 @@
                     [2, 1, 0, '...die Laufbedingung, den 2. Parameter, ...'],
                     [2, 1, 0, '...nicht mehr erfüllen.'],
                     [2, 2, 0, 'Also starten wir mit $burgerCount = 0.'],
-                    [3, 0, 0, 'Wir vereinfachen das Braten und machen den Burger in einem Schritt'],
-                    [4, 0, 0, 'Und beenden den Schleifendurchlauf.'],
-                    [4, 0, 0, 'Hier, nach dem Anweisungs-Block, wird der 3. Parameter ausgeführt.'],
+                    [3, 0, 1, 'Wir vereinfachen das Braten und machen den Burger in einem Schritt'],
+                    [4, 0, 1, 'Und beenden den Schleifendurchlauf.'],
+                    [4, 0, 1, 'Hier, nach dem Anweisungs-Block, wird der 3. Parameter ausgeführt.'],
                     [4, 0, 0, 'Also $burgerCount++'],
                     [2, 1, 0, 'Zurück am Schleifen-Anfang prüfen wir wieder:'],
                     [2, 1, 0, '$burgerCount < 3?'],
                     [2, 2, 0, 'Ja, noch ein Burger!'],
-                    [3, 0, 0, 'Burger braten...'],
-                    [4, 0, 0, 'Laufvariable aufzählen. Nun haben wir 2.'],
+                    [3, 0, 1, 'Burger braten...'],
+                    [4, 0, 0, 'Laufvariable aufzählen. Nun haben wir 2'],
                     [2, 1, 0, 'Und zurück auf Anfang.'],
                     [2, 2, 0, '2 < 3. Jap.'],
-                    [3, 0, 0, 'Burger braten.'],
-                    [4, 0, 0, 'Hochzählen: $burgerCount = 3'],
-                    [2, 1, 0, 'Wieder prüfen:'],
-                    [2, 3, 0, 'Oh! Wir haben 3 Burger. 3 ist nicht kleiner als 3!'],
-                    [4, 0, 0, 'Die Schleife wird übersprungen und beendet!'],
-                    [6, 0, 0, 'Und wieder ein gesättigter Kunde :)'],
-                    [6, 0, 0, 'Wahnsinn. Schneller geht wirklich nicht.'],
-                    [6, 0, 0, 'Was aber, wenn wir verschiedene Burger braten müssen?'],
-                    [6, 0, 0, 'Auf der nächsten Seite kommt die Königsklasse.'],
-                    [6, 0, 0, 'Lerne jetzt "Foreach"-Schleifen kennen!'],
+                    [3, 0, 1, 'Burger braten.'],
+                    [4, 0, 1, 'Hochzählen: $burgerCount = 3'],
+                    [2, 1, 1, 'Wieder prüfen:'],
+                    [2, 3, 1, 'Oh! Wir haben 3 Burger. 3 ist nicht kleiner als 3!'],
+                    [4, 0, 1, 'Die Schleife wird übersprungen und beendet!'],
+                    [6, 0, 1, 'Und wieder ein gesättigter Kunde :)'],
+                    [6, 0, 1, 'Wahnsinn. Schneller geht wirklich nicht.'],
+                    [6, 0, 1, 'Was aber, wenn wir verschiedene Burger braten müssen?'],
+                    [6, 0, 1, 'Auf der nächsten Seite kommt die Königsklasse.'],
+                    [6, 0, 1, 'Lerne jetzt "Foreach"-Schleifen kennen!'],
+                ],
+                burgerAnimation: [
+                    [],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
                 ]
             }
         },

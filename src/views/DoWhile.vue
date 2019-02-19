@@ -4,7 +4,7 @@
             <h1>Do-While-Loop</h1>
             <p class="lead text-black-50">Zum Wiederholen einer Anweisung abhängig von einer Bedingung, <strong class="text-body">ohne den ersten Durchlauf zu prüfen</strong>.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" @step="animationStep = $event">
+            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
                 <template slot="desc">
                     <p>
                         Der einzige Unterschied zwischen "While"-Schleife und "Do While"-Schleife ist, dass "<u>Do</u> While"
@@ -44,28 +44,37 @@
                     'while ($cheeseCount < 2)',
                     '// Zum Glück haben wir das "Do".',
                     '',
+                    'add(sauce);',
                     'add(topBun);',
                 ],
                 animationStep: 0,
                 animation: [
-                    [0, 0, 0, 'Unser Kunde hat seinen Burger umbestellt.'],
-                    [0, 0, 0, 'Wir sollen noch eine Scheibe Käse hinzufügen!'],
-                    [0, 0, 0, 'Eigentlich erlaubt es das Rezept garnicht...'],
-                    [0, 0, 0, '...aber wir haben einen kleinen Trick.'],
-                    [2, 0, 0, 'Der Double-Cheeseburger hat schon 2 Scheiben Käse,'],
-                    [8, 1, 0, 'unsere While-Bedingung sagt aber < 2!'],
-                    [4, 1, 0, 'Das ist aber bei "Do While" kein Problem.'],
-                    [4, 0, 0, 'Wir führen die erste Wiederholung aus, ohne zu prüfen.'],
-                    [5, 0, 0, 'Also eine Scheibe Käse hinzu.'],
-                    [6, 0, 0, 'Und aufzählen.'],
-                    [8, 0, 0, 'Jetzt wird erst überprüft (!):'],
-                    [8, 1, 0, '$cheeseCount < 2?'],
-                    [8, 3, 0, 'Nein! 3 ist größer als 2.'],
-                    [8, 3, 0, 'Die Schleife wird also abgebrochen.'],
-                    [11, 0, 0, 'Burger vollendet und wieder ein Kunde glücklich.'],
-                    [11, 0, 0, 'Auf der nächsten Seite geht es spannend weiter.'],
-                    [11, 0, 0, 'Wir können unsere Schleifen noch einfacher gestalten.'],
-                    [11, 0, 0, 'Schau dir die "For"-Schleifen an!'],
+                    [ 0, 0, 0, 'Unser Kunde hat seinen Burger umbestellt.'],
+                    [ 0, 0, 0, 'Wir sollen noch eine Scheibe Käse hinzufügen!'],
+                    [ 0, 0, 0, 'Eigentlich erlaubt es das Rezept garnicht...'],
+                    [ 0, 0, 0, '...aber wir haben einen kleinen Trick.'],
+                    [ 2, 0, 1, 'Der Double-Cheeseburger hat schon 2 Scheiben Käse,'],
+                    [ 8, 1, 1, 'unsere While-Bedingung sagt aber < 2!'],
+                    [ 4, 1, 1, 'Das ist aber bei "Do While" kein Problem.'],
+                    [ 4, 0, 1, 'Wir führen die erste Wiederholung aus, ohne zu prüfen.'],
+                    [ 5, 0, 2, 'Also eine Scheibe Käse hinzu.'],
+                    [ 6, 0, 2, 'Und aufzählen.'],
+                    [ 8, 0, 2, 'Jetzt wird erst überprüft (!):'],
+                    [ 8, 1, 2, '$cheeseCount < 2?'],
+                    [ 8, 3, 2, 'Nein! 3 ist größer als 2.'],
+                    [ 8, 3, 2, 'Die Schleife wird also abgebrochen.'],
+                    [11, 0, 3, 'Soße drauf.'],
+                    [12, 0, 4, 'Burger vollendet und wieder ein Kunde glücklich.'],
+                    [12, 0, 4, 'Auf der nächsten Seite geht es spannend weiter.'],
+                    [12, 0, 4, 'Wir können unsere Schleifen noch einfacher gestalten.'],
+                    [12, 0, 4, 'Schau dir die "For"-Schleifen an!'],
+                ],
+                burgerAnimation: [
+                    [],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce', 'topBun' ],
                 ]
             }
         },

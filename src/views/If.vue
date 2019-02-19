@@ -4,7 +4,7 @@
             <h1>If-Clause</h1>
             <p class="lead text-black-50">Immer wenn etwas abhängig von einer Bedingung ausgeführt werden soll.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" @step="animationStep = $event">
+            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
                 <template slot="desc">
                     <p>
                         Der "if"-Block ermöglicht einen Code-Abschnitt auszuführen <u>nur falls</u> eine bestimmte
@@ -23,8 +23,6 @@
                     </p>
                 </template>
                 <template slot="anim">
-                    <img src="../assets/img/topbun.svg" alt="" class="img-fluid">
-                    <img src="../assets/img/bottombun.svg" alt="" class="img-fluid">
                 </template>
             </Layout>
         </div>
@@ -43,7 +41,7 @@
                 sourcecode: [
                     '// Unsere Burger-Rezeptur',
                     '',
-                    'base = [ patty, salad, tomato, onions ];',
+                    'base = [ bottomBun, patty, salad, tomatoes ];',
                     '',
                     'if ($recipe == \'Double-Cheeseburger\') {',
                     '   add(cheese);',
@@ -62,51 +60,62 @@
                     '',
                     '// Done!'
                 ],
-                animationStep: 0,
                 animation: [
-                    [0, 0, 0, 'Ok, let\'s go. Braten wir ein paar Burger.'],
-                    [0, 0, 0, 'Das ist unser Kochbuch.'],
-                    [0, 0, 0, 'Unser erster Burger: "Double-Cheeseburger"'],
-                    [2, 0, 0, 'Zuerst immer die Basiszutaten.'],
-                    [4, 0, 0, 'Jetzt wird\'s schon tricky.'],
-                    [4, 0, 0, 'Unsere Burger haben verschiedene Rezepte.'],
-                    [4, 0, 0, 'Schauen wir, ob wir beim richtigen sind.'],
-                    [4, 1, 0, 'Rezept für einen Double-Cheeseburger?'],
-                    [4, 2, 0, 'Ja!'],
-                    [4, 2, 0, 'Also folgen wir diesem Rezept:'],
-                    [5, 0, 0, 'Käse,'],
-                    [6, 0, 0, 'Nochmal Käse,'],
-                    [7, 0, 0, 'Soße.'],
-                    [9, 0, 0, 'Das ist das Ende des Rezepts.'],
-                    [9, 0, 0, 'Das heißt wir überspringen den Rest!'],
-                    [17, 0, 0, 'Also nur noch Deckel drauf...'],
+                    [ 0, 0, 0, 'Ok, let\'s go. Braten wir ein paar Burger.'],
+                    [ 0, 0, 0, 'Das ist unser Kochbuch.'],
+                    [ 0, 0, 0, 'Unser erster Burger: "Double-Cheeseburger"'],
+                    [ 2, 0, 1, 'Zuerst immer die Basiszutaten.'],
+                    [ 4, 0, 1, 'Jetzt wird\'s schon tricky.'],
+                    [ 4, 0, 1, 'Unsere Burger haben verschiedene Rezepte.'],
+                    [ 4, 0, 1, 'Schauen wir, ob wir beim richtigen sind.'],
+                    [ 4, 1, 1, 'Rezept für einen Double-Cheeseburger?'],
+                    [ 4, 2, 1, 'Ja! $recipe == "Double-Cheeseburger".'],
+                    [ 4, 2, 1, 'Also folgen wir diesem Rezept:'],
+                    [ 5, 0, 2, 'Käse,'],
+                    [ 6, 0, 3, 'Nochmal Käse,'],
+                    [ 7, 0, 4, 'Soße.'],
+                    [ 9, 0, 4, 'Das ist das Ende des Rezepts.'],
+                    [ 9, 0, 4, 'Das heißt wir überspringen den Rest!'],
+                    [17, 0, 5, 'Also nur noch Deckel drauf...'],
                     [19, 0, 0, 'Fertig!'],
-                    [0, 0, 0, 'Nächster Burger: "Cheeseburger"'],
-                    [2, 0, 0, 'Wie immer, die Base...'],
-                    [4, 1, 0, 'Cheeseburger?'],
-                    [4, 3, 0, 'Nö.'],
-                    [9, 1, 0, 'Jetzt Cheeseburger?'],
-                    [9, 2, 0, 'Yes. Also:'],
-                    [10, 0, 0, 'Käse,'],
-                    [11, 0, 0, 'Soße,'],
-                    [13, 0, 0, 'Rest überspringen,'],
-                    [17, 0, 0, 'Deckel,'],
+                    [ 0, 0, 0, 'Nächster Burger: "Cheeseburger"'],
+                    [ 2, 0, 1, 'Wie immer, die Base...'],
+                    [ 4, 1, 1, 'Cheeseburger?'],
+                    [ 4, 3, 1, 'Nö.'],
+                    [ 9, 1, 1, 'Jetzt Cheeseburger?'],
+                    [ 9, 2, 1, 'Yes. Also:'],
+                    [10, 0, 2, 'Käse,'],
+                    [11, 0, 6, 'Soße,'],
+                    [13, 0, 6, 'Rest überspringen,'],
+                    [17, 0, 7, 'Deckel,'],
                     [19, 0, 0, 'Gut is.'],
-                    [0, 0, 0, 'Ok, der Hamburger noch.'],
-                    [2, 0, 0, 'Auch hier die Basiszutaten'],
-                    [4, 1, 0, 'Hamburger?'],
-                    [4, 3, 0, 'Nein.'],
-                    [9, 1, 0, 'Hamburger?'],
-                    [9, 3, 0, 'Nein.'],
-                    [13, 1, 0, 'Es gibt kein Rezept für Hamburger!'],
-                    [13, 2, 0, 'Dann nehmen wir standardmäßig dieses.'],
-                    [14, 0, 0, 'Soße,'],
-                    [17, 0, 0, 'Brötchen,'],
-                    [19, 0, 0, 'Auch das ist ein Burger.'],
-                    [19, 0, 0, 'Toll, das waren unsere Rezepte!'],
-                    [19, 0, 0, 'Beginnen wir, uns die Arbeit zu erleichtern.'],
-                    [19, 0, 0, 'Schau weiter zu "While"-Schleifen!'],
+                    [ 0, 0, 0, 'Ok, der Hamburger noch.'],
+                    [ 2, 0, 1, 'Auch hier die Basiszutaten'],
+                    [ 4, 1, 1, 'Hamburger?'],
+                    [ 4, 3, 1, 'Nein.'],
+                    [ 9, 1, 1, 'Hamburger?'],
+                    [ 9, 3, 1, 'Nein.'],
+                    [13, 1, 1, 'Es gibt kein Rezept für Hamburger!'],
+                    [13, 2, 1, 'Dann nehmen wir standardmäßig dieses.'],
+                    [14, 0, 8, 'Soße,'],
+                    [17, 0, 9, 'Brötchen,'],
+                    [19, 0, 9, 'Auch das ist ein Burger.'],
+                    [19, 0, 9, 'Toll, das waren unsere Rezepte!'],
+                    [19, 0, 9, 'Beginnen wir, uns die Arbeit zu erleichtern.'],
+                    [19, 0, 9, 'Schau weiter zu "While"-Schleifen!'],
                 ],
+                burgerAnimation: [
+                    [],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
+                ]
             }
         },
         computed: {},
