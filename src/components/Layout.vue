@@ -55,11 +55,11 @@
 
                             <div class="w-100 mt-3"></div>
 
-                            <b-button :disabled="!animationInterval || animationStep === animation.length-1 || animationFrequency >= animationFrequencys[0]" @click="setAnimationFrequency(-1)" variant="light" class="mr-2">langsamer</b-button>
-                            <b-button :disabled="!animationInterval || animationStep === animation.length-1 || animationFrequency <= animationFrequencys[2]" @click="setAnimationFrequency(1)" variant="light">schneller</b-button>
+                            <b-button :disabled="!animationInterval || animationStep === animation.length-1 || animationFrequencyIndex === 0" @click="setAnimationFrequency(-1)" variant="light" class="mr-2">langsamer</b-button>
+                            <b-button :disabled="!animationInterval || animationStep === animation.length-1 || animationFrequencyIndex === 2" @click="setAnimationFrequency(1)" variant="light">schneller</b-button>
 
                             <!-- Optional Design: Animation-Frequency-Slider
-                            <Slider @change="setAnimationFrequency($event)" :value="animationFrequency"></Slider>-->
+                            <Slider @change="setAnimationFrequency($event)" :value="animationFrequencyIndex"></Slider>-->
                         </div>
                     </div>
                 </div>
@@ -106,8 +106,8 @@
                 started: false,
                 playing: false,
                 animationInterval: null,
-                animationFrequency: process.env.NODE_ENV === 'development' ? 100 : 1800,
-                animationFrequencys: [ 3600, 1800, 600, 100 ],
+                animationFrequencyIndex: process.env.NODE_ENV === 'development' ? 3 : 1,
+                animationFrequencies: [ 3600, 1800, 600, 100 ],
                 animationStep: 0,
                 busy: false,
                 endScreenDismissed: false,
@@ -175,7 +175,7 @@
                         if (this.animationStep === this.animation.length - 1) {
                             this.pause();
                         }
-                    }, this.animationFrequency);
+                    }, this.animationFrequencies[this.animationFrequencyIndex]);
                 }, 350);
             },
             pause() {
@@ -240,10 +240,10 @@
                 }
             },
             setAnimationFrequency(value) {
-                this.animationFrequency = this.animationFrequencys[this.animationFrequencys.findIndex(frequency => frequency === this.animationFrequency) + value];
+                this.animationFrequencyIndex += value;
 
-                this.$cookie.set('animation-frequency', this.animationFrequency, 365);
-                console.log('animationFrequency set to ' + this.animationFrequency + 'ms');
+                this.$cookie.set('animation-frequency', this.animationFrequencyIndex, 365);
+                console.log('animationFrequency set to ' + this.animationFrequencies[this.animationFrequencyIndex] + 'ms');
 
                 if (this.animationInterval) {
                     this.pause();
@@ -255,7 +255,7 @@
             this.busy = true;
 
             if (this.$cookie.get('animation-frequency') && process.env.NODE_ENV !== 'development') {
-                this.animationFrequency = this.$cookie.get('animation-frequency');
+                this.animationFrequencyIndex = this.$cookie.get('animation-frequency');
             }
 
             setTimeout(() => {
