@@ -6,6 +6,7 @@ import './registerServiceWorker'
 
 import './plugins/bootstrap-vue'
 import './plugins/vue-highlightjs'
+import './plugins/vue-cookie'
 
 Vue.config.productionTip = false;
 

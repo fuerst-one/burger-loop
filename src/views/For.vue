@@ -1,7 +1,7 @@
 <template>
     <div id="for-loop">
         <div class="container">
-            <h1>For-Loop</h1>
+            <h1><code>for</code> Loop</h1>
             <p class="lead text-black-50">Wie eine While-Schleife die "on-the-go" definiert wird.</p>
 
             <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">

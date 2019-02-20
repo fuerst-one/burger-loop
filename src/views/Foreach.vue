@@ -1,7 +1,7 @@
 <template>
     <div id="foreach-loop">
         <div class="container">
-            <h1>Foreach-Loop</h1>
+            <h1><code>foreach</code> Loop</h1>
             <p class="lead text-black-50">Die Schleife, die alle Elemente eines Array oder Iterables durchläuft.</p>
 
             <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">

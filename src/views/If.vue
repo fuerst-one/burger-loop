@@ -1,7 +1,7 @@
 <template>
     <div id="if-clause">
         <div class="container">
-            <h1>If-Clause</h1>
+            <h1><code>if</code> Statement</h1>
             <p class="lead text-black-50">Immer wenn etwas abhängig von einer Bedingung ausgeführt werden soll.</p>
 
             <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
@@ -48,7 +48,7 @@
                     '   add(cheese);',
                     '   add(sauce);',
                     '',
-                    '} else {',
+                    '} else { // Standardrezept: \'Hamburger\'',
                     '   add(sauce);',
                     '}',
                     '',

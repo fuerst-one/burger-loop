@@ -1,7 +1,7 @@
 <template>
     <div id="do-while-loop">
         <div class="container">
-            <h1>Do-While-Loop</h1>
+            <h1><code>do while</code> Loop</h1>
             <p class="lead text-black-50">Zum Wiederholen einer Anweisung abhängig von einer Bedingung, <strong class="text-body">ohne den ersten Durchlauf zu prüfen</strong>.</p>
 
             <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
