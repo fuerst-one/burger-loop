@@ -6,7 +6,7 @@
 ├── public (index.html, Meta-Assets)
 └── src (Projektdateinen)
     ├── assets (CSS, etc)
-    |   ├── img (Bild-Dateien)
+    |   └── img (Bild-Dateien)
     ├── components (Navbar, Layout, Sourcecode & Burger Vue-Komponenten)
     ├── plugins (Vue-Plugin)
     ├── views (Seiten)
