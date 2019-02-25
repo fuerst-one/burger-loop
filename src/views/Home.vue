@@ -62,7 +62,7 @@
                   [ 4, 0, 0, '...und worauf du achten musst!'],
                   [ 6, 1, 0, 'Also, falls du bereit bist:'],
                   [ 6, 2, 0, 'Such dir ein Kapitel in der Navigation aus...'],
-                  [ 6, 2, 0, 'Oder drücke den Button links...'],
+                  [ 6, 2, 0, 'Oder drücke den Pfeil rechts...'],
                   [ 6, 2, 0, 'Und lerne die Programmier-Basics!'],
                   [ 7, 0, 0, 'Wir freuen uns darauf dir etwas beizubringen!'],
                   [ 7, 2, 1, 'Let\'s go!'],
