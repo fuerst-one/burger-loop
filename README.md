@@ -1,4 +1,18 @@
-# webprog-tutorium
+# Burger Loop
+
+## Projektstruktur
+
+```
+├── public (index.html, Meta-Assets)
+└── src (Projektdateien)
+    ├── assets (CSS, etc)
+    |   └── img (Bild-Dateien)
+    ├── components (Navbar, Layout, Sourcecode & Burger Vue-Komponenten)
+    ├── plugins (Vue Plugins)
+    ├── views (Seiten inkl. Animation-Frames)
+    ├── App.vue (Vue Main-Component)
+    └── main.js (Entrypoint)
+```
 
 ## Project setup
 ```
@@ -13,14 +27,4 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
