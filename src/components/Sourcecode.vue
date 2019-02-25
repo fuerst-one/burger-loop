@@ -1,6 +1,7 @@
 <template>
-    <div class="sourcecode-animation">
-        <pre v-highlightjs="sourcecode"><code class="php"></code></pre>
+    <div id="sourcecode-animation" class="sourcecode-animation">
+        <pre v-highlightjs="sourcecode"><code class="php" :style="{ height: theaterMode ? '' : '18rem' }"></code></pre>
+
         <div id="line-indicator" class="line-indicator" :style="{ top: indicatorPosition, opacity: theaterMode ? 1 : .3 }">
             <div v-if="activeLineStatus === 0" class="dot"></div>
             <div v-if="activeLineStatus === 1" class="question">
@@ -18,11 +19,8 @@
                     <path fill="#dc3545" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
                 </svg>
             </div>
-
-            <b-tooltip v-if="theaterMode && activeLineMessage !== ''" target="#line-indicator" :show="(desktopViewport || !theaterMode) && !blockView" class="tooltip-desktop" placement="left">
-                {{ activeLineMessage }}
-            </b-tooltip>
         </div>
+
         <div v-show="theaterMode" class="line-outline" :style="{ top: indicatorPosition }"></div>
     </div>
 </template>
@@ -35,8 +33,7 @@
         props: {
             sourcecode: String,
             sourcecodeAnimationTask: Array,
-            theaterMode: Boolean,
-            blockView: Boolean
+            theaterMode: Boolean
         },
         computed: {
             desktopViewport() {
@@ -46,7 +43,7 @@
                 return this.sourcecodeAnimationTask[0];
             },
             indicatorPosition() {
-                return 0.5 + this.activeLine * 1.125 + 'rem';
+                return 0.5 + this.activeLine * 1.06 + 'rem';
             },
             activeLineStatus() {
                 return this.sourcecodeAnimationTask[1];
@@ -59,6 +56,7 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../assets/variables';
 
     $size: 1.3rem;
 
@@ -69,6 +67,11 @@
         code {
             min-height: 375px;
         }*/
+
+        code {
+            transition: height .3s;
+            min-height: 18rem;
+        }
 
         .line-indicator {
             position: absolute;
@@ -98,7 +101,7 @@
                 width: 14px;
                 margin: 16.6%;
                 border-radius: 100%;
-                background: #007bff;
+                background: $primary;
 
                 /* Optional Design: burger Line Indicator
                 background: url("../assets/img/burger/burger.png") transparent no-repeat;
@@ -115,6 +118,12 @@
             height: $size + .25rem;
             margin-top: -($size - 0.65)/2;
             background: rgba(0,0,0,.2);
+        }
+    }
+
+    @media screen and (max-width: 991px) {
+        code {
+            height: auto !important;
         }
     }
 </style>

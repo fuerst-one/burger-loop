@@ -5,20 +5,23 @@ Atom One Dark With support for ReasonML by Gidi Morris, based off work by Daniel
 Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
 
 */
+
+@import '../variables';
+
 .hljs {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
   line-height: 1.3em;
-  color: #abb2bf;
-  background: #282c34;
+  color: $light;
+  background: $dark;
   border-radius: 5px;
 }
 .hljs-keyword, .hljs-operator {
-  color: #F92672;
+  color: $info; /* #F92672; */
 }
 .hljs-pattern-match {
-  color: #F92672;
+  color: $info; /* #F92672; */
 }
 .hljs-pattern-match .hljs-constructor {
   color: #61aeee;
@@ -42,7 +45,7 @@ Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
   color: #9CCC65;
 }
 .hljs-comment, .hljs-quote {
-  color: #b18eb1;
+  color: $secondary;
   font-style: italic;
 }
 .hljs-doctag, .hljs-formula {

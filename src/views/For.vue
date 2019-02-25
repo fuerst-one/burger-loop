@@ -1,24 +1,31 @@
 <template>
     <div id="for-loop">
         <div class="container">
-            <h1><code>for</code> Loop</h1>
-            <p class="lead text-black-50">Wie eine While-Schleife die "on-the-go" definiert wird.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+                <template slot="intro">
+                    <h1><code>for</code> Loop</h1>
+                    <p class="lead text-black-50">Wie eine While-Schleife, die du <strong class="text-body">ohne Hilfsvariablen</strong> erzeugen kannst.</p>
+                </template>
+
                 <template slot="desc">
                     <p>
-                        Eine "For"-Schleife ist hilfreich, wenn man einen Code-Block eine bestimmte Anzahl oft
-                        wiederholen will. Im Gegensatz zur "While"-Schleife, kann hier die Schleifen-Variable im Kopf
-                        des "For"-Loops erstellt werden.
+                        <b>Kümmern wir uns um unsere nächsten Kunden.</b> <br>
+                        Was wenn wir für unsere Bestellungen nicht jedes Mal eine Variable für die Anzahl erstellen wollen?
                     </p>
                     <p>
-                        "For"-Schleifen können darüber hinaus aber auch viel flexibler eingesetzt werden als es zuerst
-                        scheint. So muss die Abbruchbedingung der Schleife nicht zwangsläufig mit der Laufvariable zutun
-                        haben, sondern kann ebenfalls durch jede andere Form eines Wahrheitswerts definiert werden.
+                        Wie die <code>while</code>-Schleife, kann eine <code>for</code>-Schleife einen Code-Block
+                        beliebig oft wiederholen. Praktisch ist aber, dass die <code>for</code>-Schleife ohne extra
+                        Variablen auskommt. <b>Wir erstellen alles was wir brauchen im Kopf der Schleife selbst.</b>
                     </p>
                     <p>
-                        Auch interessant: Man kann alle Teile des Kopfes weglassen, solange man die Schleife mit einem
-                        "break" oder "return" beendet. Andernfalls wird die Schleife theoretisch unendlich ausgeführt.
+                        <b>Wie genau machen wir das?</b> <br>
+                        Die <code>for</code>-Schleife erhält 3 optionale Parameter in den runden Klammern, getrennt
+                        durch Semikolons. Der erste Parameter ist die <b>Initialisierung der Laufvariable.</b>
+                        Hier legen wir fest, welchen Startwert wir benötigen. <br>
+                        Der 2. Parameter ist die <b>Fortsetzungsbedingung</b>, die wir schon von den vorherigen Schleifen kennen.
+                        Der dritte Parameter, macht das, was wir vorher manuell machen mussten, also zum Beispiel, die
+                        Laufvariable um 1 erhöhen. <b>Diese Anweisung wird nach jedem Durchlauf ausgeführt.</b>
                     </p>
                 </template>
             </Layout>
@@ -33,6 +40,11 @@
         components: {Layout},
         data() {
             return {
+                sourcecodeGeneral: [
+                    'for ($laufVariable = <Startwert>; $laufBedingung; <Fortsetzungsanweisung>) {',
+                    '   // Code',
+                    '}'
+                ],
                 sourcecode: [
                     '// Nächste Bestellung: 3 Cheeseburger',
                     '',
@@ -43,6 +55,7 @@
                     '// Guten Appetit!'
                 ],
                 animation: [
+                    [0, 0, 0, ''],
                     [0, 0, 0, 'Da hat jemand Hunger. 3 Cheeseburger!'],
                     [0, 0, 0, 'So einen repetitiven Task können wir vereinfachen.'],
                     [2, 0, 0, 'Applaus für die "For"-Schleife!'],

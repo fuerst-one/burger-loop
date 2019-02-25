@@ -1,18 +1,39 @@
 <template>
     <div id="while-loop">
         <div class="container">
-            <h1><code>while</code> Loop</h1>
-            <p class="lead text-black-50">Zum Wiederholen einer Anweisung abhängig von einer Bedingung.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+                <template slot="intro">
+                    <h1><code>while</code> Loop</h1>
+                    <p class="lead text-black-50">Zum <strong class="text-body">Wiederholen einer Anweisung</strong> abhängig von einer Bedingung.</p>
+                </template>
+
                 <template slot="desc">
                     <p>
-                        Die "While"-Schleife wiederholt einen Code-Block solange die Bedingung im Kopf erfüllt ist.
-                        Das heißt, es wird <i>nach jedem Durchlauf</i> überprüft ob das der Fall ist.
+                        <b>Wir sollen unsere Arbeit optimieren!</b> <br>
+                        Wir benötigen mehrere Scheiben Käse, sollen aber nicht jeden Schritt einzeln notieren.
                     </p>
                     <p>
-                        Man kann die "While"-Schleife also als "If"-Block sehen, der sich solange wiederholt, bis er
-                        nicht mehr zutrifft.
+                        Unser Helfer: Die <code>while</code>-Schleife. Sie ermöglicht einen Code-Block <b>beliebig oft
+                        zu wiederholen</b>, ohne den Inhalt mehrmals schreiben zu müssen. <br>
+                        Hier hilft sie uns, in einem Schritt genau so viel Cheese auf unseren Burger zu packen wie wir
+                        benötigen.
+                    </p>
+                    <p>
+                        <b>Was tun wir dafür?</b> <br>
+                        Um die Anzahl der Wiederholungen zu bestimmen, benötigen wir eine <b>Bedingung</b> im Kopf der
+                        Schleife. Diese funktioniert genau wie ein <code>if</code>-Statement und <b>bestimmt, ob die
+                        Schleife weiterläuft </b>(<code>true</code>)<b> oder nicht.</b>
+                    </p>
+                    <p>
+                        Um hier im Beispiel 2 Schichten Käse zu bekommen, <b>erstellen wir</b> daher <b>die Variable</b>&nbsp;
+                        <code>$cheeseCount = 0</code>, symbolisch für die Anzahl der Scheiben
+                        Käse. In der <b>Bedingung</b> legen wir fest, <b>wie oft die Schleife wiederholt wird</b>. Dass das auch
+                        funktioniert, müssen wir allerdings im Schleifeninhalt <b>die Variable bei jedem Durchgang um 1
+                        erhöhen</b>. <br>
+                        Erreicht die Variable dann den Wert <code>2</code>, <b>trifft die Bedingung</b>&nbsp;
+                        <code>$cheeseCount < 2</code>&nbsp;<b>nicht mehr zu und die Schleife beendet</b> nach der
+                        richtigen Anzahl Durchläufen.
                     </p>
                 </template>
             </Layout>
@@ -27,6 +48,11 @@
         components: {Layout},
         data() {
             return {
+                sourcecodeGeneral: [
+                    'while ($condition) {',
+                    '   // Code',
+                    '}',
+                ],
                 sourcecode: [
                     '// Einen Double-Cheeseburger, bitte.',
                     '',
@@ -43,6 +69,7 @@
                     'add(topBun);',
                 ],
                 animation: [
+                    [ 0, 0, 0, ''],
                     [ 0, 0, 0, 'Großartige Bestellung, ein "Double-Cheeseburger".'],
                     [ 0, 0, 0, 'Hier können wir richtig gut eine Schleife einsetzen!'],
                     [ 0, 0, 0, 'Schauen wir\'s uns an!'],

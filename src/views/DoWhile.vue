@@ -1,17 +1,28 @@
 <template>
     <div id="do-while-loop">
         <div class="container">
-            <h1><code>do while</code> Loop</h1>
-            <p class="lead text-black-50">Zum Wiederholen einer Anweisung abhängig von einer Bedingung, <strong class="text-body">ohne den ersten Durchlauf zu prüfen</strong>.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+                <template slot="intro">
+                    <h1><code>do while</code> Loop</h1>
+                    <p class="lead text-black-50">Zum Wiederholen einer Anweisung, <strong class="text-body">ohne den ersten Durchlauf zu prüfen</strong>.</p>
+                </template>
+
                 <template slot="desc">
                     <p>
-                        Der einzige Unterschied zwischen "While"-Schleife und "Do While"-Schleife ist, dass "<u>Do</u> While"
-                        die erste Abfrage überspringt und den Code ausführt, egal ob die Kondition erfüllt ist.
+                        <b>Ein Burger soll umbelegt werden!</b> <br>
+                        Es gibt nochmal Extra-Cheese oben drauf, laut Rezept ist die Maximalmenge aber 2.
                     </p>
                     <p>
-                        Zuerst "<u>Tun</u>", dann überprüfen, ob eine weitere Wiederholung gemacht wird.
+                        Dafür benutzen wir die <code>do while</code>-Schleife. Diese funktioniert im
+                        Prinzip genau wie die <code>while</code>-Schleife, allerdings wird die Bedingung hier <b>beim ersten
+                        Durchlauf übersprungen</b>.
+                    </p>
+                    <p>
+                        Im Beispiel haben wir schon 2 Scheiben Käse, deshalb schreiben wir <code>$cheeseCount = 2</code>.
+                        Da die <b>Überprüfung erst am Ende der Schleife</b> stattfindet, wird der Code der <code>do while</code>-Schleife
+                        <b>in jedem Falle ein Mal ausgeführt</b>. Ab hier ist der Vorgang dann der gleiche wie bei der
+                        <code>while</code>-Schleife und der Inhalt wird wiederholt, bis die Bedingung nicht mehr zutrifft.
                     </p>
                 </template>
             </Layout>
@@ -22,10 +33,16 @@
 <script>
     import Layout from "../components/Layout";
     export default {
-        name: 'While',
+        name: 'DoWhile',
         components: {Layout},
         data() {
             return {
+                sourcecodeGeneral: [
+                    'do {',
+                    '   // Code',
+                    '}',
+                    'while ($condition);'
+                ],
                 sourcecode: [
                     '// Stop! Mach einen Triple draus.',
                     '',
@@ -42,6 +59,7 @@
                     'add(topBun);',
                 ],
                 animation: [
+                    [ 0, 0, 0, ''],
                     [ 0, 0, 0, 'Unser Kunde hat seinen Burger umbestellt.'],
                     [ 0, 0, 0, 'Wir sollen noch eine Scheibe Käse hinzufügen!'],
                     [ 0, 0, 0, 'Eigentlich erlaubt es das Rezept garnicht...'],

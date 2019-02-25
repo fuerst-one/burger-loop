@@ -4,11 +4,17 @@ import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
 
+import './assets/main.scss'
+
 import './plugins/bootstrap-vue'
 import './plugins/vue-highlightjs'
 import './plugins/vue-cookie'
 
 Vue.config.productionTip = false;
+
+window.hideBurgerOnIdle = false;
+window.routeTransitions = false;
+window.animationFrequencySlider = true;
 
 new Vue({
   router,

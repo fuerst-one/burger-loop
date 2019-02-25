@@ -1,21 +1,33 @@
 <template>
     <div id="foreach-loop">
         <div class="container">
-            <h1><code>foreach</code> Loop</h1>
-            <p class="lead text-black-50">Die Schleife, die alle Elemente eines Array oder Iterables durchläuft.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+                <template slot="intro">
+                    <h1><code>foreach</code> Loop</h1>
+                    <p class="lead text-black-50">Die Schleife, die alle <strong class="text-body">Schlüssel und Elemente einer Sammlung</strong> durchläuft.</p>
+                </template>
+
                 <template slot="desc">
                     <p>
-                        Der "Foreach"-Loop vereinfacht das Durchlaufen von Arrays ungemein. Zwar kann man mit einem
-                        normalen "For"-Loop unter Angabe der Array-Länge das gleiche erreichen, doch spart man sich hier
-                        wertvolle Zeit und Schreibarbeit und hat gleichzeitig besser lesbaren Code.
+                        <b>Unser Restaurant läuft gut! Wir haben viele verschiedene Bestellungen!</b> <br>
+                        Fangen wir also an, die hungrigen Kunden abzuarbeiten. Dabei wie immer: <b>möglichst effizient.</b>
                     </p>
                     <p>
-                        Beim Durchlaufen der "Foreach"-Schleife wird nämlich jedem Feld des Iterables (bspw. Schlüssel
-                        und Wert eines Arrays) der Variablenname im Kopf zugewiesen. So kann die Zuweisung durch
-                        Adressieren einer bestimmten Stelle im Array (z.B. <code>$field = $array[$i]</code>) einfach
-                        übersprungen werden.
+                        Der <code>foreach</code>-Loop <b>vereinfacht</b> uns dabei <b>das Durchlaufen von Arrays</b>
+                        ungemein. Zwar kann man mit einem normalen <code>for</code>-Loop das Gleiche erreichen, doch
+                        spart man sich hier Schreibarbeit und hat gleichzeitig besser lesbaren Code.
+                    </p>
+                    <p>
+                        <b>Wie gehen wir vor?</b> <br>
+                        Beim Durchlaufen der <code>foreach</code>-Schleife wird <b>bei jedem Durchgang das aktuelle Feld</b>
+                        des Arrays (also Schlüssel und Wert) <b>den Variablennamen im Kopf zugewiesen</b>. Dabei geht die
+                        Schleife die Felder in genau der Reihenfolge ab, wie sie erstellt wurden. <br>
+                        Wir erstellen also unser Array nach dem Schema <code>$table => $order</code>, um die Elemente
+                        später komfortabel abrufen zu können. <br>
+                        In den runden Klammern schreiben wir jetzt einfach <b>Array-Name</b>&nbsp;<code>as</code>&nbsp;
+                        <b>Schlüssel</b>&nbsp;<code>=></code>&nbsp;<b>Wert</b>. Und schon laufen wir alle Felder des
+                        Arrays ab!
                     </p>
                 </template>
             </Layout>
@@ -30,6 +42,11 @@
         components: {Layout},
         data() {
             return {
+                sourcecodeGeneral: [
+                    'foreach ($array as $key => $value) {',
+                    '   // Code',
+                    '}'
+                ],
                 sourcecode: [
                     '// Das Restaurant läuft. 3 verschiedene Bestellungen.',
                     '',
@@ -47,6 +64,7 @@
                     '// Feierabend! Geil.',
                 ],
                 animation: [
+                    [ 0, 0, 0, ''],
                     [ 0, 0, 0, 'Alright, get ready...'],
                     [ 2, 0, 0, 'Wir haben Bestellungen an 3 Tischen!'],
                     [ 2, 0, 0, 'Schlau wie wir sind, geben wir dem Koch einfach ein Array.'],

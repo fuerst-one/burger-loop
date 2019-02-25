@@ -1,25 +1,32 @@
 <template>
     <div id="if-clause">
         <div class="container">
-            <h1><code>if</code> Statement</h1>
-            <p class="lead text-black-50">Immer wenn etwas abhängig von einer Bedingung ausgeführt werden soll.</p>
 
-            <Layout :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+                <template slot="intro">
+                    <h1><code>if</code> Statement</h1>
+                    <p class="lead text-black-50">Immer wenn etwas <strong class="text-body">abhängig von einer Bedingung</strong> ausgeführt werden soll.</p>
+                </template>
+
                 <template slot="desc">
                     <p>
-                        Der "if"-Block ermöglicht einen Code-Abschnitt auszuführen <u>nur falls</u> eine bestimmte
-                        Kondition erfüllt ist.
+                        <b>Dann starten wir doch gleich mal mit unseren Rezepten.</b> <br>
+                        Da wir nicht jede Anweisung im Rezeptbuch ausführen dürfen, brauchen wir eine Art Schranke, die
+                        sagt was wir ausführen sollen und was überspringen.
                     </p>
                     <p>
-                        Ist die Bedingung bei der Ausführung nicht erfüllt, wird der Block
-                        übersprungen und falls vorhanden der "else"-Block ausgeführt.
-                        Der "else"-Block wird daher <i>nur</i> ausgeführt, wenn die Bedingung anfangs <i>nicht</i>
-                        erfüllt wurde.
+                        Auftritt <code>if</code>-Statement. Das <code>if</code>-Statement lässt einen bestimmten
+                        <b>Code-Abschnitt nur dann ausführen, wenn eine bestimmte Bedingung erfüllt ist</b>. Ist die
+                        Bedingung <b>nicht erfüllt, wird der Abschnitt</b> in den geschwungenen Klammern <b>übersprungen</b>.
                     </p>
                     <p>
-                        Ebenfalls ist es möglich "else if"-Blöcke zu verwenden, die nach Nichterfüllen der vorherigen
-                        Abfragen der Reihe nach überprüft werden. Sobald eine Bedingung in der Reihe erfüllt wurde wird
-                        kein anderer Block mehr abgefragt.
+                        Bei mehreren verschiedenen Anweisungen,
+                        können auch <code>else if</code> und <code>else</code> Blöcke verwendet werden. Das <code>else</code>
+                        signalisiert, dass <b>die vorherigen Bedingungen nicht erfüllt werden dürfen</b>.
+                    </p>
+                    <p>
+                        Hier im Beispiel wird also, wenn wir die Rezepte durchgehen, die Übereinstimmung von <code>$recipe</code>
+                        und dem Rezept überprüft und je nach Wert ein anderes Rezept ausgeführt.
                     </p>
                 </template>
             </Layout>
@@ -34,10 +41,17 @@
         components: {Layout},
         data() {
             return {
+                sourcecodeGeneral: [
+                    'if ($condition) {',
+                    '   // Code',
+                    '} else {',
+                    '   // Code',
+                    '}',
+                ],
                 sourcecode: [
                     '// Unsere Burger-Rezeptur',
                     '',
-                    'base = [ bottomBun, patty, salad, tomatoes ];',
+                    'add([ bottomBun, patty, salad, tomatoes ]);',
                     '',
                     'if ($recipe == \'Double-Cheeseburger\') {',
                     '   add(cheese);',
@@ -58,6 +72,7 @@
                 ],
                 animation: [
                     // sourcecode line, line-indicator status, burger animation frame, line-indicator tooltip
+                    [ 0, 0, 0, ''],
                     [ 0, 0, 0, 'Ok, let\'s go. Braten wir ein paar Burger.'],
                     [ 0, 0, 0, 'Das ist unser Kochbuch.'],
                     [ 0, 0, 0, 'Unser erster Burger: "Double-Cheeseburger"'],
@@ -68,8 +83,8 @@
                     [ 4, 1, 1, 'Rezept für einen Double-Cheeseburger?'],
                     [ 4, 2, 1, 'Ja! $recipe == "Double-Cheeseburger".'],
                     [ 4, 2, 1, 'Also folgen wir diesem Rezept:'],
-                    [ 5, 0, 2, 'Käse,'],
-                    [ 6, 0, 3, 'Nochmal Käse,'],
+                    [ 5, 0, 2, 'Käse'],
+                    [ 6, 0, 3, 'Nochmal Käse'],
                     [ 7, 0, 4, 'Soße.'],
                     [ 9, 0, 4, 'Das ist das Ende des Rezepts.'],
                     [ 9, 0, 4, 'Das heißt wir überspringen den Rest!'],
@@ -83,8 +98,8 @@
                     [ 9, 2, 1, 'Yes. Also:'],
                     [10, 0, 2, 'Käse,'],
                     [11, 0, 6, 'Soße,'],
-                    [13, 0, 6, 'Rest überspringen,'],
-                    [17, 0, 7, 'Deckel,'],
+                    [13, 0, 6, 'Rest überspringen'],
+                    [17, 0, 7, 'Deckel'],
                     [19, 0, 0, 'Gut is.'],
                     [ 0, 0, 0, 'Ok, der Hamburger noch.'],
                     [ 2, 0, 1, 'Auch hier die Basiszutaten'],

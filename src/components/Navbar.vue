@@ -1,51 +1,53 @@
 <template>
     <div id="navbar">
         <b-navbar toggleable="sm" type="dark" variant="dark">
-            <b-navbar-brand to="/">Burger Loop</b-navbar-brand>
+            <!--<div class="container">-->
+                <b-navbar-brand to="/">Burger Loop</b-navbar-brand>
 
-            <div class="nav-button prev d-sm-none ml-auto">
-                <router-link v-if="prevRoute !== '/foreach'" :to="prevRoute">
-                    <svg height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
-                </router-link>
-            </div>
+                <div class="nav-button prev d-sm-none ml-auto">
+                    <router-link v-if="prevRoute !== '/foreach'" :to="prevRoute">
+                        <svg height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
+                    </router-link>
+                </div>
 
-            <b-navbar-toggle target="nav-collapse" class="mx-4" />
+                <b-navbar-toggle target="nav-collapse" class="mx-4" />
 
-            <div class="nav-button next d-sm-none">
-                <router-link :to="nextRoute">
-                    <svg height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
-                </router-link>
-            </div>
+                <div class="nav-button next d-sm-none">
+                    <router-link :to="nextRoute">
+                        <svg height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
+                    </router-link>
+                </div>
 
-            <b-collapse is-nav id="nav-collapse" class="ml-2 mr-auto text-center text-sm-left">
-                <b-navbar-nav>
-                    <b-nav-item to="/if">
-                        <b-button :variant="$route.path === '/if' ? 'primary' : 'secondary'">
-                            if
-                        </b-button>
-                    </b-nav-item>
-                    <b-nav-item to="/while">
-                        <b-button :variant="$route.path === '/while' ? 'primary' : 'secondary'">
-                            while
-                        </b-button>
-                    </b-nav-item>
-                    <b-nav-item to="/do-while">
-                        <b-button :variant="$route.path === '/do-while' ? 'primary' : 'secondary'">
-                            do while
-                        </b-button>
-                    </b-nav-item>
-                    <b-nav-item to="/for">
-                        <b-button :variant="$route.path === '/for' ? 'primary' : 'secondary'">
-                            for
-                        </b-button>
-                    </b-nav-item>
-                    <b-nav-item to="/foreach">
-                        <b-button :variant="$route.path === '/foreach' ? 'primary' : 'secondary'">
-                            foreach
-                        </b-button>
-                    </b-nav-item>
-                </b-navbar-nav>
-            </b-collapse>
+                <b-collapse is-nav id="nav-collapse" class="ml-2 mr-auto text-center text-sm-left">
+                    <b-navbar-nav>
+                        <b-nav-item to="/if">
+                            <b-button :variant="$route.path === '/if' ? navbarItemActiveColor : navbarItemDefaultColor">
+                                if
+                            </b-button>
+                        </b-nav-item>
+                        <b-nav-item to="/while">
+                            <b-button :variant="$route.path === '/while' ? navbarItemActiveColor : navbarItemDefaultColor">
+                                while
+                            </b-button>
+                        </b-nav-item>
+                        <b-nav-item to="/do-while">
+                            <b-button :variant="$route.path === '/do-while' ? navbarItemActiveColor : navbarItemDefaultColor">
+                                do while
+                            </b-button>
+                        </b-nav-item>
+                        <b-nav-item to="/for">
+                            <b-button :variant="$route.path === '/for' ? navbarItemActiveColor : navbarItemDefaultColor">
+                                for
+                            </b-button>
+                        </b-nav-item>
+                        <b-nav-item to="/foreach">
+                            <b-button :variant="$route.path === '/foreach' ? navbarItemActiveColor : navbarItemDefaultColor">
+                                foreach
+                            </b-button>
+                        </b-nav-item>
+                    </b-navbar-nav>
+                </b-collapse>
+            <!--</div>-->
         </b-navbar>
     </div>
 </template>
@@ -61,9 +63,13 @@
     export default {
         name: 'Navbar',
         components: {BButton, BNavItem, BNavbarNav, BCollapse, BNavbarToggle, BNavbarBrand, BNavbar},
+        props: {
+            routes: Array
+        },
         data() {
             return {
-                routes: [ '/', '/if', '/while', '/do-while', '/for', '/foreach' ],
+                navbarItemDefaultColor: 'secondary',
+                navbarItemActiveColor: 'primary',
             }
         },
         computed: {
@@ -81,6 +87,8 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../assets/variables';
+
     .nav-button {
         width: 1rem;
         height: 1rem;
@@ -92,12 +100,16 @@
         margin-left: auto;
         margin-right: 1rem;
         padding: 0;
+        outline: none;
     }
     .navbar-brand {
         margin-left: 1rem;
     }
 
     @media screen and (max-width: 576px){
+        #navbar {
+            box-shadow: 0 0 1rem -.5rem rgba($black, 10);
+        }
         #nav-collapse {
             position: absolute;
             bottom: 3.2rem;
