@@ -86,10 +86,6 @@
         position: relative;
         transition: opacity .3s, flex .3s, max-width .3s;
         min-height: 25rem;
-
-        h2 {
-            margin-bottom: 1rem;
-        }
     }
 
     .description-wrapper {
@@ -164,6 +160,9 @@
     @include media-breakpoint-down('md') {
         .description, .animation {
             min-height: unset;
+            h2 {
+                margin-bottom: 1rem;
+            }
         }
         .description-wrapper {
             height: unset;

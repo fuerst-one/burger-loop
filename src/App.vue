@@ -59,6 +59,10 @@
     .intro {
       height: 8rem;
     }
+
+    h2 {
+      margin-bottom: 1.25rem;
+    }
   }
 
   .btn:disabled, .btn[disabled], .btn.disabled {

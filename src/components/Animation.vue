@@ -292,15 +292,10 @@
     .sourcecode, .burger {
         position: relative;
         transition: height .3s, opacity .3s, flex .3s, max-width .3s;
-
-        h2 {
-            margin-bottom: 1rem;
-        }
     }
 
     .sourcecode-animation-wrapper {
         position: relative;
-
 
         .end-screen {
             position: absolute;
