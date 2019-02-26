@@ -1,11 +1,11 @@
 <template>
     <div id="content">
-        <div class="intro row align-items-top align-items-lg-center">
+        <div class="intro row align-item-top align-items-md-center">
             <div class="col-md-8">
                 <slot name="intro"></slot>
             </div>
             <div class="col-md-4 mt-1 mt-lg-0">
-                <pre v-highlightjs="sourcecodeGeneral"><code class="php bg-light text-black-50"></code></pre>
+                <pre v-highlightjs="sourcecodeGeneral"><code class="php light"></code></pre>
             </div>
         </div>
 
@@ -22,12 +22,12 @@
                 <Animation :sourcecode="sourcecode" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event"></Animation>
             </div>
 
-            <div class="nav-button prev d-none d-md-block">
+            <div class="nav-button prev d-none d-sm-block">
                 <router-link :to="prevRoute">
                     <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#aaa" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
                 </router-link>
             </div>
-            <div class="nav-button next d-none d-md-block">
+            <div class="nav-button next d-none d-sm-block">
                 <router-link :to="nextRoute">
                     <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#aaa" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
                 </router-link>
@@ -38,15 +38,11 @@
 </template>
 
 <script>
-    import BButton from "bootstrap-vue/src/components/button/button";
-    import Slider from "./Slider";
-    import Burger from "./Burger";
-    import Sourcecode from "./Sourcecode";
     import Animation from "./Animation";
 
     export default {
         name: 'Layout',
-        components: {Animation, Sourcecode, Burger, Slider, BButton},
+        components: {Animation},
         props: {
             sourcecodeGeneral: String,
             sourcecode: String,
@@ -101,7 +97,7 @@
         border-radius: 5px;
         padding: .5rem .8rem;
 
-        height: 23.9rem;
+        height: 22.5rem;
         overflow-y: scroll;
         overflow-x: hidden;
 
@@ -113,16 +109,16 @@
             width: 10px;
         }
         &::-webkit-scrollbar-track {
-            background: darken($light, 5);
+            background: $gray-200;
             border-radius: 0 5px 5px 0;
         }
         &::-webkit-scrollbar-thumb {
             width: 8px;
             margin: 0 auto;
-            background: darken($light, 15);
+            background: $gray-300;
             border-radius: 0 5px 5px 0;
             &:hover {
-                background: #aaa;
+                background: $gray-400;
             }
         }
     }
@@ -141,7 +137,31 @@
         }
     }
 
-    @media screen and (max-width: 991px) {
+    .intro {
+        pre {
+            position: relative;
+            height: 6rem;
+            background: $light;
+            border-radius: $border-radius;
+            overflow-x: auto;
+
+            code {
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                overflow-x: visible;
+                padding: 0 .5rem;
+            }
+        }
+    }
+
+    @include media-breakpoint-down('lg') {
+        .nav-button {
+            &.prev { left: -1rem; }
+            &.next { right: -1rem; }
+        }
+    }
+    @include media-breakpoint-down('md') {
         .description, .animation {
             min-height: unset;
         }

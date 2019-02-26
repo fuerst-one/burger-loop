@@ -15,18 +15,25 @@
                         sagt was wir ausführen sollen und was überspringen.
                     </p>
                     <p>
-                        Auftritt <code>if</code>-Statement. Das <code>if</code>-Statement lässt einen bestimmten
-                        <b>Code-Abschnitt nur dann ausführen, wenn eine bestimmte Bedingung erfüllt ist</b>. Ist die
-                        Bedingung <b>nicht erfüllt, wird der Abschnitt</b> in den geschwungenen Klammern <b>übersprungen</b>.
+                        Auftritt <code>if</code>-Statement. Das <code>if</code>-Statement lässt bestimmte
+                        <b>Code-Abschnitte nur dann ausführen, wenn eine bestimmte Bedingung erfüllt ist</b>. Ist sie
+                        <b>nicht erfüllt, wird der Abschnitt</b> im Block <b>übersprungen</b>. <br>
+                        Bei mehreren verschiedenen Anweisungen, werden <code>else if</code> und <code>else</code>
+                        Blöcke angehängt, aber merke: <b>Es wird immer nur ein Teil-Block in der Reihe ausgeführt, der
+                        Rest übersprungen.</b> So bekommen wir unsere verschiedenen Rezepte ganz einfach unter einen Hut.
                     </p>
                     <p>
-                        Bei mehreren verschiedenen Anweisungen,
-                        können auch <code>else if</code> und <code>else</code> Blöcke verwendet werden. Das <code>else</code>
-                        signalisiert, dass <b>die vorherigen Bedingungen nicht erfüllt werden dürfen</b>.
+                        <b>Was müssen wir also tun?</b> <br>
+                        Wenn wir die Rezepte durchgehen, müssen wir zuerst die <b>Übereinstimmung von</b>&nbsp;
+                        <code>$recipe</code>&nbsp;<b>und dem Rezept überprüfen</b>. Wenn eine Bestellung
+                        <code>"Double-Cheeseburger"</code> lautet, sollte also das richtige Rezept ausgeführt werden.
+                        Das machen wir, indem wir in den Klammern die Variable abfragen, also
+                        <code>$recipe == "Double-Cheeseburger"</code>. Dann müssen wir nur noch  im zugehörigen Code-Block
+                        unser Rezept fortführen. <b>Um die Verwendung mehrerer Rezepte gleichzeitig zu verhindern</b>,
+                        fragen wir die anderen Rezepte in einem <code>else if</code>-Block ab.
                     </p>
                     <p>
-                        Hier im Beispiel wird also, wenn wir die Rezepte durchgehen, die Übereinstimmung von <code>$recipe</code>
-                        und dem Rezept überprüft und je nach Wert ein anderes Rezept ausgeführt.
+                        Und schon haben wir unser Kochbuch mit drei verschiedenen Rezepten!
                     </p>
                 </template>
             </Layout>
@@ -76,7 +83,7 @@
                     [ 0, 0, 0, 'Ok, let\'s go. Braten wir ein paar Burger.'],
                     [ 0, 0, 0, 'Das ist unser Kochbuch.'],
                     [ 0, 0, 0, 'Unser erster Burger: "Double-Cheeseburger"'],
-                    [ 2, 0, 1, 'Zuerst immer die Basiszutaten.'],
+                    [ 2, 0, 1, 'Zuerst belegen wir immer die Basiszutaten.'],
                     [ 4, 0, 1, 'Jetzt wird\'s schon tricky.'],
                     [ 4, 0, 1, 'Unsere Burger haben verschiedene Rezepte.'],
                     [ 4, 0, 1, 'Schauen wir, ob wir beim richtigen sind.'],
@@ -96,8 +103,8 @@
                     [ 4, 3, 1, 'Nö.'],
                     [ 9, 1, 1, 'Jetzt Cheeseburger?'],
                     [ 9, 2, 1, 'Yes. Also:'],
-                    [10, 0, 2, 'Käse,'],
-                    [11, 0, 6, 'Soße,'],
+                    [10, 0, 2, 'Käse'],
+                    [11, 0, 6, 'Soße'],
                     [13, 0, 6, 'Rest überspringen'],
                     [17, 0, 7, 'Deckel'],
                     [19, 0, 0, 'Gut is.'],
@@ -110,10 +117,10 @@
                     [13, 1, 1, 'Hamburger?'],
                     [13, 1, 1, 'Nein, aber das ist das letzte Rezept!'],
                     [13, 2, 1, 'Also nehmen wir standardmäßig dieses.'],
-                    [14, 0, 8, 'Soße,'],
-                    [17, 0, 9, 'Brötchen,'],
-                    [19, 0, 9, 'Auch das ist ein Burger.'],
-                    [19, 0, 9, 'Toll, das waren unsere Rezepte!'],
+                    [14, 0, 8, 'Soße'],
+                    [17, 0, 9, 'Brötchen'],
+                    [19, 0, 9, 'Und das war der letzte Burger.'],
+                    [19, 0, 9, 'Toll, wir haben unsere Rezepte!'],
                     [19, 0, 9, 'Beginnen wir, uns die Arbeit zu erleichtern.'],
                     [19, 0, 9, 'Schau weiter zu "While"-Schleifen!'],
                 ],

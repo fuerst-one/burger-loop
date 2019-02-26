@@ -20,7 +20,7 @@
                         benötigen.
                     </p>
                     <p>
-                        <b>Was tun wir dafür?</b> <br>
+                        <b>Wie erreichen wir das?</b> <br>
                         Um die Anzahl der Wiederholungen zu bestimmen, benötigen wir eine <b>Bedingung</b> im Kopf der
                         Schleife. Diese funktioniert genau wie ein <code>if</code>-Statement und <b>bestimmt, ob die
                         Schleife weiterläuft </b>(<code>true</code>)<b> oder nicht.</b>
@@ -34,6 +34,9 @@
                         Erreicht die Variable dann den Wert <code>2</code>, <b>trifft die Bedingung</b>&nbsp;
                         <code>$cheeseCount < 2</code>&nbsp;<b>nicht mehr zu und die Schleife beendet</b> nach der
                         richtigen Anzahl Durchläufen.
+                    </p>
+                    <p>
+                        Yeah, so haben wir zwei gleiche Schritte zu einem zusammengefasst!
                     </p>
                 </template>
             </Layout>
@@ -69,34 +72,36 @@
                     'add(topBun);',
                 ],
                 animation: [
+                    // sourcecode line, line-indicator status, burger animation frame, line-indicator tooltip
                     [ 0, 0, 0, ''],
                     [ 0, 0, 0, 'Großartige Bestellung, ein "Double-Cheeseburger".'],
                     [ 0, 0, 0, 'Hier können wir richtig gut eine Schleife einsetzen!'],
                     [ 0, 0, 0, 'Schauen wir\'s uns an!'],
                     [ 2, 0, 0, 'Legen wir fest, wieviele Schichten Käse wir anfangs haben.'],
-                    [ 2, 0, 0, '(logischerweise 0)'],
+                    [ 2, 0, 0, 'Logischerweise 0.'],
                     [ 4, 0, 1, 'Also Basiszutaten hinzufügen.'],
                     [ 6, 0, 1, 'Jetzt wird\'s spannend!'],
-                    [ 6, 0, 1, 'Wir wollen einen "Double-Cheeseburger"'],
-                    [ 6, 0, 1, 'Wir führen also 2 mal die gleiche Aktion aus.'],
+                    [ 6, 0, 1, 'Wir wollen einen "Double-Cheeseburger..."'],
+                    [ 6, 0, 1, '...also führen wir 2 mal die gleiche Aktion aus.'],
                     [ 6, 0, 1, 'Benutzen wir eine "While"-Schleife...'],
                     [ 6, 0, 1, '...können wir die Aktion beliebig oft wiederholen.'],
                     [ 6, 0, 1, 'Wir brauchen aber nur 2 Schichten Käse.'],
                     [ 6, 0, 1, 'Deshalb schreiben wir "$cheeseCount < 2".'],
-                    [ 6, 1, 1, 'Wir starten bei 0, also:'],
+                    [ 6, 1, 1, 'Wir starten bei $cheeseCount = 0, also:'],
                     [ 6, 1, 1, 'Ist 0 < 2?'],
-                    [ 6, 2, 1, 'Ja. Führen wir den Schleifeninhalt aus.'],
+                    [ 6, 2, 1, 'Ja. Wir führen den Schleifeninhalt aus.'],
                     [ 7, 0, 2, 'Wir fügen den Käse zum Burger hinzu'],
-                    [ 8, 0, 2, 'und aktualisieren die Anzahl der Scheiben. $cheeseCount = 1.'],
+                    [ 8, 0, 2, 'und aktualisieren die Anzahl der Scheiben.'],
+                    [ 8, 0, 2, '$cheeseCount + 1 = 1'],
                     [ 9, 0, 2, 'Schleife beendet, wir springen zurück.'],
                     [ 6, 1, 2, 'Nochmal überprüfen: Jetzt 1 < 2?'],
-                    [ 6, 2, 2, 'Immernoch wahr! Mehr Käse!'],
+                    [ 6, 2, 2, 'Immer noch wahr! Mehr Käse!'],
                     [ 7, 0, 3, 'Yumyum.'],
-                    [ 8, 0, 3, '+ 1 = 2'],
+                    [ 8, 0, 3, '1 + 1 = 2'],
                     [ 9, 0, 3, 'Ende. Und zurück.'],
                     [ 6, 0, 3, 'Interessant.'],
                     [ 6, 1, 3, 'Wir überprüfen wieder: 2 < 2?'],
-                    [ 6, 3, 3, 'Nope! Das war\'s! Kein Käse mehr auf den Burger!'],
+                    [ 6, 3, 3, 'Nope! Das war\'s wohl! Keinen Käse mehr auf den Burger!'],
                     [11, 0, 4, 'Also nur noch Soße...'],
                     [12, 0, 5, '...und die obere Brötchenhälfte und wir sind fertig.'],
                     [12, 0, 5, 'Wir konnten den Käse jetzt mit nur einer Anweisung doppelt hinzufügen!'],

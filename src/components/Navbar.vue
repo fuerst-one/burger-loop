@@ -105,8 +105,13 @@
     .navbar-brand {
         margin-left: 1rem;
     }
+    .nav-item {
+        .btn {
+            white-space: nowrap;
+        }
+    }
 
-    @media screen and (max-width: 575px){
+    @include media-breakpoint-only('xs') {
         #navbar {
             box-shadow: 0 0 1rem -.5rem rgba($black, 10);
         }

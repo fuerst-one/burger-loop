@@ -15,14 +15,20 @@
                     </p>
                     <p>
                         Dafür benutzen wir die <code>do while</code>-Schleife. Diese funktioniert im
-                        Prinzip genau wie die <code>while</code>-Schleife, allerdings wird die Bedingung hier <b>beim ersten
-                        Durchlauf übersprungen</b>.
+                        Prinzip genau wie die <code>while</code>-Schleife, allerdings wird die Bedingung hier <b>beim
+                        ersten Durchlauf übersprungen</b>. Genau wie wir es für unsere Sonderbestellung mit der Scheibe
+                        extra benötigen.
                     </p>
                     <p>
+                        <b>Wie tricksen wir unser Rezept nun aus?</b> <br>
                         Im Beispiel haben wir schon 2 Scheiben Käse, deshalb schreiben wir <code>$cheeseCount = 2</code>.
                         Da die <b>Überprüfung erst am Ende der Schleife</b> stattfindet, wird der Code der <code>do while</code>-Schleife
                         <b>in jedem Falle ein Mal ausgeführt</b>. Ab hier ist der Vorgang dann der gleiche wie bei der
                         <code>while</code>-Schleife und der Inhalt wird wiederholt, bis die Bedingung nicht mehr zutrifft.
+                    </p>
+                    <p>
+                        Somit können wir im ersten Durchlauf aus unserem fertigen Double-Cheeseburger ganz einfach
+                        einen Triple machen, ohne das Rezept zu ändern!
                     </p>
                 </template>
             </Layout>
@@ -60,20 +66,21 @@
                 ],
                 animation: [
                     [ 0, 0, 0, ''],
-                    [ 0, 0, 0, 'Unser Kunde hat seinen Burger umbestellt.'],
+                    [ 0, 0, 0, 'Unser Kunde hat seinen Burger umbestellt!'],
                     [ 0, 0, 0, 'Wir sollen noch eine Scheibe Käse hinzufügen!'],
                     [ 0, 0, 0, 'Eigentlich erlaubt es das Rezept garnicht...'],
                     [ 0, 0, 0, '...aber wir haben einen kleinen Trick.'],
                     [ 2, 0, 1, 'Der Double-Cheeseburger hat schon 2 Scheiben Käse,'],
-                    [ 8, 1, 1, 'unsere While-Bedingung sagt aber < 2!'],
-                    [ 4, 1, 1, 'Das ist aber bei "Do While" kein Problem.'],
-                    [ 4, 0, 1, 'Wir führen die erste Wiederholung aus, ohne zu prüfen.'],
+                    [ 8, 1, 1, 'unsere While-Bedingung im Rezept sagt aber < 2!'],
+                    [ 4, 1, 1, 'Das ist bei "Do While" aber kein Problem.'],
+                    [ 4, 0, 1, 'Wir führen die erste Wiederholung immer aus, ohne zu prüfen.'],
                     [ 5, 0, 2, 'Also eine Scheibe Käse hinzu.'],
                     [ 6, 0, 2, 'Und aufzählen.'],
-                    [ 8, 0, 2, 'Jetzt wird erst überprüft (!):'],
+                    [ 8, 0, 2, 'Erst nach dem ersten Durchlauf wird überprüft (!):'],
                     [ 8, 1, 2, '$cheeseCount < 2?'],
                     [ 8, 3, 2, 'Nein! 3 ist größer als 2.'],
-                    [ 8, 3, 2, 'Die Schleife wird also abgebrochen.'],
+                    [ 8, 3, 2, 'Die Schleife wird also direkt abgebrochen.'],
+                    [ 8, 3, 2, 'Bei einer "While"-Schleife, hätten wir den Inhalt gar nicht ausgeführt.'],
                     [ 8, 3, 2, 'Hätten wir die Bedingung hier erfüllt, würden wir zum Anfang springen.'],
                     [ 8, 3, 2, 'Haben wir aber nicht, also gehen wir weiter.'],
                     [11, 0, 3, 'Soße drauf.'],

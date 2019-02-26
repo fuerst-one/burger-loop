@@ -51,40 +51,42 @@
   @import './assets/_variables.scss';
 
   p {
-    font-size: .95rem;
+    font-size: 1rem;
   }
   #content {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
     margin-bottom: 2rem;
-    .lead {
-      height: 62px;
+    .intro {
+      height: 8rem;
     }
   }
 
   .btn:disabled, .btn[disabled], .btn.disabled {
     opacity: .3 !important;
   }
+
   * > .tooltip.show {
     transition: opacity .15s;
 
     .tooltip-inner {
       box-shadow: $box-shadow;
     }
-
-    /*&:hover {
-      opacity: 0 !important;
-    }*/
   }
 
   code {
     font-size: 95% !important;
+
+    &.light {
+        background: $light;
+        color: $gray-700;
+    }
   }
 
   .no-bg {
     background: transparent !important;
   }
 
-  @media screen and (max-width: 991px) {
+  @include media-breakpoint-down('lg') {
     #navbar {
       position: fixed;
       bottom: 0;
@@ -93,32 +95,32 @@
       z-index: 100;
     }
     #content {
-      margin-top: 3.5rem;
+      margin-top: 2rem;
       margin-bottom: 6rem;
 
-      .lead {
-        height: 109px;
+      .intro {
+        height: 9rem;
       }
     }
   }
-  @media screen and (max-width: 767px) {
+  @include media-breakpoint-down('md') {
     #content {
-      margin-top: 2rem;
+      margin-top: 2.5rem;
       margin-bottom: 5rem;
 
-      .lead {
-        height: 77px;
+      .intro {
+        height: 10rem;
       }
     }
   }
-  @media screen and (max-width: 575px) {
+  @include media-breakpoint-down('sm') {
     #content {
-      .lead {
-        height: 113px;
+      .intro {
+        height: 15rem;
       }
     }
   }
-  @media screen and (max-width: 400px) {
+  @include media-breakpoint-down(400) {
     #content {
       .display {
         font-size: 3rem;

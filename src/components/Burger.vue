@@ -121,6 +121,7 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../assets/variables';
 
     .burger-animation {
         .layer {
@@ -233,12 +234,12 @@
             }
         }
     }
-    @media screen and (max-width: 991px) {
+    @include media-breakpoint-down('md') {
         .burger-animation {
             min-height: unset;
         }
     }
-    @media screen and (max-width: 767px) {
+    @include media-breakpoint-down('sm') {
         .burger-animation {
             max-width: 80px;
             margin: 0 auto;

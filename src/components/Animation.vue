@@ -7,7 +7,7 @@
                 <div class="tooltip-inner">
                     <div>
                         <p v-if="theaterMode && activeLineMessage !== ''">{{ activeLineMessage }}</p>
-                        <p v-else>Drücke auf &nbsp;<svg @click="play" height="17px" style="margin-bottom: 3px; cursor: pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#333" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>, um zu beginnen!</p>
+                        <p v-else>Drücke auf &nbsp;<svg @click="play" height="17px" style="margin-bottom: 3px; cursor: pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="white" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg> , um zu beginnen!</p>
                     </div>
                     <div v-if="animationInterval" class="dots">
                         <span>{{ tickTock }}</span>
@@ -53,20 +53,20 @@
 
             <div class="row justify-content-center">
                 <b-button id="animation-far-prev" :disabled="animationStep === 0" @click="farPrevStep" variant="secondary" class="mr-2">
-                    <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="white" d="M20.2 247.5L167 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L85.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L184 412.5c-4.7 4.7-12.3 4.7-17 0l-146.8-148c-4.7-4.7-4.7-12.3 0-17zm160 17l146.8 148c4.7 4.7 12.3 4.7 17 0l19.8-19.8c4.7-4.7 4.7-12.3 0-17L245.3 256l118.5-119.7c4.7-4.7 4.7-12.3 0-17L344 99.5c-4.7-4.7-12.3-4.7-17 0l-146.8 148c-4.7 4.7-4.7 12.3 0 17z"></path></svg>
+                    <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M20.2 247.5L167 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L85.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L184 412.5c-4.7 4.7-12.3 4.7-17 0l-146.8-148c-4.7-4.7-4.7-12.3 0-17zm160 17l146.8 148c4.7 4.7 12.3 4.7 17 0l19.8-19.8c4.7-4.7 4.7-12.3 0-17L245.3 256l118.5-119.7c4.7-4.7 4.7-12.3 0-17L344 99.5c-4.7-4.7-12.3-4.7-17 0l-146.8 148c-4.7 4.7-4.7 12.3 0 17z"></path></svg>
                 </b-button>
                 <b-button id="animation-prev" :disabled="animationStep === 0" @click="prevStep" variant="secondary">
-                    <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
+                    <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
                 </b-button>
                 <b-button id="animation-play" :disabled="animationStep === animation.length-1" @click="togglePlay" :variant="animationInterval ? 'dark' : 'info'" class="mx-2">
-                    <svg v-if="!animationInterval" height="17px" style="margin-bottom: 3px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="white" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>
-                    <svg v-else height="17px" style="margin-bottom: 3px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="white" d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path></svg>
+                    <svg v-if="!animationInterval" height="17px" style="margin-bottom: 3px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>
+                    <svg v-else height="17px" style="margin-bottom: 3px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path></svg>
                 </b-button>
                 <b-button id="animation-next" :disabled="animationStep === animation.length-1" @click="nextStep" variant="secondary" class="mr-2">
-                    <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="white" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
+                    <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
                 </b-button>
                 <b-button id="animation-reset" :disabled="!theaterMode" @click="reset" variant="dark">
-                    <svg width="17px" style="margin-bottom: 3px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="white" d="M212.333 224.333H12c-6.627 0-12-5.373-12-12V12C0 5.373 5.373 0 12 0h48c6.627 0 12 5.373 12 12v78.112C117.773 39.279 184.26 7.47 258.175 8.007c136.906.994 246.448 111.623 246.157 248.532C504.041 393.258 393.12 504 256.333 504c-64.089 0-122.496-24.313-166.51-64.215-5.099-4.622-5.334-12.554-.467-17.42l33.967-33.967c4.474-4.474 11.662-4.717 16.401-.525C170.76 415.336 211.58 432 256.333 432c97.268 0 176-78.716 176-176 0-97.267-78.716-176-176-176-58.496 0-110.28 28.476-142.274 72.333h98.274c6.627 0 12 5.373 12 12v48c0 6.627-5.373 12-12 12z"></path></svg>
+                    <svg width="17px" style="margin-bottom: 3px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M212.333 224.333H12c-6.627 0-12-5.373-12-12V12C0 5.373 5.373 0 12 0h48c6.627 0 12 5.373 12 12v78.112C117.773 39.279 184.26 7.47 258.175 8.007c136.906.994 246.448 111.623 246.157 248.532C504.041 393.258 393.12 504 256.333 504c-64.089 0-122.496-24.313-166.51-64.215-5.099-4.622-5.334-12.554-.467-17.42l33.967-33.967c4.474-4.474 11.662-4.717 16.401-.525C170.76 415.336 211.58 432 256.333 432c97.268 0 176-78.716 176-176 0-97.267-78.716-176-176-176-58.496 0-110.28 28.476-142.274 72.333h98.274c6.627 0 12 5.373 12 12v48c0 6.627-5.373 12-12 12z"></path></svg>
                 </b-button>
 
                 <div class="w-100 mt-3"></div>
@@ -112,7 +112,7 @@
                 routes: [ '/if', '/while', '/do-while', '/for', '/foreach' ],
                 started: false,
                 animationInterval: null,
-                animationFrequencyIndex: process.env.NODE_ENV === 'development' ? 3 : 1,
+                animationFrequencyIndex: process.env.NODE_ENV === 'development' ? 3 : 0,
                 animationFrequencies: [ 3600, 1800, 600, 100 ],
                 animationStep: 0,
                 busy: false,
@@ -193,9 +193,6 @@
                 this.blockTooltip = true;
                 this.endScreenDismissed = false;
                 this.animationStep = 0;
-                document.querySelectorAll('.burger-animation .layer').forEach(obj => {
-                    obj.className = 'layer in';
-                });
             },
             togglePlay() {
                 if (!this.animationInterval) this.play();
@@ -295,7 +292,6 @@
 
     .sourcecode, .burger {
         position: relative;
-        /*min-height: 25rem;*/
         transition: height .3s, opacity .3s, flex .3s, max-width .3s;
 
         h2 {
@@ -402,7 +398,7 @@
             .arrow {
                 left: 50%;
                 top: unset;
-                bottom: calc(100% - 6px);
+                bottom: calc(100% - 7px);
                 transform: rotateZ(180deg) translateX(50%);
             }
         }
@@ -419,9 +415,13 @@
 
     .controls {
         padding-left: 1.5rem;
+
+        path {
+            fill: $white;
+        }
     }
 
-    @media screen and (max-width: 991px) {
+    @include media-breakpoint-down('md') {
         .burger {
             min-height: 22rem;
         }
@@ -435,6 +435,7 @@
         .tooltip-mobile {
             width: auto;
             padding: 0 1rem 0 1.5rem;
+            top: -.3rem;
 
             .tooltip {
                 width: 100%;
@@ -442,30 +443,28 @@
                 z-index: 0;
 
                 &, .tooltip-inner {
-                    height: 4rem;
+                    height: 5rem;
                 }
             }
         }
     }
-    @media screen and (max-width: 767px) {
+    @include media-breakpoint-down('sm') {
         .burger-animation-wrapper {
             bottom: -.2rem;
         }
         .burger {
+            margin-left: -.5rem;
             min-height: 5rem;
         }
         .tooltip-mobile {
             width: auto;
             padding: 0 1rem 0 1.5rem;
+            top: -.9rem;
 
             .tooltip {
                 width: 100%;
                 max-width: 100%;
                 z-index: 0;
-
-                &, .tooltip-inner {
-                    height: 4rem;
-                }
 
                 .arrow {
                     top: calc(100% + 6px);
@@ -475,15 +474,9 @@
             }
         }
     }
-    @media screen and (max-width: 575px) {
+    @include media-breakpoint-down('xs') {
         .burger {
-            margin-left: -0.4rem;
             margin-right: auto;
         }
-        /*.tooltip-mobile {
-            .tooltip-wrapper {
-                margin-right: 0;
-            }
-        }*/
     }
 </style>

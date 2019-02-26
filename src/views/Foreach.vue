@@ -14,9 +14,10 @@
                         Fangen wir also an, die hungrigen Kunden abzuarbeiten. Dabei wie immer: <b>möglichst effizient.</b>
                     </p>
                     <p>
-                        Der <code>foreach</code>-Loop <b>vereinfacht</b> uns dabei <b>das Durchlaufen von Arrays</b>
+                        Der <code>foreach</code>-Loop <b>vereinfacht</b> uns <b>das Durchlaufen von Arrays</b>
                         ungemein. Zwar kann man mit einem normalen <code>for</code>-Loop das Gleiche erreichen, doch
-                        spart man sich hier Schreibarbeit und hat gleichzeitig besser lesbaren Code.
+                        <b>man spart sich hier Schreibarbeit und hat gleichzeitig besser lesbaren Code</b>. Also fangen
+                        wir an unser Bestellungs-Array abzuarbeiten.
                     </p>
                     <p>
                         <b>Wie gehen wir vor?</b> <br>
@@ -28,6 +29,10 @@
                         In den runden Klammern schreiben wir jetzt einfach <b>Array-Name</b>&nbsp;<code>as</code>&nbsp;
                         <b>Schlüssel</b>&nbsp;<code>=></code>&nbsp;<b>Wert</b>. Und schon laufen wir alle Felder des
                         Arrays ab!
+                    </p>
+                    <p>
+                        Unsere Burger werden so ganz einfach der Reihe nach gebraten und dann an die Tische serviert.
+                        Fertig!
                     </p>
                 </template>
             </Layout>
@@ -48,7 +53,7 @@
                     '}'
                 ],
                 sourcecode: [
-                    '// Das Restaurant läuft. 3 verschiedene Bestellungen.',
+                    '// Es läuft. Drei verschiedene Bestellungen!',
                     '',
                     '$tableOrders = array(',
                     '    11 => "Hamburger",',
@@ -61,24 +66,24 @@
                     '    serve($table, $burger);',
                     '}',
                     '',
-                    '// Feierabend! Geil.',
+                    '// Feierabend! Nice.',
                 ],
                 animation: [
                     [ 0, 0, 0, ''],
                     [ 0, 0, 0, 'Alright, get ready...'],
-                    [ 2, 0, 0, 'Wir haben Bestellungen an 3 Tischen!'],
+                    [ 0, 0, 0, 'Wir haben Bestellungen an 3 Tischen!'],
                     [ 2, 0, 0, 'Schlau wie wir sind, geben wir dem Koch einfach ein Array.'],
                     [ 2, 0, 0, 'Für die Kellner, weisen wir der Bestellung...'],
-                    [ 2, 0, 0, '...auch noch eine Tischnummer zu.'],
-                    [ 3, 0, 0, 'Tisch 11: Ein Hamburger,'],
-                    [ 4, 0, 0, 'Tisch 23: Ein Cheeseburger,'],
-                    [ 5, 0, 0, 'Tisch 35: Ein Double-Cheeseburger,'],
+                    [ 2, 0, 0, '... auch noch eine Tischnummer zu.'],
+                    [ 3, 0, 0, 'Tisch 11: Ein Hamburger'],
+                    [ 4, 0, 0, 'Tisch 23: Ein Cheeseburger'],
+                    [ 5, 0, 0, 'Tisch 35: Ein Double-Cheeseburger'],
                     [ 8, 0, 0, 'Was passiert hier nun?'],
-                    [ 8, 0, 0, 'Wir haben das Array "$tableOrders", ...'],
-                    [ 8, 0, 0, 'mit den Nummern und Bestellungen.'],
+                    [ 8, 0, 0, 'Wir haben das Array "$tableOrders"...'],
+                    [ 8, 0, 0, '... mit Tischnummern und Bestellungen.'],
                     [ 8, 0, 0, 'Wir nennen die Nummern "$table"...'],
                     [ 8, 0, 0, '... und die Bestellungen "$order".'],
-                    [ 8, 0, 0, 'Natürlich sind die Namen frei wählbar ;)'],
+                    [ 8, 0, 0, 'Natürlich sind die Namen frei wählbar.'],
                     [ 8, 0, 0, 'Wie genau die "Foreach"-Schleife beschrieben wird,...'],
                     [ 8, 0, 0, '...hängt aber von der Programmiersprache ab.'],
                     [ 8, 0, 0, 'Hier in PHP ist es ($array as $key => $value).'],
@@ -102,13 +107,16 @@
                     [ 9, 0, 3, 'Pfannenwender-Action.'],
                     [10, 0, 3, 'Servier-Action.'],
                     [11, 0, 0, 'Bam.'],
-                    [13, 0, 0, 'Alle Bestellungen raus!'],
+                    [ 8, 1, 0, 'Wir schauen noch einmal, noch Burger übrig?'],
+                    [ 8, 3, 0, 'Neeein...'],
+                    [11, 0, 0, 'Also überspringen!'],
+                    [13, 0, 0, 'Wir haben alle Bestellungen serviert!'],
                     [13, 0, 0, 'UND DAS RESTAURANT RASTET AUS!'],
                     [13, 0, 0, 'WAS FÜR EINE KRASSE SESSION!'],
                     [13, 0, 0, '...'],
                     [13, 0, 0, 'Spaß beiseite. Wir sind durch für heute!'],
                     [13, 0, 0, 'Wir hoffen, du hast etwas gelernt.'],
-                    [13, 0, 0, 'Wenn nicht, schau doch einfach nochmal rum ;)'],
+                    [13, 0, 0, 'Wenn nicht, schau doch einfach nochmal rum!'],
                     [13, 0, 3, 'Viel Erfolg!'],
                 ],
                 burgerAnimation: [

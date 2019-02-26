@@ -10,22 +10,31 @@
 
                 <template slot="desc">
                     <p>
-                        <b>Kümmern wir uns um unsere nächsten Kunden.</b> <br>
-                        Was wenn wir für unsere Bestellungen nicht jedes Mal eine Variable für die Anzahl erstellen wollen?
+                        <b>Kümmern wir uns um unsere nächsten Kunden, eine große Bestellung.</b> <br>
+                        Was wenn wir für unsere Bestellungen nicht jedes Mal eine Variable für die Anzahl erstellen
+                        wollen? Wir brauchen einen Helfer, der uns diese Arbeit erleichtert.
                     </p>
                     <p>
                         Wie die <code>while</code>-Schleife, kann eine <code>for</code>-Schleife einen Code-Block
                         beliebig oft wiederholen. Praktisch ist aber, dass die <code>for</code>-Schleife ohne extra
                         Variablen auskommt. <b>Wir erstellen alles was wir brauchen im Kopf der Schleife selbst.</b>
+                        Wir brauchen also 3 Durchläufe um 3 Cheeseburger zu braten.
+
                     </p>
                     <p>
                         <b>Wie genau machen wir das?</b> <br>
-                        Die <code>for</code>-Schleife erhält 3 optionale Parameter in den runden Klammern, getrennt
-                        durch Semikolons. Der erste Parameter ist die <b>Initialisierung der Laufvariable.</b>
-                        Hier legen wir fest, welchen Startwert wir benötigen. <br>
-                        Der 2. Parameter ist die <b>Fortsetzungsbedingung</b>, die wir schon von den vorherigen Schleifen kennen.
+                        Die <code>for</code>-Schleife erhält 3 Parameter, getrennt durch Semikolons. Der erste Parameter
+                        ist die <b>Initialisierung der Laufvariable.</b> Hier legen wir den Startwert fest, also
+                        <code>$burgerCount = 0</code>.<br>
+                        Der 2. Parameter ist die <b>Fortsetzungs-Bedingung</b>, die wir schon von den vorherigen
+                        Schleifen kennen. <br>
                         Der dritte Parameter, macht das, was wir vorher manuell machen mussten, also zum Beispiel, die
-                        Laufvariable um 1 erhöhen. <b>Diese Anweisung wird nach jedem Durchlauf ausgeführt.</b>
+                        Laufvariable um 1 erhöhen (<code>$burgerCount++</code>). <b>Diese Anweisung wird nach jedem
+                        Durchlauf ausgeführt.</b>
+                    </p>
+                    <p>
+                        Wenn wir die Schleife so anlegen, können wir in einer Zeile gleich drei Burger braten und unsere
+                        Aufgabe ist erfüllt!
                     </p>
                 </template>
             </Layout>
@@ -41,7 +50,7 @@
         data() {
             return {
                 sourcecodeGeneral: [
-                    'for ($laufVariable = <Startwert>; $laufBedingung; <Fortsetzungsanweisung>) {',
+                    'for ($count = 0; $condition; $count++) {',
                     '   // Code',
                     '}'
                 ],
@@ -70,7 +79,7 @@
                     [2, 2, 0, 'Also starten wir mit $burgerCount = 0.'],
                     [3, 0, 1, 'Wir vereinfachen das Braten und machen den Burger in einem Schritt'],
                     [4, 0, 1, 'Und beenden den Schleifendurchlauf.'],
-                    [4, 0, 1, 'Hier, nach dem Anweisungs-Block, wird der 3. Parameter ausgeführt.'],
+                    [4, 0, 1, 'Hier, nach dem Code-Block, wird der 3. Parameter ausgeführt.'],
                     [4, 0, 0, 'Also $burgerCount++'],
                     [2, 1, 0, 'Zurück am Schleifen-Anfang prüfen wir wieder:'],
                     [2, 1, 0, '$burgerCount < 3?'],
@@ -84,8 +93,8 @@
                     [2, 1, 0, 'Wieder prüfen:'],
                     [2, 3, 0, 'Oh! Wir haben 3 Burger. 3 ist nicht kleiner als 3!'],
                     [4, 0, 0, 'Die Schleife wird übersprungen und beendet!'],
-                    [6, 0, 0, 'Und wieder ein gesättigter Kunde :)'],
-                    [6, 0, 0, 'Wahnsinn. Schneller geht wirklich nicht.'],
+                    [6, 0, 0, 'Und wieder ein gesättigter Kunde!'],
+                    [6, 0, 0, 'Wahnsinn. Kompakter geht\'s wirklich nicht.'],
                     [6, 0, 0, 'Was aber, wenn wir verschiedene Burger braten müssen?'],
                     [6, 0, 0, 'Auf der nächsten Seite kommt die Königsklasse.'],
                     [6, 0, 1, 'Lerne jetzt "Foreach"-Schleifen kennen!'],

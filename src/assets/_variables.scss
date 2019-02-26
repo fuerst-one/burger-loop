@@ -1,3 +1,5 @@
+@import '../../node_modules/bootstrap/scss/mixins/_breakpoints.scss';
+
 // Bootstrap functions
 //
 // Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
@@ -93,17 +95,17 @@
 
 // Color system
 
-$white:    #FCF8F8 !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #6c757d !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
-$black:    #000 !default;
+$white:    #FAF6F5;
+$gray-100: #EDE9E8;
+$gray-200: #D6D3D2;
+$gray-300: #B0ADAC;
+$gray-400: #9E9C9B;
+$gray-500: #8C8A89;
+$gray-600: #6E6C6B;
+$gray-700: #575555;
+$gray-800: #424141;
+$gray-900: #2E2A2A;
+$black:    #191919;
 
 $grays: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -155,13 +157,13 @@ $colors: map-merge(
 );
 
 $primary:       $pink !default;
-$secondary:     #8c8786 !default;
+$secondary:     $gray-700 !default;
 $success:       $green !default;
 $info:          $pink !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         #F5F1F0 !default;
-$dark:          #2E2A2A; //#342B29 !default;
+$light:         $gray-100 !default;
+$dark:          $gray-900; //#342B29 !default;
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -293,10 +295,10 @@ $grid-breakpoints: (
 // Define the maximum width of `.container` for different screen sizes.
 
 $container-max-widths: (
-        sm: 540px,
-        md: 720px,
-        lg: 960px,
-        xl: 1140px
+        sm: 530px,
+        md: 700px,
+        lg: 940px,
+        xl: 1120px
 ) !default;
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
@@ -936,7 +938,7 @@ $tooltip-max-width:                 200px !default;
 $tooltip-color:                     $white !default;
 $tooltip-bg:                        $pink !default;
 $tooltip-border-radius:             $border-radius !default;
-$tooltip-opacity:                   .9 !default;
+$tooltip-opacity:                   1 !default;
 $tooltip-padding-y:                 .25rem !default;
 $tooltip-padding-x:                 .5rem !default;
 $tooltip-margin:                    0 !default;

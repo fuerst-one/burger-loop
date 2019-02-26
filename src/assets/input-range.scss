@@ -4,17 +4,19 @@
 // Version 1.5.1
 // MIT License
 
-$track-color: #999 !default;
-$thumb-color: #ccc !default;
+@import '../assets/variables';
 
-$thumb-radius: 3px !default;
+$track-color: $gray-200 !default;
+$thumb-color: $secondary !default;
+
+$thumb-radius: 2px !default;
 $thumb-height: 24px !default;
 $thumb-width: 12px !default;
 $thumb-shadow-size: 0px !default;
 $thumb-shadow-blur: 0px !default;
 $thumb-shadow-color: rgba(0, 0, 0, .2) !default;
 $thumb-border-width: 0px !default;
-$thumb-border-color: #eceff1 !default;
+$thumb-border-color: transparent !default;
 
 $track-width: 100% !default;
 $track-height: 4px !default;
@@ -22,7 +24,7 @@ $track-shadow-size: 0px !default;
 $track-shadow-blur: 0px !default;
 $track-shadow-color: rgba(0, 0, 0, .2) !default;
 $track-border-width: 0px !default;
-$track-border-color: #cfd8dc !default;
+$track-border-color: transparent !default;
 
 $track-radius: 5px !default;
 $contrast: 5% !default;

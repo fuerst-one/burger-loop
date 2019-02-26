@@ -13,7 +13,7 @@ Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
   overflow-x: auto;
   padding: 0.5em;
   line-height: 1.3em;
-  color: $light;
+  color: $gray-100;
   background: $dark;
   border-radius: 5px;
 }
@@ -45,7 +45,7 @@ Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
   color: #9CCC65;
 }
 .hljs-comment, .hljs-quote {
-  color: $secondary;
+  color: $gray-300;
   font-style: italic;
 }
 .hljs-doctag, .hljs-formula {
