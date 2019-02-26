@@ -106,7 +106,7 @@
         margin-left: 1rem;
     }
 
-    @media screen and (max-width: 576px){
+    @media screen and (max-width: 575px){
         #navbar {
             box-shadow: 0 0 1rem -.5rem rgba($black, 10);
         }

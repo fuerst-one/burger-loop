@@ -111,7 +111,7 @@
       }
     }
   }
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 575px) {
     #content {
       .lead {
         height: 113px;

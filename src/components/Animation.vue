@@ -447,7 +447,7 @@
             }
         }
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
         .burger-animation-wrapper {
             bottom: -.2rem;
         }
@@ -475,7 +475,7 @@
             }
         }
     }
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: 575px) {
         .burger {
             margin-left: -0.4rem;
             margin-right: auto;
