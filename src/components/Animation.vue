@@ -265,7 +265,6 @@
                 this.animationFrequencyIndex = value;
 
                 this.$cookie.set('animation-frequency', this.animationFrequencyIndex, 365);
-                console.log('animationFrequency set to ' + this.animationFrequencies[this.animationFrequencyIndex] + 'ms');
 
                 if (this.animationInterval) {
                     this.pause();

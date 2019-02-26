@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <b-tooltip v-for="(introBubble, index) in introBubbles" trigger="click" :show="showIntro && introIndex === index" :disabled="!showIntro || introIndex !== index" :target="introBubble.el" :placement="introBubble.pos" :delay="{ show: 0, hide: 2000 }">
+        <b-tooltip v-for="(introBubble, index) in introBubbles" trigger="click" :show="showIntro && introIndex === index" :disabled="!showIntro || introIndex !== index" :target="introBubble.el" :placement="introBubble.pos" :delay="{ show: 0, hide: 2000 }" :key="index">
             <span @click="introNext">{{ introBubble.text }}</span>
         </b-tooltip>
 
@@ -45,12 +45,12 @@
 </template>
 
 <script>
+    import BTooltip from "bootstrap-vue/src/components/tooltip/tooltip";
     import BButton from "bootstrap-vue/src/components/button/button";
     import Animation from "../components/Animation";
-    import BTooltip from "bootstrap-vue/src/components/tooltip/tooltip";
     export default {
         name: 'home',
-        components: {BTooltip, Animation, BButton},
+        components: {BTooltip, BButton, Animation},
         data() {
             return {
                 routes: ['/if', '/while', '/do-while', '/for', '/foreach'],

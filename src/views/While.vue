@@ -32,7 +32,7 @@
                         funktioniert, müssen wir allerdings im Schleifeninhalt <b>die Variable bei jedem Durchgang um 1
                         erhöhen</b>. <br>
                         Erreicht die Variable dann den Wert <code>2</code>, <b>trifft die Bedingung</b>&nbsp;
-                        <code>$cheeseCount < 2</code>&nbsp;<b>nicht mehr zu und die Schleife beendet</b> nach der
+                        <code>$cheeseCount &lt; 2</code>&nbsp;<b>nicht mehr zu und die Schleife beendet</b> nach der
                         richtigen Anzahl Durchläufen.
                     </p>
                     <p>

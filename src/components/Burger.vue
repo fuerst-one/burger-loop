@@ -14,11 +14,8 @@
 </template>
 
 <script>
-    import BButtonToolbar from "bootstrap-vue/src/components/button-toolbar/button-toolbar";
     export default {
         name: 'Burger',
-        components: {BButtonToolbar},
-        directives: {},
         props: {
             burgerAnimationTask: Array
         },
@@ -28,7 +25,6 @@
                 burgerPath: '../assets/img/burger/'
             }
         },
-        computed: {},
         watch: {
             burgerAnimationTask() {
                 this.animate();
