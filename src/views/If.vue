@@ -107,7 +107,7 @@
                     [11, 0, 6, 'Soße'],
                     [13, 0, 6, 'Rest überspringen'],
                     [17, 0, 7, 'Deckel'],
-                    [19, 0, 0, 'Gut is.'],
+                    [19, 0, 0, 'Cheeseburger!'],
                     [ 0, 0, 0, 'Ok, der Hamburger noch.'],
                     [ 2, 0, 1, 'Auch hier die Basiszutaten'],
                     [ 4, 1, 1, 'Hamburger?'],
