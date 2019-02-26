@@ -18,6 +18,9 @@
 
         <b-tooltip v-if="theaterMode && activeLineMessage !== ''" target="#line-indicator" :show="(desktopViewport || !theaterMode) && !blockTooltip" class="tooltip-desktop" placement="left">
             {{ activeLineMessage }}
+            <div v-if="animationInterval" class="dots">
+                <span>{{ tickTock }}</span>
+            </div>
         </b-tooltip>
 
         <div class="sourcecode order-3 order-md-0" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col'">
@@ -353,6 +356,15 @@
         margin: 0 auto;
     }
 
+
+    .tooltip {
+        .dots {
+            position: absolute;
+            bottom: -.1rem;
+            right: .53rem;
+            color: darken($primary, 22);
+        }
+    }
     .tooltip-mobile {
         padding-left: 1.5rem;
         padding-right: 1rem;
@@ -385,7 +397,7 @@
 
             .dots {
                 position: absolute;
-                top: 2.5rem;
+                top: 3.5rem;
                 right: .5rem;
             }
 
