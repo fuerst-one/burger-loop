@@ -15,6 +15,7 @@ Vue.config.productionTip = false;
 window.hideBurgerOnIdle = false;
 window.routeTransitions = false;
 window.animationFrequencySlider = true;
+window.linearProgressAnimation = false;
 
 new Vue({
   router,

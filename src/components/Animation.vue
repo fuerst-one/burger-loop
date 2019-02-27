@@ -23,11 +23,10 @@
             </div>
         </b-tooltip>
 
-        <div class="sourcecode order-3 order-md-0" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col'">
+        <div class="sourcecode order-3 order-md-0" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col-12'">
             <h2 class="d-none d-md-block">Code:</h2>
 
             <div class="sourcecode-animation-wrapper row">
-
                 <div class="source-code-animation-wrapper container-fluid">
                     <div class="row">
 
@@ -46,14 +45,20 @@
                     </div>
 
                     <div class="progress">
-                        <div class="progress-bar bg-primary" :style="{ width: ((animationStep + 1) / animation.length * 100) + '%' }"></div>
+                        <div id="animation-progress" class="progress-bar bg-primary" :style="{ width: ((animationStep + 1) / animation.length * 100) + '%' }"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="controls col-12 col-md-6 order-4 order-md-2 mb-3">
+        <div v-show="!hideBurgerOnIdle || theaterMode" class="burger col-3 col-md-6 order-2 order-md-1 mb-3" :style="{ flex: burgerFlex }">
+            <h2 class="d-none d-md-block">Burger:</h2>
+            <div class="burger-animation-wrapper">
+                <Burger :burger-animation-task="burgerAnimationTask" @busy="busy = $event"></Burger>
+            </div>
+        </div>
 
+        <div class="controls order-4 order-md-2 mb-3" :class="!hideBurgerOnIdle || theaterMode ? 'col-6' : 'col-12'">
             <div class="row justify-content-center">
                 <b-button id="animation-far-prev" :disabled="animationStep === 0" @click="farPrevStep" variant="secondary" class="mr-2">
                     <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M20.2 247.5L167 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L85.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L184 412.5c-4.7 4.7-12.3 4.7-17 0l-146.8-148c-4.7-4.7-4.7-12.3 0-17zm160 17l146.8 148c4.7 4.7 12.3 4.7 17 0l19.8-19.8c4.7-4.7 4.7-12.3 0-17L245.3 256l118.5-119.7c4.7-4.7 4.7-12.3 0-17L344 99.5c-4.7-4.7-12.3-4.7-17 0l-146.8 148c-4.7 4.7-4.7 12.3 0 17z"></path></svg>
@@ -86,12 +91,6 @@
             </div>
         </div>
 
-        <div v-show="!hideBurgerOnIdle || theaterMode" class="burger col-3 col-md-6 order-2 order-md-1 mb-3">
-            <h2 class="d-none d-md-block">Burger:</h2>
-            <div class="burger-animation-wrapper">
-                <Burger :burger-animation-task="burgerAnimationTask" @busy="busy = $event"></Burger>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -122,7 +121,8 @@
                 endScreenDismissed: false,
                 blockTooltip: true,
                 tickTock: '.',
-                tickTockInterval: null
+                tickTockInterval: null,
+                burgerFlex: ''
             }
         },
         computed: {
@@ -145,8 +145,9 @@
                 return window.animationFrequencySlider;
             },
             theaterMode() {
-                this.$emit('theaterMode', !!this.animationInterval || this.animationStep > 0);
-                return !!this.animationInterval || this.animationStep > 0;
+                let theaterMode = !!this.animationInterval || this.animationStep > 0;
+                this.$emit('theaterMode', theaterMode);
+                return theaterMode;
             },
             activeLineMessage() {
                 return this.animation[this.animationStep][3];
@@ -165,13 +166,17 @@
             animationStep(valAfter) {
                 if (valAfter >= this.animation.length - 1) {
                     this.endScreenDismissed = false;
+                    this.burgerFlex = this.hideBurgerOnIdle ? 0 : '';
                     this.pause();
                 } else if (valAfter === 0) {
                     this.reset();
                 } else if (valAfter === 1 && this.blockTooltip) {
                     this.start();
+                    setTimeout(() => {
+                        this.burgerFlex = null;
+                    }, 100);
                 }
-            }
+            },
         },
         methods: {
             start() {
@@ -268,6 +273,9 @@
                 this.animationFrequencyIndex = value;
 
                 this.$cookie.set('animation-frequency', this.animationFrequencyIndex, 365);
+                if (window.linearProgressAnimation) {
+                    document.getElementById('animation-progress').style.transition = 'width ' + this.animationFrequencies[this.animationFrequencyIndex] + 'ms linear';
+                }
 
                 if (this.animationInterval) {
                     this.pause();
@@ -279,7 +287,14 @@
             this.busy = true;
 
             if (this.$cookie.get('animation-frequency') && process.env.NODE_ENV !== 'development') {
-                this.animationFrequencyIndex = parseInt(this.$cookie.get('animation-frequency'));
+                this.setAnimationFrequency(parseInt(this.$cookie.get('animation-frequency')));
+            }
+
+            if (window.hideBurgerOnIdle) {
+                this.burgerFlex = 0;
+                document.querySelector('.burger').style.transition = 'height .3s, opacity .3s, flex .3s, max-width .3s';
+            } else {
+                this.burgerFlex = '';
             }
 
             setTimeout(() => {
@@ -295,6 +310,7 @@
     .sourcecode, .burger {
         position: relative;
         transition: height .3s, opacity .3s, flex .3s, max-width .3s;
+        overflow: hidden;
     }
 
     .sourcecode-animation-wrapper {
