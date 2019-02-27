@@ -149,6 +149,7 @@
                     this.busy = false;
                     this.$emit('busy', false);
                     for (let i = 0; i < visible.length; i++) {
+                        visible[i].style.top = '';
                         visible[i].style.transition = '';
                     }
                 }, totalDelay + 50);
