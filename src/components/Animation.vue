@@ -3,7 +3,7 @@
 
         <div class="tooltip-mobile col-9 col-md-6 order-1 order-md-2 mb-3 d-lg-none">
             <div class="tooltip bs-tooltip-top show" role="tooltip">
-                <div class="arrow"></div>
+                <div id="animation-tooltip" class="arrow"></div>
                 <div class="tooltip-inner">
                     <div>
                         <p v-if="theaterMode && activeLineMessage !== ''">{{ activeLineMessage }}</p>

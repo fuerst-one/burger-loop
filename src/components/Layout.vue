@@ -101,6 +101,8 @@
             margin-bottom: 0;
         }
 
+        scrollbar-color: $gray-300 $gray-200;
+        scrollbar-width: thin;
         &::-webkit-scrollbar {
             width: 10px;
         }

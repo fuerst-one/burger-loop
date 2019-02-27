@@ -141,9 +141,17 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
   $slide-distance: .2rem;
   $slide-opacity: .1;
-  $route-transition-duration: .2s;
+  $route-transition-duration: .1s;
 
   .fade-enter-active, .fade-leave-active, .slide-left-enter-active, .slide-right-enter-active, .slide-left-leave-active, .slide-right-leave-active {
     transition: all $route-transition-duration ease-out;

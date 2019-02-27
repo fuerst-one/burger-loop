@@ -61,14 +61,50 @@
     .sourcecode-animation {
         position: relative;
 
-        /* Optional Design: Fixed Height
-        code {
-            min-height: 375px;
-        }*/
+        pre {
+            border-radius: $border-radius;
+            background: $dark;
 
-        code {
-            transition: height .3s;
-            min-height: 22.5rem;
+            /* Optional Design: Padded Line Indicator */
+            /*border-radius: 0 $border-radius $border-radius 0;
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                left: -1.4rem;
+                right: calc(100% - #{$border-radius});
+                bottom: 0;
+                background: $gray-200;
+                border-radius: $border-radius 0 0 $border-radius;
+                z-index: -1;
+            }*/
+
+            code {
+                transition: height .3s;
+                min-height: 22.5rem;
+                z-index: 1;
+                overflow-y: hidden;
+
+                scrollbar-color: $gray-700 $dark;
+                scrollbar-width: thin;
+                &::-webkit-scrollbar {
+                    height: 10px;
+                }
+                &::-webkit-scrollbar-track {
+                    background: $dark;
+                    border-radius: 0 0 $border-radius $border-radius;
+                }
+                &::-webkit-scrollbar-thumb {
+                    height: 10px;
+                    margin: 0 auto;
+                    background: $gray-700;
+                    border-radius: 0 0 $border-radius $border-radius;
+                    &:hover {
+                        background: $gray-600;
+                    }
+                }
+            }
         }
 
         .line-indicator {
@@ -108,13 +144,14 @@
                 border-radius: 100%;
                 background: $primary;
 
-                /* Optional Design: burger Line Indicator
-                background: url("../assets/img/burger/burger.png") transparent no-repeat;
+                /* Optional Design: burger Line Indicator */
+                /*background: url("../assets/img/burger/burger.png") transparent no-repeat;
                 background-size: contain;
                 border-radius: 0;
                 margin: 16.6% 0 0*/
             }
         }
+
         .line-outline {
             position: absolute;
             top: .5rem;
@@ -122,7 +159,7 @@
             right: 0;
             height: $size;
             margin-top: -($size - 1)/2;
-            background: rgba(0,0,0,.2);
+            background: rgba($black,.3);
         }
     }
 

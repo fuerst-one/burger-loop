@@ -47,7 +47,7 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
   background: $thumb-color;
   border: $thumb-border-width solid $thumb-border-color;
   border-radius: $thumb-radius;
-  cursor: default;
+  cursor: pointer;
   height: $thumb-height + $adjustment;
   width: $thumb-width + $adjustment;
 }
@@ -102,11 +102,11 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
     background: $track-color;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius;
-    height: $track-height / 2;
+    height: $track-height;
   }
 
   &::-moz-range-thumb {
-    @include thumb(-4);
+    @include thumb;
   }
 
   &::-ms-track {

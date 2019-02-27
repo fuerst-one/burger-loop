@@ -1,5 +1,5 @@
 <template>
-    <div @click="jump" id="burger-animation" class="burger-animation">
+    <div @click="jump" id="burger-animation" class="burger-animation no-select">
         <div id="topBun" class="layer"><img src="../assets/img/burger/topBun.svg" alt=""></div>
         <div id="sauce" class="layer"><img src="../assets/img/burger/sauce.svg" alt=""></div>
         <div id="cheese3" class="layer"><img src="../assets/img/burger/cheese3.svg" alt=""></div>
@@ -21,6 +21,7 @@
         },
         data() {
             return {
+                busy: false,
                 unmounted: false,
                 burgerPath: '../assets/img/burger/'
             }
@@ -32,8 +33,11 @@
         },
         methods: {
             animate() {
+                if (this.busy) return;
+                this.busy = true;
                 this.$emit('busy', true);
                 setTimeout(() => {
+                    this.busy = false;
                     this.$emit('busy', false);
                 }, 350);
 
@@ -78,29 +82,76 @@
                 });
             },
             jump() {
+                if (this.busy) return;
+                this.busy = true;
                 this.$emit('busy', true);
 
                 let visible = Object.values(document.querySelectorAll('.burger-animation .in'));
 
-                let delay = 66;
+                let preDelay = 20;
+                let inDelay = 60;
+                let outDelay = 15;
+                let postDelay = 10;
+
+                let preCurve = 'ease-out-cubic';
+                let inCurve = 'ease-out';
+                let outCurve = 'ease-in';
+                let postCurve = 'ease-in-cubic';
+
+                let preDuration = 20;
+                let inDuration = 200;
+                let outDuration = 200;
+                let postDuration = 5;
+
+                let preHeight = window.innerWidth < 991 ? '.02rem' : '.2rem';
+                let inHeight = window.innerWidth < 991 ? '-1.5rem' : '-5rem';
+                let outHeight = window.innerWidth < 991 ? '.05rem' : '.2rem';
+                let postHeight = 0;
+
+                let totalDelay = 0;
                 for (let i = 0; i < visible.length; i++) {
                     setTimeout(() => {
-                        visible[i].style.top = window.innerWidth < 991 ? '-2rem' : '-5rem';
-                    }, delay * i);
+                        visible[i].style.top = preHeight;
+                        visible[i].style.transition = 'top ' + preDuration + 'ms ' + preCurve;
+                    }, totalDelay + preDelay);
+                    totalDelay += preDelay;
                 }
-                setTimeout(() => {
-                    for (let i = 0; i < visible.length; i++) {
-                        visible[i].style.top = '0';
-                        visible[i].style.transition = 'top .15s';
-                    }
-                }, delay * visible.length + 200);
+                totalDelay += preDuration;
+
+                for (let i = 0; i < visible.length; i++) {
+                    setTimeout(() => {
+                        visible[i].style.top = inHeight;
+                        visible[i].style.transition = 'top ' + inDuration + 'ms ' + inCurve;
+                    }, totalDelay + inDelay);
+                    totalDelay += inDelay;
+                }
+                totalDelay += inDuration + 200;
+
+                for (let i = visible.length - 1; i >= 0; i--) {
+                    setTimeout(() => {
+                        visible[i].style.top = outHeight;
+                        visible[i].style.transition = 'top ' + outDuration + 'ms ' + outCurve;
+                    }, totalDelay + outDelay);
+                    totalDelay += outDelay;
+                }
+                totalDelay += outDuration + 10;
+
+                for (let i = visible.length - 1; i >= 0; i--) {
+                    setTimeout(() => {
+                        visible[i].style.top = postHeight;
+                        visible[i].style.transition = 'top ' + postDuration + 'ms ' + postCurve;
+                    }, totalDelay + postDelay);
+                    totalDelay += postDelay;
+                }
+                totalDelay += postDuration;
 
                 setTimeout(() => {
+                    this.busy = false;
                     this.$emit('busy', false);
                     for (let i = 0; i < visible.length; i++) {
                         visible[i].style.transition = '';
                     }
-                }, delay * visible.length + 600);
+                }, totalDelay + 50);
             }
         },
         mounted() {

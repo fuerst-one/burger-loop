@@ -20,7 +20,7 @@
 
                         <div class="pl-2">
                             <p>Schau es dir im Detail an!</p>
-                            <b-button variant="outline-info" class="mb-5" to="/#intro" @click="intro">Starte die Tour!</b-button>
+                            <b-button variant="outline-info" class="mb-5" @click="toggleTutorial">{{ showTutorial ? 'Beende die Tour.' : 'Starte die Tour!' }}</b-button>
                         </div>
                     </div>
 
@@ -37,8 +37,16 @@
             </div>
         </div>
 
-        <b-tooltip v-for="(introBubble, index) in introBubbles" trigger="click" :show="showIntro && introIndex === index" :disabled="!showIntro || introIndex !== index" :target="introBubble.el" :placement="introBubble.pos" :delay="{ show: 0, hide: 2000 }" :key="index">
-            <span @click="introNext">{{ introBubble.text }}</span>
+        <b-tooltip
+                v-for="(tutorialBubble, index) in tutorial"
+                trigger="click"
+                :show="showTutorial && tutorialIndex === index"
+                :disabled="!showTutorial || tutorialIndex !== index"
+                :target="tutorialBubble.el" :placement="tutorialBubble.pos"
+                :delay="{ show: 0, hide: 10000 }"
+                :key="index"
+        >
+            <span @click="tutorialNext">{{ tutorialBubble.text }}</span>
         </b-tooltip>
 
     </div>
@@ -93,7 +101,7 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce' ],
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce', 'topBun' ],
                 ],
-                introBubbles: [
+                tutorial: [
                     { el: 'sourcecode-animation', pos: 'left', text: 'Hi! Klicke auf diese Sprechblase um fortzufahren.' },
                     { el: 'sourcecode-animation', pos: 'left', text: 'Hier haben wir den Programmiercode!' },
                     { el: 'burger-animation', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Anhand dieses Burgers zeigen wir dir was vorgeht!' },
@@ -105,10 +113,10 @@
                     { el: 'animation-frequency-faster', pos: 'top', text: 'Bewege den Slider hierhin, um die Animation zu beschleunigen...' },
                     { el: 'animation-frequency-slower', pos: 'top', text: '...oder hierhin, um sie zu verlangsamen.' },
                     { el: 'animation-reset', pos: 'top', text: 'Hier kannst du die Animation jederzeit beenden.' },
-                    { el: 'animation-play', pos: 'top', text: 'Ok, du bist bereit! Drücke Play um die Demo zu starten!' },
+                    { el: 'animation-play', pos: 'top', text: 'Okay, du bist bereit! Drücke Play um die Demo zu starten!' },
                 ],
-                introIndex: 0,
-                showIntro: false
+                tutorialIndex: 0,
+                showTutorial: false
             }
         },
         computed: {
@@ -128,36 +136,50 @@
         watch: {
             theaterMode(newVal) {
                 if (newVal) {
-                    this.showIntro = false;
-                    for (let bubble of this.introBubbles) {
+                    this.showTutorial = false;
+                    for (let bubble of this.tutorial) {
                         document.getElementById(bubble.el).style.pointerEvents = '';
                     }
                 }
             }
         },
         methods: {
-            intro() {
-                this.theaterMode = true;
-                setTimeout(() => {
-                    this.introIndex = 0;
-                    this.showIntro = true;
-                }, 300);
-            },
-            introNext() {
-                if (this.introIndex < this.introBubbles.length - 2) {
-                    this.introIndex++;
-                    document.getElementById(this.introBubbles[this.introIndex].el).style.pointerEvents = 'none';
-                } else if (this.introIndex < this.introBubbles.length - 1) {
-                    this.introIndex++;
-                    document.getElementById('animation-play').style.pointerEvents = '';
-                } else {
-                    this.showIntro = false;
+            toggleTutorial() {
+                if (this.showTutorial) {
+                    this.showTutorial = false;
                     this.theaterMode = false;
 
-                    for (let bubble of this.introBubbles) {
+                    for (let bubble of this.tutorial) {
+                        document.getElementById(bubble.el).style.pointerEvents = '';
+                    }
+                    return;
+                }
+                this.theaterMode = true;
+                setTimeout(() => {
+                    this.tutorialIndex = 0;
+                    this.showTutorial = true;
+                }, 300);
+            },
+            tutorialNext() {
+                if (this.tutorialIndex < this.tutorial.length - 2) {
+                    this.tutorialIndex++;
+                    document.getElementById(this.tutorial[this.tutorialIndex].el).style.pointerEvents = 'none';
+                } else if (this.tutorialIndex < this.tutorial.length - 1) {
+                    this.tutorialIndex++;
+                    document.getElementById('animation-play').style.pointerEvents = '';
+                } else {
+                    this.showTutorial = false;
+                    this.theaterMode = false;
+
+                    for (let bubble of this.tutorial) {
                         document.getElementById(bubble.el).style.pointerEvents = '';
                     }
                 }
+            }
+        },
+        mounted() {
+            if (window.innerWidth < 992) {
+                this.tutorial.splice(2, 0, { el: 'animation-tooltip', pos: window.innerWidth < 768 ? 'bottom' : 'top', text: 'Hier wird jeder Code-Schritt einzeln erklärt!' });
             }
         }
     }

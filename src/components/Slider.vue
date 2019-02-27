@@ -7,9 +7,9 @@
         <label for="animation-frequency-slider" class="sr-only">Animations-Geschwindigkeit</label>
         <input @change="$emit('change', $event.target.value)" :value="value" id="animation-frequency-slider" class="animation-speed-slider form-control-range" type="range" min="0" max="2" step="1">
         <div class="ticks">
-            <span @click="$emit('change', 0)">x1</span>
-            <span @click="$emit('change', 1)">x2</span>
-            <span @click="$emit('change', 2)">x4</span>
+            <span @click="$emit('change', 0)" class="no-select">x1</span>
+            <span @click="$emit('change', 1)" class="no-select">x2</span>
+            <span @click="$emit('change', 2)" class="no-select">x4</span>
         </div>
 
         <div @click="$emit('change', 2)" id="animation-frequency-faster" class="faster-icon">
@@ -37,6 +37,7 @@
 
     .animation-speed-slider-wrapper {
         position: relative;
+        max-width: 130px;
 
         .animation-speed-slider {
             -webkit-appearance: none;
