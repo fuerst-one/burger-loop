@@ -91,10 +91,11 @@
     .description-wrapper {
         background: $light;
         border-radius: 5px;
-        padding: .5rem .8rem;
+        padding: .5rem .9rem;
+        box-shadow: $light-box-shadow;
 
         height: 22.5rem;
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
 
         p:last-child {
@@ -141,7 +142,27 @@
             height: 6rem;
             background: $light;
             border-radius: $border-radius;
+            box-shadow: $light-box-shadow;
             overflow-x: auto;
+
+            scrollbar-color: $gray-300 $gray-200;
+            scrollbar-width: thin;
+            &::-webkit-scrollbar {
+                height: 8px;
+            }
+            &::-webkit-scrollbar-track {
+                background: $gray-200;
+                border-radius: 0 0 $border-radius $border-radius;
+            }
+            &::-webkit-scrollbar-thumb {
+                height: 8px;
+                margin: 0 auto;
+                background: $gray-300;
+                border-radius: 0 0 $border-radius $border-radius;
+                &:hover {
+                    background: $gray-400;
+                }
+            }
 
             code {
                 position: relative;

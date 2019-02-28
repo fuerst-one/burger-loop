@@ -64,6 +64,7 @@
         pre {
             border-radius: $border-radius;
             background: $dark;
+            box-shadow: $dark-box-shadow;
 
             /* Optional Design: Padded Line Indicator */
             /*border-radius: 0 $border-radius $border-radius 0;

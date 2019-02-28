@@ -1214,3 +1214,13 @@ $positions: static, relative, absolute, fixed, sticky !default;
 
 $print-page-size:                   a3 !default;
 $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
+
+
+
+// Custom Variables
+//
+//
+//
+
+$light-box-shadow: 0 0 1rem -.7rem rgba($black, .3);
+$dark-box-shadow: 0 0 1rem -.7rem rgba($black, .3);

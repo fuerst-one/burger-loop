@@ -33,7 +33,7 @@
                         <div class="col-12 order-0 order-md-0 pl-4">
                             <Sourcecode :sourcecode="sourcecode" :sourcecode-animation-task="sourcecodeAnimationTask" :theater-mode="theaterMode"></Sourcecode>
 
-                            <div v-if="!animationInterval && animationStep === animation.length-1 && !endScreenDismissed" class="end-screen">
+                            <div :class="{ active: !animationInterval && animationStep === animation.length-1 && !endScreenDismissed }" class="end-screen">
                                 <div @click="reset()" class="reset">
                                     <span>Zurück auf Anfang</span>
                                 </div>
@@ -215,6 +215,11 @@
 
                 if (this.animationStep === this.animation.length - 1) return;
 
+                document.querySelector('.tooltip .tooltip-inner').classList.add('bounce');
+                setTimeout(() => {
+                    document.querySelector('.tooltip .tooltip-inner').classList.remove('bounce');
+                }, 300);
+
                 setTimeout(() => {
                     this.blockTooltip = false;
 
@@ -324,6 +329,15 @@
             bottom: 1rem;
             border-radius: $border-radius;
             overflow: hidden;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+
+            &.active {
+                pointer-events: unset;
+                opacity: 1;
+            }
 
             .next, .reset {
                 display: block;
@@ -441,6 +455,15 @@
         path {
             fill: $white;
         }
+    }
+
+    .bounce {
+        animation: bounce .3s ease-in-out;
+    }
+    @keyframes bounce {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.04); }
+        100% { transform: scale(1); }
     }
 
     @include media-breakpoint-down('md') {

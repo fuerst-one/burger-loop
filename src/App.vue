@@ -27,7 +27,11 @@
         watch: {
             /* Optional Design: Route Transitions */
             $route(to, from) {
-                if (!this.routeTransitions) return;
+                if (!this.routeTransitions || window.blockRouteTransition) {
+                    window.blockRouteTransition = false;
+                    this.transitionName = '';
+                    return;
+                }
 
                 let toIndex = this.routes.findIndex(r => r === to.path);
                 let fromIndex = this.routes.findIndex(r => r === from.path);
@@ -50,12 +54,13 @@
 <style lang="scss">
   @import './assets/_variables.scss';
 
-  p {
-    font-size: 1rem;
+  body {
+    overflow-x: hidden;
   }
   #content {
     margin-top: 2.5rem;
     margin-bottom: 2rem;
+
     .intro {
       height: 8rem;
     }
@@ -64,7 +69,9 @@
       margin-bottom: 1.25rem;
     }
   }
-
+  .btn {
+    box-shadow: 0 0 1rem -.2rem rgba($black, .3);
+  }
   .btn:disabled, .btn[disabled], .btn.disabled {
     opacity: .3 !important;
   }
@@ -149,16 +156,17 @@
     user-select: none;
   }
 
-  $slide-distance: .2rem;
-  $slide-opacity: .1;
-  $route-transition-duration: .1s;
+  $slide-distance: 40%;
+  $slide-opacity: 0;
+  $route-transition-duration: .25s;
+  $route-transition-pause: .1s;
 
-  .fade-enter-active, .fade-leave-active, .slide-left-enter-active, .slide-right-enter-active, .slide-left-leave-active, .slide-right-leave-active {
-    transition: all $route-transition-duration ease-out;
+  .slide-left-enter-active, .slide-right-enter-active {
+    transition: all $route-transition-duration $route-transition-pause cubic-bezier(0.25, 0.46, 0.45, 0.94);
     min-height: calc(100vh - 5rem);
   }
-  .fade-enter, .fade-leave-to {
-    opacity: 0;
+  .slide-left-leave-active, .slide-right-leave-active {
+    transition: all $route-transition-duration cubic-bezier(0.55, 0.085, 0.68, 0.53);
   }
   .slide-left-enter, .slide-right-leave-to {
     transform: translateX($slide-distance);
@@ -173,5 +181,40 @@
   .slide-left-enter-to, .slide-right-leave, .slide-right-enter-to, .slide-left-leave {
     transform: none;
     opacity: 1;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: all 0s ease-in-out;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+  @include media-breakpoint-down('sm') {
+    $slide-distance: 10%;
+    $slide-opacity: 0;
+    $route-transition-duration: .2s;
+    $route-transition-pause: .03s;
+
+    .slide-left-enter-active, .slide-right-enter-active {
+      transition: all $route-transition-duration $route-transition-pause cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      min-height: calc(100vh - 5rem);
+    }
+    .slide-left-leave-active, .slide-right-leave-active {
+      transition: all $route-transition-duration cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+    .slide-left-enter, .slide-right-leave-to {
+      transform: translateX($slide-distance);
+      opacity: $slide-opacity;
+      min-height: calc(100vh - 5rem);
+    }
+    .slide-right-enter, .slide-left-leave-to {
+      transform: translateX(-$slide-distance);
+      opacity: $slide-opacity;
+      min-height: calc(100vh - 5rem);
+    }
+    .slide-left-enter-to, .slide-right-leave, .slide-right-enter-to, .slide-left-leave {
+      transform: none;
+      opacity: 1;
+    }
   }
 </style>
