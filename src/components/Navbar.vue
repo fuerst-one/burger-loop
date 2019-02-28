@@ -20,28 +20,28 @@
 
                 <b-collapse is-nav id="nav-collapse" class="ml-2 mr-auto text-center text-sm-left">
                     <b-navbar-nav>
-                        <b-nav-item to="/if">
-                            <b-button :variant="$route.path === '/if' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                        <b-nav-item to="/if" @click="blockRouteTransition">
+                            <b-button :variant="$route.path === '/if' ? navbarItemActiveColor : navbarItemDefaultColor">
                                 if
                             </b-button>
                         </b-nav-item>
-                        <b-nav-item to="/while">
-                            <b-button :variant="$route.path === '/while' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                        <b-nav-item to="/while" @click="blockRouteTransition">
+                            <b-button :variant="$route.path === '/while' ? navbarItemActiveColor : navbarItemDefaultColor">
                                 while
                             </b-button>
                         </b-nav-item>
-                        <b-nav-item to="/do-while">
-                            <b-button :variant="$route.path === '/do-while' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                        <b-nav-item to="/do-while" @click="blockRouteTransition">
+                            <b-button :variant="$route.path === '/do-while' ? navbarItemActiveColor : navbarItemDefaultColor">
                                 do while
                             </b-button>
                         </b-nav-item>
-                        <b-nav-item to="/for">
-                            <b-button :variant="$route.path === '/for' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                        <b-nav-item to="/for" @click="blockRouteTransition">
+                            <b-button :variant="$route.path === '/for' ? navbarItemActiveColor : navbarItemDefaultColor">
                                 for
                             </b-button>
                         </b-nav-item>
-                        <b-nav-item to="/foreach">
-                            <b-button :variant="$route.path === '/foreach' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                        <b-nav-item to="/foreach" @click="blockRouteTransition">
+                            <b-button :variant="$route.path === '/foreach' ? navbarItemActiveColor : navbarItemDefaultColor">
                                 foreach
                             </b-button>
                         </b-nav-item>

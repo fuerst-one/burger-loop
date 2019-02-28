@@ -121,9 +121,9 @@
                 ],
                 burgerAnimation: [
                     [],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
                 ]
             }
         }

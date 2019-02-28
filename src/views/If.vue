@@ -126,15 +126,15 @@
                 ],
                 burgerAnimation: [
                     [],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce' ],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1', 'cheese2' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1', 'cheese2', 'sauce' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1', 'sauce' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'cheese1', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'sauce' ],
+                    [ 'bottomBun', 'salad', 'tomatoes', 'patty', 'sauce', 'topBun' ],
                 ]
             }
         }

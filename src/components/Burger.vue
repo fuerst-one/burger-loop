@@ -1,15 +1,15 @@
 <template>
     <div @click="jump" id="burger-animation" class="burger-animation no-select">
-        <div id="topBun" class="layer"><img src="../assets/img/burger/topBun.svg" alt=""></div>
-        <div id="sauce" class="layer"><img src="../assets/img/burger/sauce.svg" alt=""></div>
-        <div id="cheese3" class="layer"><img src="../assets/img/burger/cheese3.svg" alt=""></div>
-        <div id="cheese2" class="layer"><img src="../assets/img/burger/cheese2.svg" alt=""></div>
-        <div id="cheese1" class="layer"><img src="../assets/img/burger/cheese1.svg" alt=""></div>
-        <div id="tomatoes" class="layer"><img src="../assets/img/burger/tomatoes.svg" alt=""></div>
-        <div id="salad" class="layer"><img src="../assets/img/burger/salad.svg" alt=""></div>
-        <div id="patty" class="layer"><img src="../assets/img/burger/patty.svg" alt=""></div>
-        <div id="bottomBun" class="layer"><img src="../assets/img/burger/bottomBun.svg" alt=""></div>
-        <div id="plate" class="layer"><img src="../assets/img/burger/plate.svg" alt=""></div>
+        <div id="topBun" class="layer"><img src="../assets/img/burger2/topBun.svg" alt=""></div>
+        <div id="sauce" class="layer"><img src="../assets/img/burger2/sauce.svg" alt=""></div>
+        <div id="cheese3" class="layer"><img src="../assets/img/burger2/cheese3.svg" alt=""></div>
+        <div id="cheese2" class="layer"><img src="../assets/img/burger2/cheese2.svg" alt=""></div>
+        <div id="cheese1" class="layer"><img src="../assets/img/burger2/cheese1.svg" alt=""></div>
+        <div id="patty" class="layer"><img src="../assets/img/burger2/patty.svg" alt=""></div>
+        <div id="tomatoes" class="layer"><img src="../assets/img/burger2/tomatoes.svg" alt=""></div>
+        <div id="salad" class="layer"><img src="../assets/img/burger2/salad.svg" alt=""></div>
+        <div id="bottomBun" class="layer"><img src="../assets/img/burger2/bottomBun.svg" alt=""></div>
+        <div id="plate" class="layer"><img src="../assets/img/burger2/plate.svg" alt=""></div>
     </div>
 </template>
 
@@ -94,8 +94,8 @@
                 let postDelay = 10;
 
                 let preCurve = 'ease-out-cubic';
-                let inCurve = 'ease-out';
-                let outCurve = 'ease-in';
+                let inCurve = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
+                let outCurve = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
                 let postCurve = 'ease-in-cubic';
 
                 let preDuration = 20;
@@ -210,68 +210,65 @@
 
         #topBun {
             &.in, &.out, &.out-right {
-                height: 5.3rem;
-                /*height: 8.6rem;*/
-                width: 97%;
+                height: 6.7rem;
+                width: 80%;
                 z-index: 8;
             }
         }
         #sauce {
             &.in, &.out, &.out-right {
-                height: .55rem;
+                height: .15rem;
                 width: 58%;
                 z-index: 7;
             }
         }
         #cheese3 {
             &.in, &.out, &.out-right {
-                height: .8rem;
-                width: 94%;
+                height: .5rem;
+                width: 95%;
                 z-index: 6;
             }
         }
         #cheese2 {
             &.in, &.out, &.out-right {
-                height: .8rem;
-                width: 93%;
+                height: .5rem;
+                width: 85%;
                 z-index: 5;
             }
         }
         #cheese1 {
             &.in, &.out, &.out-right {
-                height: .8rem;
-                width: 95%;
+                height: 1.7rem;
+                width: 100%;
                 z-index: 4;
+            }
+        }
+        #patty {
+            &.in, &.out, &.out-right {
+                height: 1.0rem;
+                width: 70%;
+                z-index: 3;
             }
         }
         #tomatoes {
             &.in, &.out, &.out-right {
-                height: .9rem;
-                width: 78%;
-                z-index: 3;
+                height: .6rem;
+                width: 70%;
+                z-index: 2;
             }
         }
         #salad {
             &.in, &.out, &.out-right {
                 height: .9rem;
-                /*height: 1.5rem;*/
                 width: 100%;
-                z-index: 2;
-            }
-        }
-        #patty {
-            &.in, &.out, &.out-right {
-                height: 2.1rem;
-                width: 95%;
-                z-index: 0;
+                z-index: 1;
             }
         }
         #bottomBun {
             &.in, &.out, &.out-right {
-                height: 1.9rem;
-                /*height: 3.4rem;*/
+                height: 2.8rem;
                 width: 100%;
-                z-index: 1;
+                z-index: 0;
             }
         }
         #plate {
@@ -279,6 +276,73 @@
                 height: auto;
                 width: 100%;
                 z-index: 0;
+            }
+        }
+
+        &.alternate-burger {
+            #topBun {
+                &.in, &.out, &.out-right {
+                    height: 5.3rem;
+                    /*height: 8.6rem;*/
+                    width: 97%;
+                    z-index: 8;
+                }
+            }
+            #sauce {
+                &.in, &.out, &.out-right {
+                    height: .55rem;
+                    width: 58%;
+                    z-index: 7;
+                }
+            }
+            #cheese3 {
+                &.in, &.out, &.out-right {
+                    height: .8rem;
+                    width: 94%;
+                    z-index: 6;
+                }
+            }
+            #cheese2 {
+                &.in, &.out, &.out-right {
+                    height: .8rem;
+                    width: 93%;
+                    z-index: 5;
+                }
+            }
+            #cheese1 {
+                &.in, &.out, &.out-right {
+                    height: .8rem;
+                    width: 95%;
+                    z-index: 4;
+                }
+            }
+            #tomatoes {
+                &.in, &.out, &.out-right {
+                    height: .9rem;
+                    width: 78%;
+                    z-index: 3;
+                }
+            }
+            #salad {
+                &.in, &.out, &.out-right {
+                    height: .9rem;
+                    width: 100%;
+                    z-index: 2;
+                }
+            }
+            #patty {
+                &.in, &.out, &.out-right {
+                    height: 2.1rem;
+                    width: 95%;
+                    z-index: 0;
+                }
+            }
+            #bottomBun {
+                &.in, &.out, &.out-right {
+                    height: 1.9rem;
+                    width: 100%;
+                    z-index: 1;
+                }
             }
         }
     }
@@ -315,6 +379,28 @@
             #bottomBun { &.in, &.out, &.out-right { height: .45rem; } }
 
             #plate { &.in, &.out, &.out-right { height: auto; } }
+
+            &.alternate-burger {
+                #topBun { &.in, &.out, &.out-right { height: 1.05rem; } }
+
+                #sauce { &.in, &.out, &.out-right { height: .15rem; } }
+
+                #cheese3 { &.in, &.out, &.out-right { height: .25rem; } }
+
+                #cheese2 { &.in, &.out, &.out-right { height: .2rem; } }
+
+                #cheese1 { &.in, &.out, &.out-right { height: .18rem; } }
+
+                #tomatoes { &.in, &.out, &.out-right { height: .45rem; } }
+
+                #salad { &.in, &.out, &.out-right { height: .25rem; } }
+
+                #patty { &.in, &.out, &.out-right { height: .5rem; } }
+
+                #bottomBun { &.in, &.out, &.out-right { height: .45rem; } }
+
+                #plate { &.in, &.out, &.out-right { height: auto; } }
+            }
         }
     }
 </style>
