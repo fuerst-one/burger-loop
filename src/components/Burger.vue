@@ -361,17 +361,17 @@
                 top: -.5rem;
             }
 
-            #topBun { &.in, &.out, &.out-right { height: 1.5rem; width: 90%; } }
+            #topBun { &.in, &.out, &.out-right { height: 1.45rem; width: 90%; } }
 
-            #sauce { &.in, &.out, &.out-right { height: .4rem; width: 60%; left: 0; } }
+            #sauce { &.in, &.out, &.out-right { height: .3rem; width: 60%; left: 0; } }
 
             #cheese3 { &.in, &.out, &.out-right { height: .1rem; width: 95%; } }
 
             #cheese2 { &.in, &.out, &.out-right { height: .2rem; width: 95%; } }
 
-            #cheese1 { &.in, &.out, &.out-right { height: .05rem; width: 100%; } }
+            #cheese1 { &.in, &.out, &.out-right { height: .1rem; width: 100%; } }
 
-            #patty { &.in, &.out, &.out-right { height: .3rem; width: 90%; } }
+            #patty { &.in, &.out, &.out-right { height: .45rem; width: 90%; } }
 
             #tomatoes { &.in, &.out, &.out-right { height: .4rem; width: 85%; } }
 
