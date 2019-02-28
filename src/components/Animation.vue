@@ -1,7 +1,7 @@
 <template>
     <div class="row mt-3 mt-lg-0">
 
-        <div class="tooltip-mobile col-9 col-md-6 order-1 order-md-2 mb-3 d-lg-none">
+        <div class="tooltip-mobile col-9 col-md-6 order-1 order-md-2 mb-1 mb-md-3 d-lg-none">
             <div class="tooltip bs-tooltip-top show" role="tooltip">
                 <div id="animation-tooltip" class="arrow"></div>
                 <div class="tooltip-inner">
@@ -23,7 +23,7 @@
             </div>
         </b-tooltip>
 
-        <div class="sourcecode order-3 order-md-0" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col-12'">
+        <div class="sourcecode order-3 order-md-0" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col-md-12'">
             <h2 class="d-none d-md-block">Code:</h2>
 
             <div class="sourcecode-animation-wrapper row">
@@ -51,14 +51,14 @@
             </div>
         </div>
 
-        <div v-show="!hideBurgerOnIdle || theaterMode" class="burger col-3 col-md-6 order-2 order-md-1 mb-3" :style="{ flex: burgerFlex }">
+        <div v-show="!hideBurgerOnIdle || theaterMode" class="burger col-3 col-md-6 order-2 order-md-1 mb-1 mb-md-3" :style="{ flex: burgerFlex }">
             <h2 class="d-none d-md-block">Burger:</h2>
             <div class="burger-animation-wrapper">
                 <Burger :burger-animation-task="burgerAnimationTask" @busy="busy = $event"></Burger>
             </div>
         </div>
 
-        <div class="controls order-4 order-md-2 mb-3" :class="!hideBurgerOnIdle || theaterMode ? 'col-6' : 'col-12'">
+        <div class="controls order-4 order-md-2 mb-3" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col-md-12'">
             <div class="row justify-content-center">
                 <b-button id="animation-far-prev" :disabled="animationStep === 0" @click="farPrevStep" variant="secondary" class="mr-2">
                     <svg height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M20.2 247.5L167 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L85.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L184 412.5c-4.7 4.7-12.3 4.7-17 0l-146.8-148c-4.7-4.7-4.7-12.3 0-17zm160 17l146.8 148c4.7 4.7 12.3 4.7 17 0l19.8-19.8c4.7-4.7 4.7-12.3 0-17L245.3 256l118.5-119.7c4.7-4.7 4.7-12.3 0-17L344 99.5c-4.7-4.7-12.3-4.7-17 0l-146.8 148c-4.7 4.7-4.7 12.3 0 17z"></path></svg>
@@ -311,6 +311,7 @@
         position: relative;
         transition: height .3s, opacity .3s, flex .3s, max-width .3s;
         overflow: hidden;
+        height: 26.5rem;
     }
 
     .sourcecode-animation-wrapper {
@@ -431,7 +432,7 @@
         top: calc(-1rem - 5px);
         margin-left: 9px;
         height: 5px;
-        border-radius: 0 0 5px 5px;
+        border-radius: 0 0 $border-radius $border-radius;
         background: transparent;
     }
 
@@ -445,10 +446,10 @@
 
     @include media-breakpoint-down('md') {
         .burger {
-            min-height: 22rem;
+            min-height: 20rem;
         }
         .burger-animation-wrapper {
-            bottom: 1rem;
+            bottom: .5rem;
         }
 
         body > .tooltip.show {
