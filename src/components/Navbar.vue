@@ -131,12 +131,16 @@
             transform: translateX(50%);
             text-align: center;
             background: inherit;
-            padding: 1rem;
+            padding: 1rem 1rem .25rem 1rem;
             border-radius: 5px 5px 0 0;
             box-shadow: 0 0 1rem -.2rem rgba(black, 40);
             z-index: -1;
 
             .nav-item {
+                a {
+                    padding: 0 !important;
+                    margin: 0 0 .75rem 0;
+                }
                 &:last-child {
                     .nav-link {
                         padding-bottom: 0;
