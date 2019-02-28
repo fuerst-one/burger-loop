@@ -39,10 +39,13 @@
 
                 let oldContent = document.getElementById('content').cloneNode(true);
                 oldContent.setAttribute('id', 'content-old');
-                document.body.append(oldContent);
+
+                document.getElementById('app').append(oldContent);
 
                 oldContent.classList.add(this.transitionName + '-leave-to');
+                oldContent.classList.add(this.transitionName + '-leave-active');
                 setTimeout(() => {
+                    oldContent.classList.remove(this.transitionName + '-leave-active');
                     oldContent.classList.remove(this.transitionName + '-leave-to');
                     oldContent.remove();
                 }, 200);
@@ -55,6 +58,7 @@
   @import './assets/_variables.scss';
 
   body {
+    position: relative;
     overflow-x: hidden;
   }
   #content {
@@ -139,6 +143,7 @@
       }
       .lead {
         line-height: 1.2;
+        height: 72px;
       }
     }
   }
@@ -198,9 +203,17 @@
     .slide-left-enter-active, .slide-right-enter-active {
       transition: all $route-transition-duration $route-transition-pause cubic-bezier(0.25, 0.46, 0.45, 0.94);
       min-height: calc(100vh - 5rem);
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
     }
     .slide-left-leave-active, .slide-right-leave-active {
       transition: all $route-transition-duration cubic-bezier(0.55, 0.085, 0.68, 0.53);
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
     }
     .slide-left-enter, .slide-right-leave-to {
       transform: translateX($slide-distance);

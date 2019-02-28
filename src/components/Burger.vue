@@ -104,7 +104,7 @@
                 let postDuration = 5;
 
                 let preHeight = window.innerWidth < 991 ? '.02rem' : '.2rem';
-                let inHeight = window.innerWidth < 991 ? '-1.5rem' : '-5rem';
+                let inHeight = window.innerWidth < 991 ? '-1rem' : '-5rem';
                 let outHeight = window.innerWidth < 991 ? '.05rem' : '.2rem';
                 let postHeight = 0;
 
@@ -210,16 +210,17 @@
 
         #topBun {
             &.in, &.out, &.out-right {
-                height: 6.7rem;
-                width: 80%;
+                height: 6.1rem;
+                width: 74%;
                 z-index: 8;
             }
         }
         #sauce {
             &.in, &.out, &.out-right {
                 height: .15rem;
-                width: 58%;
+                width: 60%;
                 z-index: 7;
+                left: -.6rem;
             }
         }
         #cheese3 {
@@ -232,7 +233,7 @@
         #cheese2 {
             &.in, &.out, &.out-right {
                 height: .5rem;
-                width: 85%;
+                width: 75%;
                 z-index: 5;
             }
         }
@@ -252,14 +253,14 @@
         }
         #tomatoes {
             &.in, &.out, &.out-right {
-                height: .6rem;
-                width: 70%;
+                height: .4rem;
+                width: 69%;
                 z-index: 2;
             }
         }
         #salad {
             &.in, &.out, &.out-right {
-                height: .9rem;
+                height: 1.2rem;
                 width: 100%;
                 z-index: 1;
             }
@@ -267,7 +268,7 @@
         #bottomBun {
             &.in, &.out, &.out-right {
                 height: 2.8rem;
-                width: 100%;
+                width: 72%;
                 z-index: 0;
             }
         }
@@ -360,23 +361,23 @@
                 top: -.5rem;
             }
 
-            #topBun { &.in, &.out, &.out-right { height: 1.05rem; } }
+            #topBun { &.in, &.out, &.out-right { height: 1.5rem; width: 90%; } }
 
-            #sauce { &.in, &.out, &.out-right { height: .15rem; } }
+            #sauce { &.in, &.out, &.out-right { height: .4rem; width: 60%; left: 0; } }
 
-            #cheese3 { &.in, &.out, &.out-right { height: .25rem; } }
+            #cheese3 { &.in, &.out, &.out-right { height: .1rem; width: 95%; } }
 
-            #cheese2 { &.in, &.out, &.out-right { height: .2rem; } }
+            #cheese2 { &.in, &.out, &.out-right { height: .2rem; width: 95%; } }
 
-            #cheese1 { &.in, &.out, &.out-right { height: .18rem; } }
+            #cheese1 { &.in, &.out, &.out-right { height: .05rem; width: 100%; } }
 
-            #tomatoes { &.in, &.out, &.out-right { height: .45rem; } }
+            #patty { &.in, &.out, &.out-right { height: .3rem; width: 90%; } }
 
-            #salad { &.in, &.out, &.out-right { height: .25rem; } }
+            #tomatoes { &.in, &.out, &.out-right { height: .4rem; width: 85%; } }
 
-            #patty { &.in, &.out, &.out-right { height: .5rem; } }
+            #salad { &.in, &.out, &.out-right { height: .38rem; width: 100%; } }
 
-            #bottomBun { &.in, &.out, &.out-right { height: .45rem; } }
+            #bottomBun { &.in, &.out, &.out-right { height: .55rem; width: 90%; } }
 
             #plate { &.in, &.out, &.out-right { height: auto; } }
 

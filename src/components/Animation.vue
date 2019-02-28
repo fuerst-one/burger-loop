@@ -282,7 +282,7 @@
                     document.getElementById('animation-progress').style.transition = 'width ' + this.animationFrequencies[this.animationFrequencyIndex] + 'ms linear';
                 }
 
-                if (this.animationInterval) {
+                if (!!this.animationInterval) {
                     this.pause();
                     this.play();
                 }
@@ -316,6 +316,9 @@
         position: relative;
         transition: height .3s, opacity .3s, flex .3s, max-width .3s;
         overflow: hidden;
+    }
+    .burger {
+        overflow: visible;
     }
 
     .sourcecode-animation-wrapper {

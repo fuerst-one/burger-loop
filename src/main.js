@@ -13,7 +13,7 @@ import './plugins/vue-cookie'
 Vue.config.productionTip = false;
 
 window.hideBurgerOnIdle = false;
-window.routeTransitions = true;
+window.routeTransitions = false;
 window.animationFrequencySlider = true;
 window.linearProgressAnimation = false;
 
