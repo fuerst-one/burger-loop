@@ -311,7 +311,6 @@
         position: relative;
         transition: height .3s, opacity .3s, flex .3s, max-width .3s;
         overflow: hidden;
-        height: 26.5rem;
     }
 
     .sourcecode-animation-wrapper {
