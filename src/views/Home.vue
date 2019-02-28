@@ -20,7 +20,7 @@
 
                         <div class="pl-2">
                             <p>Schau es dir im Detail an!</p>
-                            <b-button variant="outline-info" class="mb-5" @click="toggleTutorial">{{ showTutorial ? 'Beende die Tour.' : 'Starte die Tour!' }}</b-button>
+                            <b-button variant="outline-info" class="btn-cta mb-5" @click="toggleTutorial">{{ showTutorial ? 'Beende die Tour.' : 'Starte die Tour!' }}</b-button>
                         </div>
                     </div>
 
@@ -194,6 +194,10 @@
         & > [class*='col-'] {
             transition: opacity .3s, flex .3s, max-width .3s;
         }
+    }
+
+    .btn-cta {
+        box-shadow: 0 0 .5rem -.25rem $primary, inset 0 0 1rem -.5rem rgba($primary, .1);
     }
 
     .tooltip span {
