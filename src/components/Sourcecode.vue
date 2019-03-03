@@ -60,6 +60,7 @@
 
     .sourcecode-animation {
         position: relative;
+        overflow: visible;
 
         pre {
             border-radius: $border-radius;
@@ -67,19 +68,20 @@
             box-shadow: $dark-box-shadow;
 
             /* Optional Design: Padded Line Indicator */
-            /*border-radius: 0 $border-radius $border-radius 0;
+            border-radius: 0 $border-radius $border-radius 0;
             &::before {
                 content: "";
                 display: block;
                 position: absolute;
                 top: 0;
-                left: -1.4rem;
+                left: -1.3rem;
                 right: calc(100% - #{$border-radius});
                 bottom: 0;
-                background: $gray-200;
+                background: $gray-800; //lighten($dark, 5);
                 border-radius: $border-radius 0 0 $border-radius;
                 z-index: -1;
-            }*/
+                box-shadow: 0 0 1rem -.3rem $gray-200;
+            }
 
             code {
                 transition: height .3s;
@@ -94,13 +96,13 @@
                 }
                 &::-webkit-scrollbar-track {
                     background: $dark;
-                    border-radius: 0 0 $border-radius $border-radius;
+                    border-radius: 0 0 $border-radius 0;
                 }
                 &::-webkit-scrollbar-thumb {
                     height: 10px;
                     margin: 0 auto;
                     background: $gray-700;
-                    border-radius: 0 0 $border-radius $border-radius;
+                    border-radius: 0 0 $border-radius 0;
                     &:hover {
                         background: $gray-600;
                     }
@@ -129,11 +131,18 @@
                 }
             }
             .false {
-                width: 320/512 * 1rem;
-                path { fill: $danger }
+                svg {
+                    left: .07rem;
+                    width: 1.15rem;
+                    path { fill: $danger }
+                }
             }
             .true {
-                path { fill: $success }
+                svg {
+                    left: .07rem;
+                    width: 1.15rem;
+                    path { fill: $success }
+                }
             }
             .question {
                 path { fill: $blue }
@@ -141,7 +150,7 @@
             .dot {
                 height: 14px;
                 width: 14px;
-                margin: 16.6%;
+                margin: 17% 20%;
                 border-radius: 100%;
                 background: $primary;
 

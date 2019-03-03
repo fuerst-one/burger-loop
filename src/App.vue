@@ -29,7 +29,8 @@
             $route(to, from) {
                 if (!this.routeTransitions || window.blockRouteTransition) {
                     window.blockRouteTransition = false;
-                    this.transitionName = '';
+                    this.transitionName = 'fade';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     return;
                 }
 
@@ -37,15 +38,23 @@
                 let fromIndex = this.routes.findIndex(r => r === from.path);
                 this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left';
 
-                let oldContent = document.getElementById('content').cloneNode(true);
-                oldContent.setAttribute('id', 'content-old');
-                document.body.append(oldContent);
+                let oldContentEl = document.querySelector('#content .content-wrapper');
 
+                if (!oldContentEl) return;
+
+                let oldContent = oldContentEl.cloneNode(true);
+
+                oldContent.setAttribute('id', 'content-old');
                 oldContent.classList.add(this.transitionName + '-leave-to');
+                oldContent.classList.add(this.transitionName + '-leave-active');
+
+                document.getElementById('content').append(oldContent);
+
                 setTimeout(() => {
                     oldContent.classList.remove(this.transitionName + '-leave-to');
+                    oldContent.classList.remove(this.transitionName + '-leave-active');
                     oldContent.remove();
-                }, 200);
+                }, 300);
             }
         }
     }
@@ -57,9 +66,10 @@
   body {
     overflow-x: hidden;
   }
-  #content, #content-old {
-    margin-top: 2.5rem;
-    margin-bottom: 2rem;
+  #content {
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
 
     .intro {
       height: 8rem;
@@ -68,6 +78,14 @@
     h2 {
       margin-bottom: 1.25rem;
     }
+  }
+  #content-old {
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
   }
   .btn {
     box-shadow: 0 0 1rem -.2rem rgba($black, .3);
@@ -100,14 +118,15 @@
   @include media-breakpoint-down('lg') {
     #navbar {
       position: fixed;
-      bottom: 0;
+      top: calc(100vh - 4.4rem);
       left: 0;
       right: 0;
       z-index: 100;
+      width: 100vw;
     }
     #content {
       margin-top: 2rem;
-      margin-bottom: 6rem;
+      margin-bottom: 7rem;
 
       .intro {
         height: 9rem;
@@ -116,8 +135,8 @@
   }
   @include media-breakpoint-down('md') {
     #content {
-      margin-top: 2.5rem;
-      margin-bottom: 5rem;
+      margin-top: 1.8rem;
+      margin-bottom: 7rem;
 
       .intro {
         height: 10rem;
@@ -126,13 +145,20 @@
   }
   @include media-breakpoint-down('sm') {
     #content {
+      margin-top: 2rem;
+      margin-bottom: 6.5rem;
       .intro {
-        height: 15rem;
+        height: 16rem;
       }
     }
   }
-  @include media-breakpoint-down(400) {
+  @include media-breakpoint-down('xs') {
+    #navbar {
+      top: calc(100vh - 3.9rem);
+    }
     #content {
+      margin-top: 1rem;
+      margin-bottom: 6rem;
       .display {
         font-size: 3rem;
         font-weight: 600;
@@ -159,20 +185,16 @@
   $slide-distance: 40%;
   $slide-opacity: 0;
   $route-transition-duration: .25s;
-  $route-transition-pause: .1s;
+  $route-transition-pause: .0s;
 
+  .slide-left-enter-active, .slide-right-enter-active, .slide-left-leave-active, .slide-right-leave-active {
+  }
   .slide-left-enter-active, .slide-right-enter-active {
     transition: all $route-transition-duration $route-transition-pause cubic-bezier(0.25, 0.46, 0.45, 0.94);
     min-height: calc(100vh - 5rem);
-      position: absolute;
-      top: 0;
-      max-width: 100%;
   }
   .slide-left-leave-active, .slide-right-leave-active {
     transition: all $route-transition-duration cubic-bezier(0.55, 0.085, 0.68, 0.53);
-      position: absolute;
-      top: 0;
-      max-width: 100%;
   }
   .slide-left-enter, .slide-right-leave-to {
     transform: translateX($slide-distance);
@@ -185,14 +207,14 @@
     min-height: calc(100vh - 5rem);
   }
   .slide-left-enter-to, .slide-right-leave, .slide-right-enter-to, .slide-left-leave {
-    transform: none;
     opacity: 1;
   }
   .fade-enter-active, .fade-leave-active {
-    transition: all 0s ease-in-out;
+    transition: all .2s ease-in;
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
+    transform: translateY(.1rem);
   }
 
   @include media-breakpoint-down('sm') {
@@ -221,6 +243,9 @@
     .slide-left-enter-to, .slide-right-leave, .slide-right-enter-to, .slide-left-leave {
       transform: none;
       opacity: 1;
+    }
+    .fade-enter, .fade-leave-to {
+      transform: translateY(-.35rem);
     }
   }
 </style>

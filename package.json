@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.11",
+    "mo-js": "^0.288.2",
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.22",
     "vue-cookie": "^1.1.4",

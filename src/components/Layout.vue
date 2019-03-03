@@ -187,6 +187,9 @@
                 margin-bottom: 1rem;
             }
         }
+        .animation {
+            padding: 0 1.7rem;
+        }
         .description-wrapper {
             height: unset;
         }

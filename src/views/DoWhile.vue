@@ -1,5 +1,5 @@
 <template>
-    <div id="do-while-loop">
+    <div id="do-while-loop" class="content-wrapper">
         <div class="container">
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">

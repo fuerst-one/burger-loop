@@ -1,5 +1,5 @@
 <template>
-    <div id="for-loop">
+    <div id="for-loop" class="content-wrapper">
         <div class="container">
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">

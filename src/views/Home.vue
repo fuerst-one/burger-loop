@@ -1,9 +1,9 @@
 <template>
-    <div id="home">
+    <div id="home" class="content-wrapper">
         <div class="container">
             <div id="content">
                 <div class="intro">
-                    <h1 class="display-3 display">Burger Loop</h1>
+                    <h1 class="display">Burger Loop</h1>
                     <p class="lead text-black-50">Lerne, wie man mit pr<code>0</code>grammen Burger zum Braten bringt und dabei komplizierte Probleme löst.</p>
                 </div>
 
@@ -11,7 +11,7 @@
                 <div class="row">
 
                     <div :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ? 'col-lg-4' : 'col-lg-3'" :style="{ opacity: theaterMode ? .3 : 1 }">
-                        <h2 class="mb-3">Leg jetzt los:</h2>
+                        <h2>Leg' jetzt los:</h2>
 
                         <blockquote class="blockquote bg-light rounded py-2 px-3">
                             <p>"Ich habe mit Burger-Loop so schnell und einfach die Basics gelernt, ich kann es absolut jedem empfehlen!"</p>
@@ -20,11 +20,11 @@
 
                         <div class="pl-2">
                             <p>Schau es dir im Detail an!</p>
-                            <b-button variant="outline-info" class="btn-cta mb-5" @click="toggleTutorial">{{ showTutorial ? 'Beende die Tour.' : 'Starte die Tour!' }}</b-button>
+                            <b-button id="start-tutorial" variant="outline-info" class="btn-cta mb-5" @click="toggleTutorial">{{ showTutorial ? 'Beende die Tour.' : 'Starte die Tour!' }}</b-button>
                         </div>
                     </div>
 
-                    <div :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
+                    <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
                         <Animation :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event"></Animation>
                     </div>
 
@@ -102,13 +102,14 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce', 'topBun' ],
                 ],
                 tutorial: [
-                    { el: 'sourcecode-animation', pos: 'left', text: 'Hi! Klicke auf diese Sprechblase um fortzufahren.' },
+                    { el: 'start-tutorial', pos: 'top', text: 'Hi! Klicke auf diese Sprechblase um fortzufahren.' },
                     { el: 'sourcecode-animation', pos: 'left', text: 'Hier haben wir den Programmiercode!' },
+                    { el: 'line-indicator', pos: window.innerWidth < 768 ? 'right' : 'left', text: 'Hier siehst du die aktuelle Zeile.' },
                     { el: 'burger-animation', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Anhand dieses Burgers zeigen wir dir was vorgeht!' },
                     { el: 'animation-play', pos: 'top', text: 'Hier kann die Animation gestartet und pausiert werden' },
+                    { el: 'animation-next', pos: 'top', text: 'Hier gelangst du schrittweise voran.' },
                     { el: 'animation-prev', pos: 'top', text: 'Drücke hier, um einen Schritt zurück zu gehen.' },
                     { el: 'animation-far-prev', pos: 'top', text: 'Hier, um zur vorherigen Zeile im Code zu gelangen...' },
-                    { el: 'animation-next', pos: 'top', text: 'Und hier einen Schritt weiter in der Animation.' },
                     { el: 'animation-frequency-slider', pos: 'top', text: 'Hier kannst du die Geschwindigkeit einstellen.' },
                     { el: 'animation-frequency-faster', pos: 'top', text: 'Bewege den Slider hierhin, um die Animation zu beschleunigen...' },
                     { el: 'animation-frequency-slower', pos: 'top', text: '...oder hierhin, um sie zu verlangsamen.' },
@@ -154,22 +155,28 @@
                     }
                     return;
                 }
-                this.theaterMode = true;
                 setTimeout(() => {
                     this.tutorialIndex = 0;
                     this.showTutorial = true;
                 }, 300);
             },
             tutorialNext() {
-                if (this.tutorialIndex < this.tutorial.length - 2) {
-                    this.tutorialIndex++;
-                    document.getElementById(this.tutorial[this.tutorialIndex].el).style.pointerEvents = 'none';
+                 if (this.tutorialIndex === 0) {
+                    this.theaterMode = true;
+                     setTimeout(() => {
+                         this.tutorialIndex++;
+                     }, 300);
+
+                } else if (this.tutorialIndex < this.tutorial.length - 2) {
+                     this.tutorialIndex++;
+                     document.getElementById(this.tutorial[this.tutorialIndex].el).style.pointerEvents = 'none';
+
                 } else if (this.tutorialIndex < this.tutorial.length - 1) {
                     this.tutorialIndex++;
                     document.getElementById('animation-play').style.pointerEvents = '';
+
                 } else {
                     this.showTutorial = false;
-                    this.theaterMode = false;
 
                     for (let bubble of this.tutorial) {
                         document.getElementById(bubble.el).style.pointerEvents = '';
@@ -179,7 +186,7 @@
         },
         mounted() {
             if (window.innerWidth < 992) {
-                this.tutorial.splice(2, 0, { el: 'animation-tooltip', pos: window.innerWidth < 768 ? 'bottom' : 'top', text: 'Hier wird jeder Code-Schritt einzeln erklärt!' });
+                this.tutorial.splice(3, 0, { el: 'animation-tooltip', pos: window.innerWidth < 768 ? 'bottom' : 'top', text: 'Hier wird jeder Code-Schritt einzeln erklärt!' });
             }
         }
     }
@@ -194,6 +201,12 @@
         & > [class*='col-'] {
             transition: opacity .3s, flex .3s, max-width .3s;
         }
+    }
+
+    .animation {
+        position: relative;
+        transition: opacity .3s, flex .3s, max-width .3s;
+        min-height: 25rem;
     }
 
     .btn-cta {
@@ -223,6 +236,11 @@
         #content {
             .intro {
                 padding-top: .5rem;
+
+                .display {
+                    font-size: 3rem;
+                    font-weight: 600;
+                }
             }
         }
     }
@@ -234,6 +252,9 @@
         }
     }
     @include media-breakpoint-down('md') {
+        .animation {
+            padding: 0 1.7rem;
+        }
         .display {
             font-size: 4.4rem;
         }
@@ -258,7 +279,7 @@
             font-weight: 600;
         }
         .lead {
-            height: 90px !important;
+            height: auto;
             font-weight: 400;
         }
     }

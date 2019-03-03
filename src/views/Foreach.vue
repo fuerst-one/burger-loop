@@ -1,5 +1,5 @@
 <template>
-    <div id="foreach-loop">
+    <div id="foreach-loop" class="content-wrapper">
         <div class="container">
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">

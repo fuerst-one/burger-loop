@@ -54,7 +54,7 @@
         <div v-show="!hideBurgerOnIdle || theaterMode" class="burger col-3 col-md-6 order-2 order-md-1 mb-1 mb-md-3" :style="{ flex: burgerFlex }">
             <h2 class="d-none d-md-block">Burger:</h2>
             <div class="burger-animation-wrapper">
-                <Burger :burger-animation-task="burgerAnimationTask" @busy="busy = $event"></Burger>
+                <Burger :burger-animation-task="burgerAnimationTask" :show-heatwaves="!theaterMode" @busy="busy = $event"></Burger>
             </div>
         </div>
 
@@ -315,7 +315,13 @@
     .sourcecode, .burger {
         position: relative;
         transition: height .3s, opacity .3s, flex .3s, max-width .3s;
-        overflow: hidden;
+        overflow: visible;
+    }
+    .sourcecode {
+        padding-right: .2rem;
+    }
+    .burger {
+        overflow: visible;
     }
 
     .sourcecode-animation-wrapper {
@@ -381,7 +387,7 @@
         position: absolute;
         left: 0;
         right: 0;
-        bottom: .2rem;
+        bottom: 1.5rem;
         max-width: 315px;
         margin: 0 auto;
     }
@@ -445,7 +451,7 @@
         top: calc(-1rem - 5px);
         margin-left: 9px;
         height: 5px;
-        border-radius: 0 0 $border-radius $border-radius;
+        border-radius: 0 0 $border-radius 0;
         background: transparent;
     }
 
@@ -471,7 +477,10 @@
             min-height: 20rem;
         }
         .burger-animation-wrapper {
-            bottom: .5rem;
+            bottom: 1.5rem;
+        }
+        .controls {
+            padding-left: 1rem;
         }
 
         body > .tooltip.show {
@@ -479,7 +488,7 @@
         }
         .tooltip-mobile {
             width: auto;
-            padding: 0 1rem 0 1.5rem;
+            padding: 0 .2rem;
             top: -.3rem;
 
             .tooltip {
@@ -495,15 +504,12 @@
     }
     @include media-breakpoint-down('sm') {
         .burger-animation-wrapper {
-            bottom: -.2rem;
+            bottom: 1.3rem;
         }
         .burger {
-            margin-left: -.5rem;
             min-height: 5rem;
         }
         .tooltip-mobile {
-            width: auto;
-            padding: 0 1rem 0 1.5rem;
             top: -.9rem;
 
             .tooltip {

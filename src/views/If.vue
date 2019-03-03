@@ -1,5 +1,5 @@
 <template>
-    <div id="if-clause">
+    <div id="if-statement" class="content-wrapper">
         <div class="container">
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">

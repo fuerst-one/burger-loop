@@ -2,7 +2,7 @@
     <div id="navbar">
         <b-navbar toggleable="sm" type="dark" variant="dark">
             <!--<div class="container">-->
-                <b-navbar-brand to="/">Burger Loop</b-navbar-brand>
+                <b-navbar-brand to="/"><div @click="blockRouteTransition">Burger Loop</div></b-navbar-brand>
 
                 <div class="nav-button prev d-sm-none ml-auto">
                     <b-button variant="dark" v-if="prevRoute !== '/foreach'" :to="prevRoute">
@@ -21,27 +21,27 @@
                 <b-collapse is-nav id="nav-collapse" class="ml-2 mr-auto text-center text-sm-left">
                     <b-navbar-nav>
                         <b-nav-item to="/if">
-                            <b-button :variant="$route.path === '/if' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                            <b-button :variant="navItemColor('/if')" @click="blockRouteTransition">
                                 if
                             </b-button>
                         </b-nav-item>
                         <b-nav-item to="/while">
-                            <b-button :variant="$route.path === '/while' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                            <b-button :variant="navItemColor('/while')" @click="blockRouteTransition">
                                 while
                             </b-button>
                         </b-nav-item>
                         <b-nav-item to="/do-while">
-                            <b-button :variant="$route.path === '/do-while' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                            <b-button :variant="navItemColor('/do-while')" @click="blockRouteTransition">
                                 do while
                             </b-button>
                         </b-nav-item>
                         <b-nav-item to="/for">
-                            <b-button :variant="$route.path === '/for' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                            <b-button :variant="navItemColor('/for')" @click="blockRouteTransition">
                                 for
                             </b-button>
                         </b-nav-item>
                         <b-nav-item to="/foreach">
-                            <b-button :variant="$route.path === '/foreach' ? navbarItemActiveColor : navbarItemDefaultColor" @click="blockRouteTransition">
+                            <b-button :variant="navItemColor('/foreach')" @click="blockRouteTransition">
                                 foreach
                             </b-button>
                         </b-nav-item>
@@ -86,6 +86,9 @@
         methods: {
             blockRouteTransition() {
                 window.blockRouteTransition = true;
+            },
+            navItemColor(pathName) {
+                return this.$route.path === pathName ? this.navbarItemActiveColor : this.navbarItemDefaultColor;
             }
         }
     }

@@ -43,6 +43,7 @@
             -webkit-appearance: none;
             width: 100%;
             background: transparent;
+            cursor: pointer;
         }
 
         .faster-icon, .slower-icon {
