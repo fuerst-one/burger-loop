@@ -35,6 +35,12 @@
                         Fertig!
                     </p>
                 </template>
+
+                <template slot="task">
+                    <p>
+                        <strong>TBD Aufgabe</strong>
+                    </p>
+                </template>
             </Layout>
         </div>
     </div>

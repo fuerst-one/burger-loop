@@ -31,6 +31,12 @@
                         einen Triple machen, ohne das Rezept zu ändern!
                     </p>
                 </template>
+
+                <template slot="task">
+                    <p>
+                        <strong>TBD Aufgabe</strong>
+                    </p>
+                </template>
             </Layout>
         </div>
     </div>

@@ -36,6 +36,12 @@
                         Und schon haben wir unser Kochbuch mit drei verschiedenen Rezepten!
                     </p>
                 </template>
+
+                <template slot="task">
+                    <p>
+                        <strong>TBD Aufgabe</strong>
+                    </p>
+                </template>
             </Layout>
         </div>
     </div>

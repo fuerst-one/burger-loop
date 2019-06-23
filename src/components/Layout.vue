@@ -45,6 +45,12 @@
                 <b-button variant="info" class="mt-4 mb-5" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
 
+            <div class="builder" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
+                <div class="container border h-75">
+                    <h2>TBD</h2>
+                </div>
+            </div>
+
             <div class="nav-button prev d-none d-sm-block">
                 <router-link :to="prevRoute">
                     <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#aaa" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
@@ -115,7 +121,7 @@
         position: relative;
     }
 
-    .description, .task, .animation {
+    .description, .task, .animation, .builder {
         position: relative;
         transition: opacity .3s, flex .3s, max-width .3s;
         min-height: 25rem;
@@ -220,7 +226,7 @@
                 margin-bottom: 1rem;
             }
         }
-        .animation {
+        .animation, .builder {
             padding: 0 1.7rem;
         }
         .description-wrapper {
