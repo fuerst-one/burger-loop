@@ -35,9 +35,19 @@
                                 do while
                             </b-button>
                         </b-nav-item>
+                        <b-nav-item to="/array">
+                            <b-button :variant="navItemColor('/array')" @click="blockRouteTransition">
+                                array
+                            </b-button>
+                        </b-nav-item>
                         <b-nav-item to="/for">
                             <b-button :variant="navItemColor('/for')" @click="blockRouteTransition">
                                 for
+                            </b-button>
+                        </b-nav-item>
+                        <b-nav-item to="/map">
+                            <b-button :variant="navItemColor('/map')" @click="blockRouteTransition">
+                                map
                             </b-button>
                         </b-nav-item>
                         <b-nav-item to="/foreach">

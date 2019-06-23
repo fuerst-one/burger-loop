@@ -58,7 +58,7 @@
                 sourcecode: [
                     '// Unsere Burger-Rezeptur',
                     '',
-                    'add([ bottomBun, patty, salad, tomatoes ]);',
+                    'add(bottomBun, patty, salad, tomatoes);',
                     '',
                     'if ($recipe == \'Double-Cheeseburger\') {',
                     '   add(cheese);',

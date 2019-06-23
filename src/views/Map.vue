@@ -1,11 +1,11 @@
 <template>
-    <div id="for-loop" class="content-wrapper">
+    <div id="map" class="content-wrapper">
         <div class="container">
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
                 <template slot="intro">
-                    <h1><code>for</code> Loop</h1>
-                    <p class="lead text-black-50">Wie eine While-Schleife, die du <strong class="text-body">ohne Hilfsvariablen</strong> erzeugen kannst.</p>
+                    <h1><code>map</code> Liste</h1>
+                    <p class="lead text-black-50">Wie das Array, nur mit eigenem Namen für jedes Feld.</p>
                 </template>
 
                 <template slot="desc">
@@ -45,31 +45,37 @@
 <script>
     import Layout from "../components/Layout";
     export default {
-        name: 'For',
+        name: 'Map',
         components: {Layout},
         data() {
             return {
                 sourcecodeGeneral: [
-                    'for ($count = 0; $condition; $count++) {',
-                    '   // Code',
-                    '}'
+                    '$map = [',
+                    '   "key" => $value,',
+                    '   "key" => $value // etc.',
+                    '];'
                 ],
                 sourcecode: [
-                    '// Die Bestellung ist in der Küche angekommen!',
+                    '// In der Küche kommen einige Bestellungen mit Tischnummern.',
                     '',
-                    '$order = [',
-                    '    "Cheeseburger",',
-                    '    "Double-Cheeseburger",',
-                    '    "Hamburger",',
+                    '$tableOrders = [',
+                    '    12 => [',
+                    '        "Cheeseburger",',
+                    '        "Double-Cheeseburger"',
+                    '    ],',
+                    '    8 => [',
+                    '        "Hamburger",',
+                    '        "Cheeseburger"',
+                    '    ]',
                     '];',
                     '',
-                    '// Wir gehen Step by Step die Liste ab und braten unsere Burger:',
-                    'for ($burgerIndex = 0; $burgerIndex < count($order); $burgerIndex++) {',
-                    '    $burger = $order[$burgerIndex];',
-                    '    make($burger);',
-                    '}',
+                    '// "Julio, Tisch 8 hat Prio!"',
                     '',
-                    '// Guten Appetit!'
+                    'echo $tableOrders[8]',
+                    '',
+                    '// Also: [ "Hamburger", "Cheeseburger" ]',
+                    '',
+                    '// *DING* Alle neuen Kunden bedient. Es läuft!'
                 ],
                 animation: [
                     [0, 0, 0, ''],

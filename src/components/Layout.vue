@@ -10,16 +10,39 @@
         </div>
 
         <hr>
-        <div class="layout-wrapper row justify-content-between align-items-center align-items-md-stretch mt-5">
+        <div v-show="mode === 'lection'" class="layout-wrapper row justify-content-between align-items-center align-items-md-stretch mt-5">
             <div class="description mb-3 order-0" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ? 'col-lg-4' : 'col-lg-3'">
                 <h2>Das passiert:</h2>
                 <div class="description-wrapper" :style="{ opacity: desktopViewport && theaterMode ? .3 : 1 }">
                     <slot name="desc"></slot>
                 </div>
+                <b-button variant="info" class="mt-4 mb-5" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
 
             <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
                 <Animation :sourcecode="sourcecode" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event"></Animation>
+            </div>
+
+            <div class="nav-button prev d-none d-sm-block">
+                <router-link :to="prevRoute">
+                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#aaa" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
+                </router-link>
+            </div>
+            <div class="nav-button next d-none d-sm-block">
+                <router-link :to="nextRoute">
+                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#aaa" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
+                </router-link>
+            </div>
+
+        </div>
+
+        <div v-show="mode === 'quiz'" class="layout-wrapper row justify-content-between align-items-center align-items-md-stretch mt-5">
+            <div class="task mb-3 order-0" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ? 'col-lg-4' : 'col-lg-3'">
+                <h2>Die Aufgabe:</h2>
+                <div class="task-wrapper" :style="{ opacity: desktopViewport && theaterMode ? .3 : 1 }">
+                    <slot name="task"></slot>
+                </div>
+                <b-button variant="info" class="mt-4 mb-5" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
 
             <div class="nav-button prev d-none d-sm-block">
@@ -51,8 +74,9 @@
         },
         data() {
             return {
-                routes: [ '/if', '/while', '/do-while', '/for', '/foreach' ],
-                theaterMode: false
+                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
+                theaterMode: false,
+                mode: ''
             }
         },
         computed: {
@@ -71,6 +95,15 @@
             hideBurgerOnIdle() {
                 return window.hideBurgerOnIdle;
             }
+        },
+        methods: {
+            switchMode() {
+                this.mode = this.mode === 'lection' ? 'quiz' : 'lection';
+                window['layoutMode'] = this.mode;
+            }
+        },
+        beforeMount() {
+            this.mode = window['layoutMode'] ? window['layoutMode'] : 'lection';
         }
     }
 </script>
@@ -82,13 +115,13 @@
         position: relative;
     }
 
-    .description, .animation {
+    .description, .task, .animation {
         position: relative;
         transition: opacity .3s, flex .3s, max-width .3s;
         min-height: 25rem;
     }
 
-    .description-wrapper {
+    .description-wrapper, .task-wrapper {
         background: $light;
         border-radius: 5px;
         padding: .5rem .9rem;

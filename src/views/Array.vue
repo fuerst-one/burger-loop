@@ -1,11 +1,11 @@
 <template>
-    <div id="for-loop" class="content-wrapper">
+    <div id="array" class="content-wrapper">
         <div class="container">
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
                 <template slot="intro">
-                    <h1><code>for</code> Loop</h1>
-                    <p class="lead text-black-50">Wie eine While-Schleife, die du <strong class="text-body">ohne Hilfsvariablen</strong> erzeugen kannst.</p>
+                    <h1><code>array</code> Liste</h1>
+                    <p class="lead text-black-50">Eine Liste, in der du Sachen hinzufügen und löschen kannst.</p>
                 </template>
 
                 <template slot="desc">
@@ -45,17 +45,17 @@
 <script>
     import Layout from "../components/Layout";
     export default {
-        name: 'For',
+        name: 'Array',
         components: {Layout},
         data() {
             return {
                 sourcecodeGeneral: [
-                    'for ($count = 0; $condition; $count++) {',
-                    '   // Code',
-                    '}'
+                    '$array = [',
+                    '   $item1, $item2 // etc.',
+                    '];'
                 ],
                 sourcecode: [
-                    '// Die Bestellung ist in der Küche angekommen!',
+                    '// Hier wird eine Bestellung aufgenommen:',
                     '',
                     '$order = [',
                     '    "Cheeseburger",',
@@ -63,13 +63,15 @@
                     '    "Hamburger",',
                     '];',
                     '',
-                    '// Wir gehen Step by Step die Liste ab und braten unsere Burger:',
-                    'for ($burgerIndex = 0; $burgerIndex < count($order); $burgerIndex++) {',
-                    '    $burger = $order[$burgerIndex];',
-                    '    make($burger);',
-                    '}',
+                    '// Sorry, was war nochmal das Zweite?',
                     '',
-                    '// Guten Appetit!'
+                    'echo $order[2];',
+                    '',
+                    '// Antwort: "Double-Cheeseburger"',
+                    '',
+                    '',
+                    '// "Also, das war\'s für mich. Was wollt ihr?"',
+                    '// - Props gehen raus für den Joke!',
                 ],
                 animation: [
                     [0, 0, 0, ''],

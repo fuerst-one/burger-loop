@@ -1,9 +1,9 @@
 <template>
     <div @click="jump" id="burger-animation" class="burger-animation no-select">
         <div v-show="showHeatwaves" class="heatwaves">
-            <svg id="heatwave1"><path></path></svg>
-            <svg id="heatwave2"><path></path></svg>
-            <svg id="heatwave3"><path></path></svg>
+            <svg id="heatwave1"><path d=""></path></svg>
+            <svg id="heatwave2"><path d=""></path></svg>
+            <svg id="heatwave3"><path d=""></path></svg>
         </div>
 
         <div id="topBun" class="layer"><img src="../assets/img/burger1/topBun.svg" alt=""></div>
@@ -208,7 +208,7 @@
                 setTimeout(() => {
                     document.querySelector('.heatwaves').style.opacity = 1;
                     vm.animateHeatwave();
-                }, 500);
+                }, 1000);
             }
         },
         beforeDestroy() {

@@ -36,10 +36,20 @@ export default new Router({
       component: () => import('./views/DoWhile.vue')
     },
     {
-      path: '/for',
-      name: 'for',
-      component: () => import('./views/For.vue')
+      path: '/array',
+      name: 'array',
+      component: () => import('./views/Array.vue')
     },
+    {
+          path: '/for',
+          name: 'for',
+          component: () => import('./views/For.vue')
+      },
+      {
+          path: '/map',
+          name: 'map',
+          component: () => import('./views/Map.vue')
+      },
     {
       path: '/foreach',
       name: 'foreach',
