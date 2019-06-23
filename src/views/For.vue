@@ -79,6 +79,11 @@
                 ],
                 animation: [
                     [0, 0, 0, ''],
+                    [0, 0, 0, 'TBD Edited'],
+                    [0, 0, 0, 'TBD Edited'],
+                    [0, 0, 0, 'TBD Edited'],
+                    [0, 0, 0, 'TBD Edited'],
+                    [0, 0, 0, 'TBD Edited'],
                     [0, 0, 0, 'Da hat jemand Hunger. 3 Cheeseburger!'],
                     [0, 0, 0, 'So einen repetitiven Task können wir vereinfachen.'],
                     [2, 0, 0, 'Applaus für die "For"-Schleife!'],
@@ -114,8 +119,7 @@
                     [6, 0, 1, 'Lerne jetzt "Foreach"-Schleifen kennen!'],
                 ],
                 burgerAnimation: [
-                    [],
-                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
+                    []
                 ]
             }
         }
