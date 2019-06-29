@@ -2,7 +2,7 @@
     <div id="map" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
                 <template slot="intro">
                     <h1><code>map</code> Liste</h1>
                     <p class="lead text-black-50">Wie das Array, nur mit eigenem Namen für jedes Feld.</p>
@@ -33,8 +33,8 @@
             return {
                 sourcecodeGeneral: [
                     '$map = [',
-                    '   "key" => $value,',
-                    '   "key" => $value // etc.',
+                    '   $key => $value,',
+                    '   $key => $value // etc.',
                     '];'
                 ],
                 sourcecode: [
@@ -66,6 +66,10 @@
                 ],
                 burgerAnimation: [
                     [],
+                    [],
+                ],
+                exercise: [
+                    [ 0, 1, 2, 3, 4, 5 ]
                 ]
             }
         }

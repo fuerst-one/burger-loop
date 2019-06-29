@@ -46,9 +46,7 @@
             </div>
 
             <div class="builder" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
-                <div class="container border h-75">
-                    <h2>TBD</h2>
-                </div>
+                <Quiz :exercise="exercise"></Quiz>
             </div>
 
             <div class="nav-button prev d-none d-sm-block">
@@ -68,15 +66,17 @@
 
 <script>
     import Animation from "./Animation";
+    import Quiz from "./Quiz";
 
     export default {
         name: 'Layout',
-        components: {Animation},
+        components: {Quiz, Animation},
         props: {
             sourcecodeGeneral: String,
             sourcecode: String,
             animation: Array,
-            burgerAnimation: Array
+            burgerAnimation: Array,
+            exercise: Array
         },
         data() {
             return {

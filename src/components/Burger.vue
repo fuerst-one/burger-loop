@@ -24,7 +24,7 @@
         name: 'Burger',
         props: {
             burgerAnimationTask: Array,
-            showHeatwaves: false
+            showHeatwaves: Boolean
         },
         data() {
             return {

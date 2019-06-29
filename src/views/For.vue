@@ -2,7 +2,7 @@
     <div id="for-loop" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
                 <template slot="intro">
                     <h1><code>for</code> Loop</h1>
                     <p class="lead text-black-50">Wie eine While-Schleife, die du <strong class="text-body">ohne Hilfsvariablen</strong> erzeugen kannst.</p>
@@ -119,7 +119,11 @@
                     [6, 0, 1, 'Lerne jetzt "Foreach"-Schleifen kennen!'],
                 ],
                 burgerAnimation: [
-                    []
+                    [],
+                    [],
+                ],
+                exercise: [
+                    [ 0, 1, 2, 3, 4 ]
                 ]
             }
         }

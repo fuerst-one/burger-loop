@@ -2,7 +2,7 @@
     <div id="foreach-loop" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
                 <template slot="intro">
                     <h1><code>foreach</code> Loop</h1>
                     <p class="lead text-black-50">Die Schleife, die alle <strong class="text-body">Schlüssel und Elemente einer Sammlung</strong> durchläuft.</p>
@@ -141,6 +141,9 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
+                ],
+                exercise: [
+                    [ 0, 1, 2, 3, 4, 5, 6 ]
                 ]
             }
         }

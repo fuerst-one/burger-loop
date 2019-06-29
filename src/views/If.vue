@@ -2,7 +2,7 @@
     <div id="if-statement" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
                 <template slot="intro">
                     <h1><code>if</code> Statement</h1>
                     <p class="lead text-black-50">Immer wenn etwas <strong class="text-body">abhängig von einer Bedingung</strong> ausgeführt werden soll.</p>
@@ -141,6 +141,9 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce' ],
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
+                ],
+                exercise: [
+                    [ 0 ]
                 ]
             }
         }

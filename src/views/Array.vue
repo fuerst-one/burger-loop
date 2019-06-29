@@ -2,7 +2,7 @@
     <div id="array" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
                 <template slot="intro">
                     <h1><code>array</code> Liste</h1>
                     <p class="lead text-black-50">Eine Liste, in der du Sachen hinzufügen und löschen kannst.</p>
@@ -63,6 +63,10 @@
                 ],
                 burgerAnimation: [
                     [],
+                    [],
+                ],
+                exercise: [
+                    [ 0, 1, 2, 3 ]
                 ]
             }
         }
