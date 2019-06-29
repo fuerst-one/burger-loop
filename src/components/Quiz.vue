@@ -17,7 +17,7 @@
                                 <div class="drop-space col-auto" :class="activeBrick ? 'show' : ''" @click="dropToSolution(i, j)" v-on:drop="dropToSolution(i, j)" v-on:dragover="allowDrop">+</div>
                                 <div class="brick col-auto" :id="'brick' + brick.id" :class="activeBrick && brick.id === activeBrick.id ? 'active' : ''" draggable="true" @click="selectBrick(brick.id, 'solution')" v-on:dragstart="selectBrick(brick.id, 'solution')" :key="j">{{ brick.text }}</div>
                             </template>
-                            <div v-if="line.length > 0" class="drop-space col-auto" :class="activeBrick ? 'show' : ''" @click="dropToSolution(i, line.length)" v-on:drop="dropToSolution(i, line.length)" v-on:dragover="allowDrop">+</div>
+                            <div v-if="line.length > 0" class="drop-space show col" :class="activeBrick ? 'show' : ''" @click="dropToSolution(i, line.length)" v-on:drop="dropToSolution(i, line.length)" v-on:dragover="allowDrop">+</div>
                         </div>
 
                         <div v-if="solution.length > 0" class="canvas-line row mx-0">
@@ -80,7 +80,10 @@
                 } else {
                     for (let i = 0; i < this.solution.length; i++) {
                         if (this.solution[i].find(b => b.id === this.activeBrick.id)) {
-                            brick = this.solution[i].splice(this.solution[i].findIndex(b => b.id === this.activeBrick.id), 1)[0];
+                            let j = this.solution[i].findIndex(b => b.id === this.activeBrick.id);
+                            if (index > j) index--;
+
+                            brick = this.solution[i].splice(j, 1)[0];
 
                             if (this.solution[i].length === 0) {
                                 this.solution.splice(i, 1);
@@ -185,8 +188,9 @@
 
                 &.show {
                     max-width: 100%;
-                    width: 1rem;
                     visibility: visible;
+                    &:not(:last-of-type) { width: 1rem; }
+                    &:last-of-type { width: auto; }
                 }
             }
             .brick {
