@@ -27,12 +27,12 @@
                     <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
                         <Animation :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event"></Animation>
                     </div>
+                </div>
 
-                    <div class="nav-button next d-none d-sm-block">
-                        <router-link :to="nextRoute">
-                            <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#aaa" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
-                        </router-link>
-                    </div>
+                <div class="nav-button next d-none d-sm-block">
+                    <router-link :to="nextRoute">
+                        <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#aaa" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -225,10 +225,21 @@
         height: 1rem;
 
         &.prev {
-            left: -2rem;
+            left: 5rem;
         }
         &.next {
-            right: -2rem;
+            right: 5rem;
+        }
+    }
+
+    .nav-button {
+        position: fixed;
+        top: calc(50%);
+        transition: opacity .3s;
+
+        [class*="slide-"] & {
+            opacity: 0;
+            transition: none;
         }
     }
 
@@ -247,8 +258,16 @@
 
     @include media-breakpoint-down('lg') {
         .nav-button {
-            &.prev { left: -1rem; }
-            &.next { right: -1rem; }
+            position: fixed;
+            top: calc(50% - 3.5rem);
+            &.prev { left: 1rem; }
+            &.next { right: 1rem; }
+            transition: opacity .3s;
+
+            [class*="slide-"] & {
+                opacity: 0;
+                transition: opacity .05s;
+            }
         }
     }
     @include media-breakpoint-down('md') {

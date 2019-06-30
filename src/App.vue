@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar :routes="routes"></Navbar>
+    <Navbar :routes="routes" :badges="badges"></Navbar>
     <div id="content">
       <transition :name="routeTransitions ? transitionName : ''" mode="out-in">
         <router-view></router-view>
@@ -16,6 +16,7 @@
         data() {
             return {
                 routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
+                badges: [],
                 transitionName: 'slide-left'
             }
         },
@@ -55,7 +56,20 @@
                     oldContent.classList.remove(this.transitionName + '-leave-active');
                     oldContent.remove();
                 }, 300);
-            }
+            },
+        },
+        methods: {},
+        mounted() {
+            setTimeout(() => {
+                this.badges = JSON.parse(this.$cookie.get("badges"));
+                window['badges'] = this.badges;
+
+                let updateBadges = () => {
+                    this.badges = window['badges'];
+                };
+                document.removeEventListener("badgesChange", updateBadges);
+                document.addEventListener("badgesChange", updateBadges);
+            }, 300);
         }
     }
 </script>
@@ -77,6 +91,10 @@
 
     h2 {
       margin-bottom: 1.25rem;
+    }
+
+    h3, h4 {
+      font-weight: bold;
     }
   }
   #content-old {

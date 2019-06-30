@@ -53,7 +53,7 @@
                     'do {',
                     '   // Code',
                     '}',
-                    'while ($condition);'
+                    'while ( $condition ) ;'
                 ],
                 sourcecode: [
                     '// Stop! Mach einen Triple draus.',

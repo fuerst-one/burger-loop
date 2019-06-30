@@ -41,19 +41,24 @@ export default new Router({
       component: () => import('./views/Array.vue')
     },
     {
-          path: '/for',
-          name: 'for',
-          component: () => import('./views/For.vue')
-      },
-      {
-          path: '/map',
-          name: 'map',
-          component: () => import('./views/Map.vue')
-      },
+      path: '/for',
+      name: 'for',
+      component: () => import('./views/For.vue')
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: () => import('./views/Map.vue')
+    },
     {
       path: '/foreach',
       name: 'foreach',
       component: () => import('./views/Foreach.vue')
+    },
+    {
+      path: '/impressum',
+      name: 'impressum',
+      component: () => import('./views/Impressum.vue')
     }
   ]
 })

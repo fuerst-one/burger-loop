@@ -111,7 +111,7 @@
         },
         data() {
             return {
-                routes: [ '/if', '/while', '/do-while', '/for', '/foreach' ],
+                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
                 started: false,
                 animationInterval: null,
                 animationFrequencyIndex: process.env.NODE_ENV === 'development' ? 3 : 0,

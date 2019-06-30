@@ -5,7 +5,11 @@
                 <slot name="intro"></slot>
             </div>
             <div class="col-md-4 mt-1 mt-lg-0">
-                <pre v-highlightjs="sourcecodeGeneral"><code class="php light"></code></pre>
+                <pre v-if="mode === 'lection'" v-highlightjs="sourcecodeGeneral"><code class="php light"></code></pre>
+                <div v-else class="badges px-2">
+                    <h4 class="mt-1 mb-1">Gelöste Aufgaben:</h4>
+                    <router-link :to="route" v-for="route in routes" :id="route.slice(1) + '-badge'" class="badge" :class="{ active: badges.find(b => b === route.slice(1)) }">{{ route.slice(1) }}</router-link>
+                </div>
             </div>
         </div>
 
@@ -16,28 +20,17 @@
                 <div class="description-wrapper" :style="{ opacity: desktopViewport && theaterMode ? .3 : 1 }">
                     <slot name="desc"></slot>
                 </div>
-                <b-button variant="info" class="mt-4 mb-5" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
+                <b-button variant="info" class="mt-4 mb-5 d-none d-lg-block" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
 
             <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
                 <Animation :sourcecode="sourcecode" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event"></Animation>
+                <b-button variant="info" class="mt-4 mb-5 d-lg-none" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
-
-            <div class="nav-button prev d-none d-sm-block">
-                <router-link :to="prevRoute">
-                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#aaa" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
-                </router-link>
-            </div>
-            <div class="nav-button next d-none d-sm-block">
-                <router-link :to="nextRoute">
-                    <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#aaa" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
-                </router-link>
-            </div>
-
         </div>
 
         <div v-show="mode === 'quiz'" class="layout-wrapper row justify-content-between align-items-center align-items-md-stretch mt-5">
-            <div class="task mb-3 order-0" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ? 'col-lg-4' : 'col-lg-3'">
+            <div class="task mb-3 order-2 order-lg-0" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ? 'col-lg-4' : 'col-lg-3'">
                 <h2>Die Aufgabe:</h2>
                 <div class="task-wrapper" :style="{ opacity: desktopViewport && theaterMode ? .3 : 1 }">
                     <slot name="task"></slot>
@@ -45,10 +38,12 @@
                 <b-button variant="info" class="mt-4 mb-5" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
 
-            <div class="builder" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
-                <Quiz :exercise="exercise"></Quiz>
+            <div class="builder order-0 order-lg-2" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
+                <Quiz :template="exercise" @addBadge="addBadge" @removeBadge="removeBadge"></Quiz>
             </div>
+        </div>
 
+        <div class="nav-buttons container">
             <div class="nav-button prev d-none d-sm-block">
                 <router-link :to="prevRoute">
                     <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#aaa" d="M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z"></path></svg>
@@ -59,7 +54,6 @@
                     <svg height="36px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="#aaa" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z"></path></svg>
                 </router-link>
             </div>
-
         </div>
     </div>
 </template>
@@ -76,13 +70,15 @@
             sourcecode: String,
             animation: Array,
             burgerAnimation: Array,
-            exercise: Array
+            /*exercise: Array*/
         },
         data() {
             return {
                 routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
                 theaterMode: false,
-                mode: ''
+                mode: '',
+                exercise: [],
+                badges: []
             }
         },
         computed: {
@@ -106,10 +102,31 @@
             switchMode() {
                 this.mode = this.mode === 'lection' ? 'quiz' : 'lection';
                 window['layoutMode'] = this.mode;
+            },
+            addBadge() {
+                this.badges.push(this.$route.name);
+                this.updateBadges();
+            },
+            removeBadge() {
+                let index = this.badges.findIndex(badge => badge === this.$route.name);
+                if (index >= 0) this.badges.splice(index, 1);
+                this.updateBadges();
+            },
+            updateBadges() {
+                window['badges'] = this.badges;
+                this.$cookie.set("badges", JSON.stringify(this.badges), 180);
+                document.dispatchEvent(new Event("badgesChange"));
             }
         },
         beforeMount() {
             this.mode = window['layoutMode'] ? window['layoutMode'] : 'lection';
+        },
+        mounted() {
+            setTimeout(() => {
+                this.badges = window['badges'] ? window['badges'] : [];
+            }, 300);
+
+            this.exercise = this.sourcecodeGeneral.split("\n").map(c => c.split(" ").filter(c => c !== ""));
         }
     }
 </script>
@@ -125,6 +142,9 @@
         position: relative;
         transition: opacity .3s, flex .3s, max-width .3s;
         min-height: 25rem;
+    }
+    .builder {
+        min-height: auto;
     }
 
     .description-wrapper, .task-wrapper {
@@ -161,65 +181,111 @@
         }
     }
 
-    .nav-button {
-        position: absolute;
-        top: .1rem;
-        width: 1rem;
-        height: 1rem;
+    .nav-buttons {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
 
-        &.prev {
-            left: -2rem;
-        }
-        &.next {
-            right: -2rem;
+        .nav-button {
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            transition: opacity .3s;
+
+            &.prev { left: -2rem; }
+            &.next { right: -2rem; }
+
+            [class*="slide-"] & {
+                opacity: 0;
+                transition: opacity .05s;
+            }
         }
     }
 
     .intro {
         pre {
+            scrollbar-color: $gray-500 $gray-400;
+            scrollbar-width: thin;
+            &::-webkit-scrollbar {
+                height: 4px;
+            }
+            &::-webkit-scrollbar-track {
+                background: $gray-400;
+                border-radius: 0 $border-radius $border-radius 0;
+            }
+            &::-webkit-scrollbar-thumb {
+                height: 4px;
+                margin: 0 auto;
+                background: $gray-500;
+                border-radius: 0 $border-radius $border-radius 0;
+                &:hover {
+                    background: $gray-400;
+                }
+            }
+        }
+        pre, .badges {
             position: relative;
             height: 6rem;
             background: $light;
             border-radius: $border-radius;
             box-shadow: $light-box-shadow;
-            overflow-x: auto;
-
-            scrollbar-color: $gray-300 $gray-200;
-            scrollbar-width: thin;
-            &::-webkit-scrollbar {
-                height: 8px;
-            }
-            &::-webkit-scrollbar-track {
-                background: $gray-200;
-                border-radius: 0 0 $border-radius $border-radius;
-            }
-            &::-webkit-scrollbar-thumb {
-                height: 8px;
-                margin: 0 auto;
-                background: $gray-300;
-                border-radius: 0 0 $border-radius $border-radius;
-                &:hover {
-                    background: $gray-400;
-                }
-            }
+            overflow: auto;
 
             code {
                 position: relative;
                 top: 50%;
                 transform: translateY(-50%);
-                overflow-x: visible;
+                width: 100%;
                 padding: 0 .5rem;
             }
         }
     }
 
+    .badge {
+        display: inline-block;
+        margin: 0 .15rem .25rem;
+        padding: .4rem .6rem .5rem;
+        font-family: $font-family-monospace;
+        font-weight: bold;
+        color: $white;
+        background: $gray-300;
+
+        &.active {
+            &#if-badge { background: $blue; }
+            &#while-badge { background: $yellow;; }
+            &#do-while-badge { background: $indigo; }
+            &#array-badge { background: $pink; }
+            &#for-badge { background: $green; }
+            &#map-badge { background: $orange; }
+            &#foreach-badge { background: $cyan; }
+        }
+    }
+
     @include media-breakpoint-down('lg') {
-        .nav-button {
-            &.prev { left: -1rem; }
-            &.next { right: -1rem; }
+        .nav-buttons {
+            top: calc(50% - 3rem);
         }
     }
     @include media-breakpoint-down('md') {
+        .nav-button {
+            position: fixed;
+            top: calc(50%);
+            transition: opacity .3s;
+
+            &.prev { left: 1rem; }
+            &.next { right: 1rem; }
+
+            [class*="slide-"] & {
+                opacity: 0;
+                transition: opacity .05s;
+            }
+        }
+        .badge {
+            display: inline-block;
+            margin: 0 .15rem;
+            padding: .2rem .3rem .3rem;
+        }
         .description, .animation {
             min-height: unset;
             h2 {
@@ -228,6 +294,9 @@
         }
         .animation, .builder {
             padding: 0 1.7rem;
+        }
+        .builder {
+            padding-bottom: 3rem;
         }
         .description-wrapper {
             height: unset;

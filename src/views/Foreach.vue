@@ -54,7 +54,7 @@
         data() {
             return {
                 sourcecodeGeneral: [
-                    'foreach ($array as $key => $value) {',
+                    'foreach ( $array as $key => $value ) {',
                     '   // Code',
                     '}'
                 ],

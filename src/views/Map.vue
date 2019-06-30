@@ -4,7 +4,7 @@
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
                 <template slot="intro">
-                    <h1><code>map</code> Liste</h1>
+                    <h1><code>map</code> List</h1>
                     <p class="lead text-black-50">Wie das Array, nur mit eigenem Namen für jedes Feld.</p>
                 </template>
 
@@ -33,9 +33,9 @@
             return {
                 sourcecodeGeneral: [
                     '$map = [',
-                    '   $key => $value,',
-                    '   $key => $value // etc.',
-                    '];'
+                    '   $key => $value ,',
+                    '   $key2 => $value2 // etc.',
+                    '] ;'
                 ],
                 sourcecode: [
                     '// In der Küche kommen einige Bestellungen mit Tischnummern.',

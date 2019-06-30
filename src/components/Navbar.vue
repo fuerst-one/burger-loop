@@ -19,43 +19,18 @@
                 </div>
 
                 <b-collapse is-nav id="nav-collapse" class="ml-2 mr-auto text-center text-sm-left">
-                    <b-navbar-nav>
-                        <b-nav-item to="/if">
-                            <b-button :variant="navItemColor('/if')" @click="blockRouteTransition">
-                                if
+                    <b-navbar-nav id="navbar-nav">
+                        <b-nav-item v-for="route in routes" :to="route">
+                            <b-button :variant="navItemColor(route)" @click="blockRouteTransition">
+                                {{ route }} <svg v-if="badges && badges.find(b => b === route.slice(1))" height="17px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
                             </b-button>
                         </b-nav-item>
-                        <b-nav-item to="/while">
-                            <b-button :variant="navItemColor('/while')" @click="blockRouteTransition">
-                                while
-                            </b-button>
-                        </b-nav-item>
-                        <b-nav-item to="/do-while">
-                            <b-button :variant="navItemColor('/do-while')" @click="blockRouteTransition">
-                                do while
-                            </b-button>
-                        </b-nav-item>
-                        <b-nav-item to="/array">
-                            <b-button :variant="navItemColor('/array')" @click="blockRouteTransition">
-                                array
-                            </b-button>
-                        </b-nav-item>
-                        <b-nav-item to="/for">
-                            <b-button :variant="navItemColor('/for')" @click="blockRouteTransition">
-                                for
-                            </b-button>
-                        </b-nav-item>
-                        <b-nav-item to="/map">
-                            <b-button :variant="navItemColor('/map')" @click="blockRouteTransition">
-                                map
-                            </b-button>
-                        </b-nav-item>
-                        <b-nav-item to="/foreach">
-                            <b-button :variant="navItemColor('/foreach')" @click="blockRouteTransition">
-                                foreach
-                            </b-button>
+                        <b-nav-item to="/impressum">
+                            <b-button variant="dark" class="text-muted text-center">Impressum</b-button>
                         </b-nav-item>
                     </b-navbar-nav>
+                    <div class="hint before" :class="{ active: beforeHintVisible }"></div>
+                    <div class="hint after" :class="{ active: afterHintVisible }"></div>
                 </b-collapse>
             <!--</div>-->
         </b-navbar>
@@ -74,12 +49,15 @@
         name: 'Navbar',
         components: {BButton, BNavItem, BNavbarNav, BCollapse, BNavbarToggle, BNavbarBrand, BNavbar},
         props: {
-            routes: Array
+            routes: Array,
+            badges: Array
         },
         data() {
             return {
                 navbarItemDefaultColor: 'secondary',
                 navbarItemActiveColor: 'primary',
+                beforeHintVisible: false,
+                afterHintVisible: false,
             }
         },
         computed: {
@@ -91,7 +69,7 @@
             },
             nextRoute() {
                 return this.routes[this.activeRoute === this.routes.length ? 0 : this.activeRoute + 1] || '/';
-            },
+            }
         },
         methods: {
             blockRouteTransition() {
@@ -100,6 +78,19 @@
             navItemColor(pathName) {
                 return this.$route.path === pathName ? this.navbarItemActiveColor : this.navbarItemDefaultColor;
             }
+        },
+        mounted() {
+            let vm = this;
+            setTimeout(() => {
+                document.getElementById('navbar-nav').addEventListener("scroll", event => {
+                    window.requestAnimationFrame(() => {
+                        vm.beforeHintVisible = window.innerWidth < 1110 && event.target.scrollLeft !== 0;
+                        vm.afterHintVisible = window.innerWidth < 1110 && event.target.scrollLeft + event.target.offsetWidth < event.target.scrollWidth;
+                    });
+                });
+
+                vm.afterHintVisible = window.innerWidth < 1053;
+            }, 300);
         }
     }
 </script>
@@ -120,6 +111,50 @@
     .navbar-brand {
         margin-left: 1rem;
     }
+    .navbar-nav {
+        max-width: calc(100vw - 11.5rem);
+        flex-basis: 0 0;
+        overflow-x: auto;
+        scrollbar-color: $black $dark;
+        scrollbar-width: thin;
+        &::-webkit-scrollbar {
+            height: 5px;
+        }
+        &::-webkit-scrollbar-track {
+            background: $dark;
+            border-radius: $border-radius;
+        }
+        &::-webkit-scrollbar-thumb {
+            height: 5px;
+            margin: 0 auto;
+            background: $black;
+            border-radius: $border-radius;
+            &:hover {
+                background: $gray-600;
+            }
+        }
+    }
+
+    #nav-collapse {
+        position: relative;
+
+        .hint {
+            position: absolute;
+            top: .2rem;
+            bottom: .2rem;
+            width: .3rem;
+            background: rgba($black, .5);
+            opacity: 0;
+            z-index: 5;
+
+            &.before { left: -.1rem; border-radius: 0 50% 50% 0; }
+            &.after { right: -.1rem; border-radius: 50% 0 0 50%; }
+
+            &.active {
+                opacity: 1;
+            }
+        }
+    }
     .nav-item {
         a {
             padding: 0 !important;
@@ -127,6 +162,17 @@
         }
         .btn {
             white-space: nowrap;
+            font-family: $font-family-monospace;
+
+            svg {
+                height: 14px;
+                margin-top: -2px;
+                fill: $success;
+            }
+        }
+
+        .nav-link.router-link-active .btn svg {
+            fill: $white !important;
         }
     }
 
@@ -140,7 +186,7 @@
             position: absolute;
             bottom: 3.8rem;
             right: 4.8rem;
-            width: 8rem;
+            width: 10rem;
             transform: translateX(50%);
             text-align: center;
             background: inherit;
@@ -164,6 +210,11 @@
 
                     .btn {
                         width: 100%;
+                        text-align: left;
+                        svg {
+                            float: right;
+                            margin-top: .3rem;
+                        }
                     }
                 }
             }
