@@ -101,7 +101,7 @@ Naja dann lass die <code>fries</code> weg aber gibt mir zur <code>coke</code> no
                 ],
                 exercise: [
                     [ 0, 1, 2, 3 ]
-                    [ "Double-Cheeseburger", "Hamburger", "Hamburger", "Coke", "Cheeseburger",  ]
+                    [ "Double-Cheeseburger", "Hamburger", "Hamburger", "Coke", "Cheeseburger", “Milkshake”, “Orange-Juice”, “Small Fries”, “Medium Fries”, "$order=[", ",", ",", ",", ",", ";", ";", ";", ";", "echo", "$order=[2", "$order[0]", "];" ]
                 ]
             }
         }
