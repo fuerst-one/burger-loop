@@ -38,7 +38,13 @@
 
                 <template slot="task">
                     <p>
-                        <strong>TBD Aufgabe</strong>
+                        Last but not least! Du hast es bis zum letzten Quiz geschafft. Dabei hast du gelernt <code>burger</code>  zu implementieren indem die sie belegt, die Bestellungen aufgenommen und die Burger-Produktion koordiniert hast. Zuletzt sollen die <code>burger</code>  nun an die richtigen <code>tables</code>  kommen. Dazu nutzen wir unseren Hash mit den <code>$tableOrders</code>. 
+                        
+                    </p>
+                    <p> <b> „Tisch 4 bekommt noch einen Milkshake, Tisch 12 wartet schon seit 10 Minuten!“ </b>
+                    
+                    Es müssen noch die Bestellungen von zwei Tischen zubereitet und serviert werden. Tisch <code>4</code> hatte einen <code>Hamburger</code>, eine <code>Fries</code>  und einen <code>Milkshake</code>. Die Bestellung von Tisch <code>12</code>  umfasst zwei <code>Double-Cheeseburger</code>  und eine <code>Coke</code>. 
+                    Wenn das <code>$tableOrders</code>  steht, versuche die Zubereitung der <code>$items</code>  bis hin zum servieren durch die <code>foreach<code> -Schleife auszudrücken. Damit hast du die Königsklasse des BurgerLoop abgeschlossen und kannst mehr als stolz sein. Also lass uns noch ein letztes Mal die Ärmel hochkrempeln und ran an die Arbeit! 
                     </p>
                 </template>
             </Layout>
@@ -143,8 +149,12 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
                 ],
                 exercise: [
-                    [ 0, 1, 2, 3, 4, 5, 6 ]
-                ]
+                    [ "$tabelOrders", "$tabelOrders", "=", "=", 12, 4, 7, "=>", "=>", "“Hamburger“", "“Fries“", "“Milkshake“",
+                    "“Double-Cheeseburger“",  "“Double-Cheeseburger“", "“Coke“", "[", "[", "[", "[", "]", "]", "]", "]", 
+                    ",", ",", ",", ",", ")", ")", ")", ")", ";", ";", ";", ";", "{", "{", "{", "{", "}", "}", "}", "}", 
+                    "foreach(", "as", "as", "$table", "$table", "$order", "$order", "$item", "$item", "$burger", "$burger",
+                    "make(", "serve("]
+               ]
             }
         }
     }

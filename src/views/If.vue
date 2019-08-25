@@ -39,8 +39,20 @@
 
                 <template slot="task">
                     <p>
-                        <strong>TBD Aufgabe</strong>
+                    Jetzt bist du an der Reihe! Die Küche in unserem <code>BurgerLoop</code> braucht bei der Vielzahl an <code>orders</code> deine Unterstützung um die Burger zu belegen. Wie in der Lektion gezeigt soll hierfür die <code>ifelse</code>-Schleife verwendet werden. 
+                    Die ersten <code>orders</code> kommen rein – genug gechillt, jetzt geht’s an die Arbeit! 
+
                     </p>
+                    <p>
+                    <b>„Bitte einen Double-Cheeseburger und einen Hamburger aber pronto!“</b>
+                    Für den Double-Cheeseburger benötigst du für die Base: <br>
+                    ein <code>bottomBun</code>, ein <code>patty</code>, einmal <code>salad</code>, einmal <code>tomatoes</code>. Dann kommt der <code>cheese</code>  und die <code>sauce</code>  drauf. Zum Schluss noch ein <code>topBun</code>. Thats it!
+                    Der Hamburger ist nochmal leichter: Die Base bleibt die gleiche. Statt <code>cheese</code>  und <code>sauce</code>  kommt hier noch die <code>sauce</code>  drauf, dann der <code>topBun</code>.
+                    </p>
+                    <p>
+                    Versuche dich selbst und baue den <code>burger</code> mit Hilfe der Codebausteine zusammen. 
+                    </p>
+                    
                 </template>
             </Layout>
         </div>
@@ -143,7 +155,10 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                 ],
                 exercise: [
-                    [ 0 ]
+                    [ "add(", "add(", "if(", ")", ")", ")", ")", "{", "{", "{", "{", "}", "}", "}", "}", 
+                    "elseif(", "else(", ";", ";", ";", ";", ",", ",", ",", ",", "bottomBun", "patty",  
+                    "salad", "tomatoes", "cheese", "cheese", "sauce", "sauce","‘Double-Cheeseburger‘", 
+                    "‘Hamburger‘", "$recipe==", "$recipe==", "fries", "‘Cheeseburger‘", "while ("]
                 ]
             }
         }
