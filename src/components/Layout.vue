@@ -120,8 +120,8 @@
             }
         },
         mounted() {
-            if (!this.mode) this.mode = this.$cookie.get("layoutMode").replace(/"/g, "");
-            else this.mode = window['layoutMode'];
+            if (!this.mode && this.$cookie.get("layoutMode")) this.mode = this.$cookie.get("layoutMode").replace(/"/g, "");
+            else this.mode = window['layoutMode'] ? window['layoutMode'] : 'lection';
 
             setTimeout(() => {
                 this.badges = window['badges'] ? window['badges'] : [];
