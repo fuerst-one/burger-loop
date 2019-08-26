@@ -56,6 +56,10 @@
             <div class="burger-animation-wrapper">
                 <Burger :burger-animation-task="burgerAnimationTask" :show-heatwaves="!theaterMode" @busy="busy = $event"></Burger>
             </div>
+
+            <div v-show="people.filter(p => p === 'barkeeper').length > 0" id="barkeeper" class="layer people"><img src="../assets/img/people/barkeeper.svg" alt=""></div>
+            <div v-show="people.filter(p => p === 'chef').length > 0" id="chef" class="layer people"><img src="../assets/img/people/chef.svg" alt=""></div>
+            <div v-show="people.filter(p => p === 'guest').length > 0" id="guest" class="layer people"><img src="../assets/img/people/guest.svg" alt=""></div>
         </div>
 
         <div class="controls order-4 order-md-2 mb-3" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col-md-12'">
@@ -107,7 +111,8 @@
             sourcecodeGeneral: String,
             sourcecode: String,
             animation: Array,
-            burgerAnimation: Array
+            burgerAnimation: Array,
+            people: Array
         },
         data() {
             return {
@@ -322,6 +327,26 @@
     }
     .burger {
         overflow: visible;
+    }
+
+    #barkeeper, #chef, #guest {
+        position: absolute;
+        bottom: 0;
+        left: 55%;
+        height: 14rem;
+        width: 12rem;
+        z-index: 13;
+        img {
+            width: 100%;
+            height: auto;
+        }
+        pointer-events: none;
+    }
+    #chef {
+        left: -10%;
+    }
+    #guest {
+        left: 35%;
     }
 
     .sourcecode-animation-wrapper {

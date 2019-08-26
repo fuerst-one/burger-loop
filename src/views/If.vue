@@ -2,7 +2,7 @@
     <div id="if-statement" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
                     <h1><code>if</code> Statement</h1>
                     <p class="lead text-black-50">Immer wenn etwas <strong class="text-body">abhängig von einer Bedingung</strong> ausgeführt werden soll.</p>
@@ -159,7 +159,8 @@
                     "elseif(", "else(", ";", ";", ";", ";", ",", ",", ",", ",", "bottomBun", "patty",  
                     "salad", "tomatoes", "cheese", "cheese", "sauce", "sauce","‘Double-Cheeseburger‘", 
                     "‘Hamburger‘", "$recipe==", "$recipe==", "fries", "‘Cheeseburger‘", "while ("]
-                ]
+                ],
+                people: [ "chef" ]
             }
         }
     }

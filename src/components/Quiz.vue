@@ -5,8 +5,8 @@
             <h2 @click="check">
                 Spielfeld:
                 <span class="status">
-                    <svg v-if="message === 'Geschafft'" height="17px" class="mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
-                    <span> {{ message }}</span>
+                    <svg v-if="correctCount === totalCount" height="17px" class="mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
+                    <span> {{ correctCount !== totalCount ? (correctCount + ' / ' + totalCount) : 'Geschafft' }}</span>
                 </span>
             </h2>
 
@@ -14,26 +14,26 @@
                 <div class="canvas-lines-wrapper container-fluid">
                     <div class="canvas-lines">
 
-                        <h1 v-if="finished" @click="" class="end-screen">
+                        <h1 v-if="finished" class="end-screen">
                             <a href="javascript:" @click="toNextRoute" class="next">
                                 <span>{{ nextRoute === '/' ? 'Fertig!' : nextRoute === '/if' ? 'Zur ersten Aufgabe!' : 'Zur nächsten Aufgabe' }}</span>
                             </a>
                         </h1>
 
                         <div class="canvas-line row mx-0">
-                            <div class="drop-space show col-12" @click="dropToSolution(-1, 0)" v-on:drop="dropToSolution(-1, 0)" v-on:dragover="allowDrop">+</div>
+                            <div class="drop-space show col-12" @click="dropToCanvas(-1, 0)" v-on:drop="dropToCanvas(-1, 0)" v-on:dragover="allowDrop">+</div>
                         </div>
 
                         <div v-for="(line, i) in solution" class="canvas-line row mx-0" :key="i">
                             <template v-for="(brick, j) in line">
-                                <div class="drop-space col-auto" :class="activeBrick ? 'show' : ''" @click="dropToSolution(i, j)" v-on:drop="dropToSolution(i, j)" v-on:dragover="allowDrop">+</div>
-                                <div class="brick col-auto" :id="'brick' + brick.id" :class="activeBrick && brick.id === activeBrick.id ? 'active' : ''" draggable="true" @click="selectBrick(brick.id, 'solution')" v-on:dragstart="selectBrick(brick.id, 'solution')" :key="j">{{ brick.text }}</div>
+                                <div class="drop-space col-auto" :class="activeBrick ? 'show' : ''" @click="dropToCanvas(i, j)" v-on:drop="dropToCanvas(i, j)" v-on:dragover="allowDrop" :key="i+'-'+j">+</div>
+                                <div class="brick col-auto" :id="'brick' + brick.id" :class="activeBrick && brick.id === activeBrick.id ? 'active' : ''" draggable="true" @click="selectBrick(brick.id, 'solution')" v-on:dragstart="selectBrick(brick.id, 'solution')" :key="i+'--'+j">{{ brick.text }}</div>
                             </template>
-                            <div v-if="line.length > 0" class="drop-space show col" :class="activeBrick ? 'show' : ''" @click="dropToSolution(i, line.length)" v-on:drop="dropToSolution(i, line.length)" v-on:dragover="allowDrop">+</div>
+                            <div v-if="line.length > 0" class="drop-space show col" :class="activeBrick ? 'show' : ''" @click="dropToCanvas(i, line.length)" v-on:drop="dropToCanvas(i, line.length)" v-on:dragover="allowDrop" :key="'a'+i">+</div>
                         </div>
 
                         <div v-if="solution.length > 0" class="canvas-line row mx-0">
-                            <div class="drop-space show col-12" @click="dropToSolution(solution.length, 0)" v-on:drop="dropToSolution(solution.length, 0)" v-on:dragover="allowDrop">+</div>
+                            <div class="drop-space show col-12" @click="dropToCanvas(solution.length, 0)" v-on:drop="dropToCanvas(solution.length, 0)" v-on:dragover="allowDrop">+</div>
                         </div>
                     </div>
 
@@ -52,8 +52,14 @@
         <div class="pool col-md-4 order-3 order-md-0">
             <h2 class="d-none d-md-block">Puzzleteile:</h2>
 
-            <div class="pool-wrapper container-fluid" :class="{ dropping: activeBrick }">
-                <div @click="dropToBricks" v-on:drop="dropToBricks" v-on:dragover="allowDrop" class="pool-brick-wrapper row">
+            <div @click="dropToPool" v-on:drop="dropToPool" v-on:dragover="allowDrop" class="pool-wrapper container-fluid" :class="{ dropping: activeBrick }">
+                <span :class="{ show: activeBrick && activeBrick.source !== 'bricks' }" class="trash-screen">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm415.2 56.7L394.8 467c-1.6 25.3-22.6 45-47.9 45H101.1c-25.3 0-46.3-19.7-47.9-45L32.8 140.7c-.4-6.9 5.1-12.7 12-12.7h358.5c6.8 0 12.3 5.8 11.9 12.7z"></path>
+                    </svg>
+                </span>
+
+                <div class="pool-brick-wrapper row">
                     <div v-for="brick in bricks" :id="'brick' + brick.id" :class="activeBrick && brick.id === activeBrick.id ? 'active' : ''" class="brick col-auto" draggable="true" @click="selectBrick(brick.id, 'bricks')" v-on:dragstart="selectBrick(brick.id, 'bricks')" :key="brick.id">{{ brick.text }}</div>
                 </div>
             </div>
@@ -78,10 +84,12 @@
                 activeBrick: null,
                 lastAction: '',
                 dragging: false,
-                message: '',
                 finished: false,
                 remove: false,
-                exitIntent: false
+                exitIntent: false,
+                correctCount: 0,
+                setCount: 0,
+                totalCount: 0
             }
         },
         computed: {
@@ -95,16 +103,16 @@
                 return this.routes[this.activeRoute === this.routes.length ? 0 : this.activeRoute + 1] || '/';
             },
             progress() {
-                return { width: (this.solution.reduce((line, arr) => arr.concat(line), []).length / this.template.reduce((line, arr) => arr.concat(line), []).length * 100) + '%' };
+                return { width: (this.setCount / this.totalCount * 100) + '%' };
             },
             correct() {
-                return { width: (this.check() / this.template.reduce((line, arr) => arr.concat(line), []).length * 100) + '%' };
+                return { width: (this.correctCount / this.totalCount * 100) + '%' };
             }
         },
         watch: {},
         methods: {
             toNextRoute() {
-                if (!this.exitIntent && this.solution.length > 0 && this.message !== 'Geschafft') {
+                if (!this.exitIntent && this.solution.length > 0 && !this.finished) {
                     this.exitIntent = true;
                 } else if (this.exitIntent) {
                     this.$router.push(this.nextRoute);
@@ -114,17 +122,18 @@
                 this.activeBrick = this.activeBrick ? null : { id, source };
                 event.stopPropagation();
             },
-            dropToSolution(line, index) {
+            dropToCanvas(line, index) {
                 if (this.activeBrick === null) return;
 
                 let brick;
 
                 if (this.activeBrick.source === 'bricks') {
                     brick = this.bricks.splice(this.bricks.findIndex(b => b.id === this.activeBrick.id), 1)[0];
-                } else {
+                } else if (this.activeBrick.source === 'solution') {
                     for (let i = 0; i < this.solution.length; i++) {
                         if (this.solution[i].find(b => b.id === this.activeBrick.id)) {
                             let j = this.solution[i].findIndex(b => b.id === this.activeBrick.id);
+
                             if (line === i && index > j) index--;
 
                             brick = this.solution[i].splice(j, 1)[0];
@@ -166,7 +175,7 @@
 
                 this.finished = true;
             },
-            dropToBricks() {
+            dropToPool() {
                 event.preventDefault();
                 if (this.activeBrick === null) return;
 
@@ -202,18 +211,38 @@
                     return 0;
                 }
 
-                for (let i = 0, j = 0; i < solutionList.length; i++) {
+                /*for (let i = 0, j = 0; i < solutionList.length; i++) {
                     if (i === solutionList.length - 1 && solutionList[i].id === solutionList.length - 1) {
                         templateList.find(item => item.id === solutionList[i].id).correct = true;
 
                     } else if (i < solutionList.length - 1 && solutionList[i].id < solutionList[i+1].id) {
                         templateList.find(item => item.id === solutionList[i].id).correct = true;
                     }
+                }*/
+
+                let startIndex = 0;
+                let templateIndex = 0;
+
+                while (startIndex < solutionList.length) {
+                    templateIndex = templateList.findIndex(b => b.text === solutionList[startIndex].text);
+
+                    if (templateIndex < 0) break;
+
+                    for (let i = startIndex; i < Math.min(solutionList.length, templateList.length) - startIndex; i++) {
+                        if (solutionList[startIndex+i] && solutionList[startIndex+i].text === templateList[templateIndex+i].text) {
+                            templateList[templateIndex+i].correct = true;
+                        } else {
+                            startIndex += i - 1;
+                            break;
+                        }
+                    }
+
+                    startIndex++;
                 }
 
-                this.message = templateList.filter(i => i.correct).length === templateList.length ? 'Geschafft' : templateList.filter(i => i.correct).length + " / " + templateList.length;
-
-                return templateList.filter(i => i.correct).length;
+                this.correctCount = templateList.filter(i => i.correct).length;
+                this.setCount = solutionList.length;
+                this.totalCount = templateList.length;
             },
             reset(finished) {
                 let index = 0;
@@ -233,6 +262,7 @@
             removeBadge() {
                 if (this.remove) {
                     this.$emit('removeBadge');
+                    this.reset(false);
                     this.remove = false;
                 }
                 else this.remove = true;
@@ -253,12 +283,47 @@
 
     .canvas-lines {
         position: relative;
-        overflow: visible;
-        min-height: 22.5rem;
+        overflow-y: auto;
+        height: 22.5rem;
+        max-height: 22.5rem;
         margin: 0 -.75rem 1rem;
         background: $dark;
         color: $white;
         border-radius: $border-radius;
+
+        .end-screen {
+            position: absolute;
+            top: 0;
+            left: 1.5rem;
+            right: calc(1rem - 1px);
+            bottom: 1rem;
+            border-radius: $border-radius;
+            overflow: hidden;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+        }
+
+        scrollbar-color: $gray-800 $dark;
+        scrollbar-width: thin;
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        background: $dark;
+        &::-webkit-scrollbar-track {
+            background: $dark;
+            border-radius: 0 5px 5px 0;
+        }
+        &::-webkit-scrollbar-thumb {
+            width: 8px;
+            margin: 0 auto;
+            background: $gray-800;
+            border-radius: 0 5px 5px 0;
+            &:hover {
+                background: $gray-700;
+            }
+        }
 
         .canvas-line {
             /*min-height: 2.5rem;*/
@@ -308,12 +373,64 @@
     }
 
     .pool-wrapper {
+        position: relative;
+
+        .trash-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: $border-radius;
+            opacity: 0;
+            z-index: 2;
+            background: rgba($white, .66);
+            text-align: center;
+            transition: opacity .3s;
+            pointer-events: none;
+
+            &.show {
+                pointer-events: all;
+                opacity: 1;
+            }
+
+            svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                fill: $primary;
+                height: 4rem;
+            }
+        }
+
         .pool-brick-wrapper {
-            min-height: 2rem;
+            height: 22.5rem;
+            max-height: 22.5rem;
             padding: .25rem;
             background: $gray-200;
+            overflow-y: scroll;
             border-radius: $border-radius;
             align-content: start;
+
+            scrollbar-color: $gray-300 $gray-200;
+            scrollbar-width: thin;
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+            &::-webkit-scrollbar-track {
+                background: $gray-200;
+                border-radius: 0 5px 5px 0;
+            }
+            &::-webkit-scrollbar-thumb {
+                width: 8px;
+                margin: 0 auto;
+                background: $gray-300;
+                border-radius: 0 5px 5px 0;
+                &:hover {
+                    background: $gray-400;
+                }
+            }
         }
     }
 
@@ -329,20 +446,6 @@
         }
     }
 
-    .end-screen {
-        position: absolute;
-        top: 0;
-        left: 1.5rem;
-        right: calc(1rem - 1px);
-        bottom: 1rem;
-        border-radius: $border-radius;
-        overflow: hidden;
-
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .3s;
-    }
-
     .brick {
         display: inline-block;
         height: 2rem;
@@ -353,11 +456,11 @@
         border-radius: $border-radius;
         box-shadow: 0 1px 3px 0 rgba($dark, .3);
 
-        &:hover {
+        &:hover, .canvas-wrapper & {
             background: $info;
         }
 
-        &.active {
+        &.active, .canvas-wrapper &:hover {
             background: darken($info, 20);
         }
     }
@@ -388,13 +491,10 @@
         transition: width .1s;
     }
 
-    @include media-breakpoint-down('md') {
-        .canvas-lines {
-            min-height: auto !important;
-        }
-    }
-
     @include media-breakpoint-down('sm') {
+        .canvas-lines, .pool-brick-wrapper {
+            height: auto !important;
+        }
         .pool {
             margin: 1rem 0;
         }

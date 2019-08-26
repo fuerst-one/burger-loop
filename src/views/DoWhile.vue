@@ -2,7 +2,7 @@
     <div id="do-while-loop" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
                     <h1><code>do while</code> Loop</h1>
                     <p class="lead text-black-50">Zum Wiederholen einer Anweisung, <strong class="text-body">ohne den ersten Durchlauf zu prüfen</strong>.</p>
@@ -112,7 +112,8 @@
                     [ "$hotCount",  "$hotCount",  "$hotCount",  "$hotCount", "=", "=", "=", "=", ";", ";", ";", ";", "add(",
                     "add(", "add(", "add(", "Base",  "jalapenos",  "sauce", "topBun", "cheese",  "redChilis", ")", ")", ")", 
                     ")", "while(", 2, 3]
-                ]
+                ],
+                people: [ "chef" ]
             }
         }
     }

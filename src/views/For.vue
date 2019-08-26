@@ -2,7 +2,7 @@
     <div id="for-loop" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
                     <h1><code>for</code> Loop</h1>
                     <p class="lead text-black-50">Wie eine While-Schleife, die du <strong class="text-body">ohne Hilfsvariablen</strong> erzeugen kannst.</p>
@@ -83,8 +83,8 @@ Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burg
                     '];',
                     '',
                     '// Wir gehen Step by Step die Liste ab und braten unsere Burger:',
-                    'for ($burgerIndex = 0; $burgerIndex < count($order); $burgerIndex++) {',
-                    '    $burger = $order[$burgerIndex];',
+                    'for ($orderIndex = 0; $orderIndex < count($order); $orderIndex++) {',
+                    '    $burger = $order[$orderIndex];',
                     '    make($burger);',
                     '}',
                     '',
@@ -140,7 +140,8 @@ Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burg
                     "“Double-Cheeseburger“", "“Red-Hot-Chili-Burger“", ",", ",", ",", ",", ";",
                     ";", ";", ";", "{", "}", "for(", "$burgerIndex", "$burgerIndex", "$burgerIndex", "$burgerIndex", 
                     "=", "=", "count", "($order)",  "($burger)", "++",  "$burger",  "$order",  "[$burgerIndex];", "make("]
-                ]
+                ],
+                people: [ "barkeeper" ]
             }
         }
     }

@@ -2,7 +2,7 @@
     <div id="array" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
                     <h1>Impressum</h1>
                     <p class="lead text-black-50">Mit freundlicher Unterstützung durch</p>
@@ -35,9 +35,8 @@
                             Studiengang E-Commerce
                         </p>
                         <ul>
-                            <li>User Interface</li>
-                            <li>Interaction Design</li>
                             <li>Konzeption</li>
+                            <li>Interface Design</li>
                             <li>Technische Umsetzung</li>
                         </ul>
                         <h4 class="mb-1">Christiane Pluta</h4>
@@ -47,8 +46,8 @@
                         </p>
                         <ul>
                             <li>Illustration</li>
-                            <li>Texte</li>
                             <li>Konzeption</li>
+                            <li>Texte</li>
                         </ul>
                     </div>
                 </template>
@@ -91,7 +90,8 @@
                 ],
                 exercise: [
                     [ 0, 1, 2, 3 ]
-                ]
+                ],
+                people: [ "barkeeper", "guest", "chef" ]
             }
         }
     }

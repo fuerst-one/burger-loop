@@ -8,7 +8,7 @@
                 <pre v-if="mode === 'lection'" v-highlightjs="sourcecodeGeneral"><code class="php light"></code></pre>
                 <div v-else class="badges px-2">
                     <h4 class="mt-1 mb-1">Gelöste Aufgaben:</h4>
-                    <router-link :to="route" v-for="route in routes" :id="route.slice(1) + '-badge'" class="badge" :class="{ active: badges.find(b => b === route.slice(1)) }">{{ route.slice(1) }}</router-link>
+                    <router-link :to="route" v-for="(route, i) in routes" :id="route.slice(1) + '-badge'" class="badge" :class="{ active: badges.find(b => b === route.slice(1)) }" :key="i">{{ route.slice(1) }}</router-link>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
-                <Animation :sourcecode="sourcecode" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event"></Animation>
+                <Animation :sourcecode="sourcecode" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event" :people="people"></Animation>
                 <b-button variant="info" class="mt-4 mb-5 d-lg-none" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
         </div>
@@ -70,14 +70,14 @@
             sourcecode: String,
             animation: Array,
             burgerAnimation: Array,
-            /*exercise: Array*/
+            exercise: Array,
+            people: Array
         },
         data() {
             return {
-                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
+                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/hash', '/foreach' ],
                 theaterMode: false,
                 mode: '',
-                exercise: [],
                 badges: []
             }
         },
@@ -102,6 +102,7 @@
             switchMode() {
                 this.mode = this.mode === 'lection' ? 'quiz' : 'lection';
                 window['layoutMode'] = this.mode;
+                this.$cookie.set("layoutMode", this.mode, 180);
             },
             addBadge() {
                 this.badges.push(this.$route.name);
@@ -118,15 +119,13 @@
                 document.dispatchEvent(new Event("badgesChange"));
             }
         },
-        beforeMount() {
-            this.mode = window['layoutMode'] ? window['layoutMode'] : 'lection';
-        },
         mounted() {
+            if (!this.mode) this.mode = this.$cookie.get("layoutMode").replace(/"/g, "");
+            else this.mode = window['layoutMode'];
+
             setTimeout(() => {
                 this.badges = window['badges'] ? window['badges'] : [];
             }, 300);
-
-            this.exercise = this.sourcecodeGeneral.split("\n").map(c => c.split(" ").filter(c => c !== ""));
         }
     }
 </script>
@@ -186,6 +185,7 @@
         top: 50%;
         left: 50%;
         transform: translateX(-50%);
+        z-index: 15;
 
         .nav-button {
             position: absolute;
@@ -257,7 +257,7 @@
             &#do-while-badge { background: $indigo; }
             &#array-badge { background: $pink; }
             &#for-badge { background: $green; }
-            &#map-badge { background: $orange; }
+            &#hash-badge { background: $orange; }
             &#foreach-badge { background: $cyan; }
         }
     }

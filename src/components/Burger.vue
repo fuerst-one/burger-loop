@@ -16,6 +16,10 @@
         <div id="patty" class="layer"><img src="../assets/img/burger1/patty.svg" alt=""></div>
         <div id="bottomBun" class="layer"><img src="../assets/img/burger1/bottomBun.svg" alt=""></div>
         <div id="plate" class="layer"><img src="../assets/img/burger1/plate.svg" alt=""></div>
+
+        <!--<div id="coke" class="layer single"><img src="../assets/img/burger1/coke.svg" alt=""></div>-->
+        <!--<div id="milkshake" class="layer single"><img src="../assets/img/burger1/milkshake.svg" alt=""></div>-->
+        <!--<div id="fries" class="layer single"><img src="../assets/img/burger1/fries.svg" alt=""></div>-->
     </div>
 </template>
 

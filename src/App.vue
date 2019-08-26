@@ -15,7 +15,7 @@
         components: {Navbar},
         data() {
             return {
-                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
+                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/hash', '/foreach' ],
                 badges: [],
                 transitionName: 'slide-left'
             }

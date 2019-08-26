@@ -2,7 +2,7 @@
     <div id="array" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
                     <h1><code>array</code> Liste</h1>
                     <p class="lead text-black-50">Eine Liste, in der du Items hinzufügen und löschen kannst.</p>
@@ -36,22 +36,17 @@
                         Du musst vorne an der Theke einspringen, die <code>orders</code> fliegen nur so rein. Damit keine <code>order</code> verloren geht solltest du jede order in ein <code>array</code> einpflegen. 
                     </p>
                     <p>
-                    Der erste deiner <code>customer</code> kommt. Seine <code>order</code> lautet: 
+                        Der erste deiner <code>customer</code> kommt. Seine <code>order</code> lautet:
                     </p>
                     
-                    <p> <b>
-                    „Hallo! Ich hätte heute gerne einen <code>Double-Cheeseburger</code> mit einer großen Portion <code>fries</code> und einer kalten <code>coke</code>. Ach weisst du was, ich habe wirklich großen Hunger, ich nehme noch einen <code>Hamburger</code> dazu. Obwohl ich eigentlich auf meine Linie achten sollte.. 
-Naja dann lass die <code>fries</code> weg aber gibt mir zur <code>coke</code> noch einen <code>milkshake</code> dazu. Das wäre dann alles!“ </b>
+                    <p><b>„Hallo! Ich hätte heute gerne einen <code>Double-Cheeseburger</code> mit einer großen Portion <code>fries</code> und einer kalten <code>coke</code>. Ach weisst du was, ich habe wirklich großen Hunger, ich nehme noch einen <code>Hamburger</code> dazu. Obwohl ich eigentlich auf meine Linie achten sollte.. Naja dann lass die <code>fries</code> weg aber gibt mir zur <code>coke</code> noch einen <code>milkshake</code> dazu. Das wäre dann alles!“ </b>
                     </p>
                     <p>
-                    Welch‘ ein Chaos, wenn wir die <code>order</code> nur auf einen Zettel geschrieben hätten. Versuche die <code>order</code> deshalb in den <code>array</code> einzupflegen. Nutze dazu die vorgefertigten Codebausteine aber pass auf, nicht jeder Baustein gehört in jede Bestellung!
-                </p>
-                <p> <b>
-                „Entschuldigung, welchen Burger hatte ich als erstes bestellt?“ </b>
-                
-               Gib dem Kunden die Antwort auf seine Frage indem du den Index des Feldes im <code>array</code> ausgeben lässt, den dir der Kunde zuerst genannt hat. 
-          
-                </p>
+                        Welch‘ ein Chaos, wenn wir die <code>order</code> nur auf einen Zettel geschrieben hätten. Versuche die <code>order</code> deshalb in den <code>array</code> einzupflegen. Nutze dazu die vorgefertigten Codebausteine aber pass auf, nicht jeder Baustein gehört in jede Bestellung!
+                    </p>
+                    <p><b>„Entschuldigung, welchen Burger hatte ich als erstes bestellt?“</b>
+                        Gib dem Kunden die Antwort auf seine Frage indem du den Index des Feldes im <code>array</code> ausgeben lässt, den dir der Kunde zuerst genannt hat.
+                    </p>
                 </template>
             </Layout>
         </div>
@@ -100,9 +95,9 @@ Naja dann lass die <code>fries</code> weg aber gibt mir zur <code>coke</code> no
                     [],
                 ],
                 exercise: [
-                    [ 0, 1, 2, 3 ]
-                    [ "Double-Cheeseburger", "Hamburger", "Hamburger", "Coke", "Cheeseburger", “Milkshake”, “Orange-Juice”, “Small Fries”, “Medium Fries”, "$order=[", ",", ",", ",", ",", ";", ";", ";", ";", "echo", "$order=[2", "$order[0]", "];" ]
-                ]
+                    [ "Double-Cheeseburger", "Hamburger", "Hamburger", "Coke", "Cheeseburger", "Milkshake", "Orange-Juice", "Small Fries", "Medium Fries", "$order=[", ",", ",", ",", ",", ";", ";", ";", ";", "echo", "$order=[2", "$order[0]", "];" ]
+                ],
+                people: [ "barkeeper" ]
             }
         }
     }

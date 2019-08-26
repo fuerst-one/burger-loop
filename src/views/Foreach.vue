@@ -2,7 +2,7 @@
     <div id="foreach-loop" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
                     <h1><code>foreach</code> Loop</h1>
                     <p class="lead text-black-50">Die Schleife, die alle <strong class="text-body">Schlüssel und Elemente einer Sammlung</strong> durchläuft.</p>
@@ -44,7 +44,7 @@
                     <p> <b> „Tisch 4 bekommt noch einen Milkshake, Tisch 12 wartet schon seit 10 Minuten!“ </b>
                     
                     Es müssen noch die Bestellungen von zwei Tischen zubereitet und serviert werden. Tisch <code>4</code> hatte einen <code>Hamburger</code>, eine <code>Fries</code>  und einen <code>Milkshake</code>. Die Bestellung von Tisch <code>12</code>  umfasst zwei <code>Double-Cheeseburger</code>  und eine <code>Coke</code>. 
-                    Wenn das <code>$tableOrders</code>  steht, versuche die Zubereitung der <code>$items</code>  bis hin zum servieren durch die <code>foreach<code> -Schleife auszudrücken. Damit hast du die Königsklasse des BurgerLoop abgeschlossen und kannst mehr als stolz sein. Also lass uns noch ein letztes Mal die Ärmel hochkrempeln und ran an die Arbeit! 
+                    Wenn das <code>$tableOrders</code>  steht, versuche die Zubereitung der <code>$items</code>  bis hin zum servieren durch die <code>foreach</code> -Schleife auszudrücken. Damit hast du die Königsklasse des BurgerLoop abgeschlossen und kannst mehr als stolz sein. Also lass uns noch ein letztes Mal die Ärmel hochkrempeln und ran an die Arbeit!
                     </p>
                 </template>
             </Layout>
@@ -70,7 +70,7 @@
                     '$tableOrders = [',
                     '    12 => [',
                     '        "Cheeseburger",',
-                    '       "Double-Cheeseburger"',
+                    '        "Double-Cheeseburger"',
                     '    ],',
                     '    8 => [',
                     '        "Hamburger",',
@@ -154,7 +154,8 @@
                     ",", ",", ",", ",", ")", ")", ")", ")", ";", ";", ";", ";", "{", "{", "{", "{", "}", "}", "}", "}", 
                     "foreach(", "as", "as", "$table", "$table", "$order", "$order", "$item", "$item", "$burger", "$burger",
                     "make(", "serve("]
-               ]
+                ],
+                people: [ "barkeeper", "guest" ]
             }
         }
     }

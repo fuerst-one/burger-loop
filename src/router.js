@@ -46,9 +46,9 @@ export default new Router({
       component: () => import('./views/For.vue')
     },
     {
-      path: '/map',
-      name: 'map',
-      component: () => import('./views/Map.vue')
+      path: '/hash',
+      name: 'hash',
+      component: () => import('./views/Hash.vue')
     },
     {
       path: '/foreach',

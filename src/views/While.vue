@@ -2,7 +2,7 @@
     <div id="while-loop" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
                     <h1><code>while</code> Loop</h1>
                     <p class="lead text-black-50">Zum <strong class="text-body">Wiederholen einer Anweisung</strong> abhängig von einer Bedingung.</p>
@@ -135,7 +135,8 @@
                     ";", ";", ";", ";", "add", "add", "add","add", "Base",  "jalapenos",  
                     "sauce", "topBun",  ")", ")", ")", ")",  "while(",  "=", "=", "=", "=",
                     "+1", 2, 1, "{", "{", "{", "{", "}", "}", "}", "}"]
-                ]
+                ],
+                people: [ "chef" ]
             }
         }
     }
