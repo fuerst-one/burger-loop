@@ -4,7 +4,7 @@
 
             <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
                 <template slot="intro">
-                    <h1><code>hash</code> List</h1>
+                    <h1><code>hash</code> Liste</h1>
                     <p class="lead text-black-50">Wie das Array, nur mit eigenem Namen für jedes Feld.</p>
                 </template>
 
@@ -91,16 +91,20 @@
                     '// *DING* Alle neuen Kunden bedient. Es läuft!'
                 ],
                 animation: [
-                    [0, 0, 0, 'TBD'],
-                    [0, 0, 0, 'TBD'],
-                    [0, 0, 0, 'TBD']
+                    [0, 0, 0, 'TBD' ],
+                    [0, 0, 1, 'Cheeseburger' ],
+                    [0, 0, 2, 'Double-Cheeseburger' ],
+                    [0, 0, 3, 'Hamburger' ],
+                    [0, 0, 1, 'Cheeseburger' ],
+                    [6, 0, 1, 'Hamburger & Cheeseburger' ],
                 ],
                 burgerAnimation: [
                     [],
-                    [],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                 ],
                 exercise: [
-                    [ "Hamburger", "Fries", "Coke", "Cheeseburger", "Milkshake", "Double-Cheeseburger", "Milkshake", "Double-Cheeseburger", "$tableOrders=[", "];", "];", "];", "];", "];", ";", ";", ";", ";", "$tableOrders[", "],", "],", "],", "echo", ",", ",", ",", ",", ",", ",",  "Fries", "Coke", "Cheeseburger", 7, 15, 18, 3, 14]
                 ],
                 people: [ "barkeeper", "chef" ]
             }

@@ -57,9 +57,11 @@
                 <Burger :burger-animation-task="burgerAnimationTask" :show-heatwaves="!theaterMode" @busy="busy = $event"></Burger>
             </div>
 
-            <div v-show="people.filter(p => p === 'barkeeper').length > 0" id="barkeeper" class="layer people"><img src="../assets/img/people/barkeeper.svg" alt=""></div>
-            <div v-show="people.filter(p => p === 'chef').length > 0" id="chef" class="layer people"><img src="../assets/img/people/chef.svg" alt=""></div>
-            <div v-show="people.filter(p => p === 'guest').length > 0" id="guest" class="layer people"><img src="../assets/img/people/guest.svg" alt=""></div>
+            <div :class="{ out: theaterMode }">
+                <div v-show="people.filter(p => p === 'barkeeper').length > 0" id="barkeeper" class="layer people"><img src="../assets/img/people/barkeeper.svg" alt=""></div>
+                <div v-show="people.filter(p => p === 'chef').length > 0" id="chef" class="layer people"><img src="../assets/img/people/chef.svg" alt=""></div>
+                <div v-show="people.filter(p => p === 'guest').length > 0" id="guest" class="layer people"><img src="../assets/img/people/guest.svg" alt=""></div>
+            </div>
         </div>
 
         <div class="controls order-4 order-md-2 mb-3" :class="!hideBurgerOnIdle || theaterMode ? 'col-md-6' : 'col-md-12'">
@@ -116,7 +118,7 @@
         },
         data() {
             return {
-                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
+                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/hash', '/foreach' ],
                 started: false,
                 animationInterval: null,
                 animationFrequencyIndex: process.env.NODE_ENV === 'development' ? 3 : 0,
@@ -329,24 +331,36 @@
         overflow: visible;
     }
 
-    #barkeeper, #chef, #guest {
+    .people {
         position: absolute;
         bottom: 0;
-        left: 55%;
-        height: 14rem;
-        width: 12rem;
+        height: 16rem;
+        width: auto;
         z-index: 13;
+        pointer-events: none;
+        transition: opacity .3s;
+
         img {
             width: 100%;
             height: auto;
         }
-        pointer-events: none;
+
+        .out & {
+            opacity: 0;
+        }
+    }
+    #barkeeper {
+        left: 65%;
+        width: 8.5rem;
     }
     #chef {
         left: -10%;
+        width: 10.5rem;
     }
     #guest {
-        left: 35%;
+        left: 43%;
+        width: 7.7rem;
+        bottom: -.5rem;
     }
 
     .sourcecode-animation-wrapper {
@@ -497,6 +511,14 @@
         100% { transform: scale(1); }
     }
 
+    @include media-breakpoint-only('md') {
+        .people {
+            bottom: 1.2rem;
+        }
+        #guest {
+            bottom: .9rem;
+        }
+    }
     @include media-breakpoint-down('md') {
         .burger {
             min-height: 20rem;
@@ -548,6 +570,25 @@
                     transform: translateX(-50%);
                 }
             }
+        }
+
+        .people {
+            height: 5.5rem;
+        }
+        #barkeeper {
+            left: 70%;
+            width: 2.8rem;
+            bottom: .1rem;
+        }
+        #chef {
+            left: -5%;
+            width: 3.2rem;
+            bottom: -.2rem;
+        }
+        #guest {
+            left: 53%;
+            width: 2.4rem;
+            bottom: -.2rem;
         }
     }
     @include media-breakpoint-down('xs') {

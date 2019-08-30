@@ -19,8 +19,8 @@
                         </blockquote>
 
                         <div class="pl-2">
-                            <p>Schau es dir im Detail an!</p>
-                            <b-button id="start-tutorial" variant="outline-info" class="btn-cta mb-5" @click="toggleTutorial">{{ showTutorial ? 'Beende die Tour.' : 'Starte die Tour!' }}</b-button>
+                            <p>Schau' dir im Detail an wie Burger Loop funktioniert:</p>
+                            <b-button id="start-tutorial" variant="outline-info" class="btn-cta mb-5" @click="toggleTutorial">{{ showTutorial ? 'Beende die Tour.' : 'Starte die Tour' }}</b-button>
                         </div>
                     </div>
 
@@ -43,7 +43,7 @@
                 :show="showTutorial && tutorialIndex === index"
                 :disabled="!showTutorial || tutorialIndex !== index"
                 :target="tutorialBubble.el" :placement="tutorialBubble.pos"
-                :delay="{ show: 0, hide: 10000 }"
+                :delay="{ show: 300, hide: 100000 }"
                 :key="index"
         >
             <span @click="tutorialNext">{{ tutorialBubble.text }}</span>
@@ -107,6 +107,9 @@
                     { el: 'sourcecode-animation', pos: 'left', text: 'Hier haben wir den Programmiercode!' },
                     { el: 'line-indicator', pos: window.innerWidth < 768 ? 'right' : 'left', text: 'Hier siehst du die aktuelle Zeile.' },
                     { el: 'burger-animation', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Anhand dieses Burgers zeigen wir dir was vorgeht!' },
+                    { el: 'chef', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Das ist unser Koch, er brät unsere deliziösen Code-Burger,' },
+                    { el: 'barkeeper', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Unser Barkeeper bereitet Drinks zu  und bedient Gäste,' },
+                    { el: 'guest', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'So wie diese nette Dame! Das ist unser Burger Loop Dreamteam.' },
                     { el: 'animation-play', pos: 'top', text: 'Hier kann die Animation gestartet und pausiert werden' },
                     { el: 'animation-next', pos: 'top', text: 'Hier gelangst du schrittweise voran.' },
                     { el: 'animation-prev', pos: 'top', text: 'Drücke hier, um einen Schritt zurück zu gehen.' },
@@ -156,21 +159,33 @@
                     }
                     return;
                 }
+                this.theaterMode = true;
                 setTimeout(() => {
                     this.tutorialIndex = 0;
                     this.showTutorial = true;
                 }, 300);
             },
             tutorialNext() {
-                 if (this.tutorialIndex === 0) {
-                    this.theaterMode = true;
-                     setTimeout(() => {
-                         this.tutorialIndex++;
-                     }, 300);
+                if (this.tutorialIndex < this.tutorial.length - 3) {
+                    if (this.tutorial[this.tutorialIndex+2].el === "chef") {
+                        this.people = [];
+                    } else if (this.tutorial[this.tutorialIndex+1].el === "chef") {
+                        this.people = ["chef"];
+                    } else if (this.tutorial[this.tutorialIndex+1].el === "barkeeper") {
+                        this.people = ["chef", "barkeeper"];
+                    } else if (this.tutorial[this.tutorialIndex+1].el === "guest") {
+                        this.people = ["chef", "barkeeper", "guest"];
+                    } else {
+                        this.people = [ "barkeeper", "chef", "guest" ];
+                    }
+                }
+
+                if (this.tutorialIndex === 1) {
+                    this.tutorialIndex++;
 
                 } else if (this.tutorialIndex < this.tutorial.length - 2) {
-                     this.tutorialIndex++;
-                     document.getElementById(this.tutorial[this.tutorialIndex].el).style.pointerEvents = 'none';
+                    this.tutorialIndex++;
+                    document.getElementById(this.tutorial[this.tutorialIndex].el).style.pointerEvents = 'none';
 
                 } else if (this.tutorialIndex < this.tutorial.length - 1) {
                     this.tutorialIndex++;

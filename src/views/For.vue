@@ -133,7 +133,9 @@ Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burg
                 ],
                 burgerAnimation: [
                     [],
-                    [],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                 ],
                 exercise: [
                     [ "$order=[", "];", "“Cheeseburger“", "“Cheeseburger“", "“Hamburger“", 

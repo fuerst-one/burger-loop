@@ -136,7 +136,8 @@
   @include media-breakpoint-down('lg') {
     #navbar {
       position: fixed;
-      top: calc(100vh - 4.4rem);
+      top: /*calc(100vh - 4.4rem);*/ unset;
+      bottom: 0;
       left: 0;
       right: 0;
       z-index: 100;
@@ -172,7 +173,7 @@
   }
   @include media-breakpoint-down('xs') {
     #navbar {
-      top: calc(100vh - 3.9rem);
+      /*top: calc(100vh - 3.9rem);*/
     }
     #content {
       margin-top: 1rem;

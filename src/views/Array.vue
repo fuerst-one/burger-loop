@@ -86,13 +86,17 @@
                     '// - Props gehen raus für den Joke!',
                 ],
                 animation: [
-                    [0, 0, 0, 'TBD'],
-                    [0, 0, 0, 'TBD'],
-                    [0, 0, 0, 'TBD']
+                    [0, 0, 0, 'TBD' ],
+                    [0, 0, 1, 'Cheeseburger' ],
+                    [0, 0, 2, 'Double-Cheeseburger' ],
+                    [0, 0, 3, 'Hamburger' ],
+                    [6, 0, 2, 'Double-Cheeseburger' ],
                 ],
                 burgerAnimation: [
                     [],
-                    [],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
+                    [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                 ],
                 exercise: [
                     [ "Double-Cheeseburger", "Hamburger", "Hamburger", "Coke", "Cheeseburger", "Milkshake", "Orange-Juice", "Small Fries", "Medium Fries", "$order=[", ",", ",", ",", ",", ";", ";", ";", ";", "echo", "$order=[2", "$order[0]", "];" ]

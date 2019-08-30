@@ -2,7 +2,12 @@
     <div id="navbar">
         <b-navbar toggleable="sm" type="dark" variant="dark">
             <!--<div class="container">-->
-                <b-navbar-brand to="/"><div @click="blockRouteTransition">Burger Loop</div></b-navbar-brand>
+                <b-navbar-brand to="/">
+                    <div @click="blockRouteTransition">
+                        <img src="../assets/img/burger.svg" alt="Burger Loop Logo" class="burger-logo">
+                        Burger Loop
+                    </div>
+                </b-navbar-brand>
 
                 <div class="nav-button prev d-sm-none ml-auto">
                     <b-button variant="dark" v-if="prevRoute !== '/foreach'" :to="prevRoute">
@@ -98,6 +103,7 @@
 <style lang="scss" scoped>
     @import '../assets/variables';
 
+
     .nav-button {
         position: relative;
     }
@@ -110,6 +116,13 @@
     }
     .navbar-brand {
         margin-left: 1rem;
+
+        .burger-logo {
+            height: 1.7rem;
+            width: auto;
+            margin-bottom: .2rem;
+            margin-right: .4rem;
+        }
     }
     .navbar-nav {
         max-width: calc(100vw - 11.5rem);

@@ -6,20 +6,20 @@
             <svg id="heatwave3"><path d=""></path></svg>
         </div>
 
-        <div id="topBun" class="layer"><img src="../assets/img/burger1/topBun.svg" alt=""></div>
-        <div id="sauce" class="layer"><img src="../assets/img/burger1/sauce.svg" alt=""></div>
-        <div id="cheese3" class="layer"><img src="../assets/img/burger1/cheese3.svg" alt=""></div>
-        <div id="cheese2" class="layer"><img src="../assets/img/burger1/cheese2.svg" alt=""></div>
-        <div id="cheese1" class="layer"><img src="../assets/img/burger1/cheese1.svg" alt=""></div>
-        <div id="tomatoes" class="layer"><img src="../assets/img/burger1/tomatoes.svg" alt=""></div>
-        <div id="salad" class="layer"><img src="../assets/img/burger1/salad.svg" alt=""></div>
-        <div id="patty" class="layer"><img src="../assets/img/burger1/patty.svg" alt=""></div>
-        <div id="bottomBun" class="layer"><img src="../assets/img/burger1/bottomBun.svg" alt=""></div>
-        <div id="plate" class="layer"><img src="../assets/img/burger1/plate.svg" alt=""></div>
+        <div id="topBun" class="layer"><img src="../assets/img/burger/topBun.svg" alt=""></div>
+        <div id="sauce" class="layer"><img src="../assets/img/burger/sauce.svg" alt=""></div>
+        <div id="cheese3" class="layer"><img src="../assets/img/burger/cheese3.svg" alt=""></div>
+        <div id="cheese2" class="layer"><img src="../assets/img/burger/cheese2.svg" alt=""></div>
+        <div id="cheese1" class="layer"><img src="../assets/img/burger/cheese1.svg" alt=""></div>
+        <div id="tomatoes" class="layer"><img src="../assets/img/burger/tomatoes.svg" alt=""></div>
+        <div id="salad" class="layer"><img src="../assets/img/burger/salad.svg" alt=""></div>
+        <div id="patty" class="layer"><img src="../assets/img/burger/patty.svg" alt=""></div>
+        <div id="bottomBun" class="layer"><img src="../assets/img/burger/bottomBun.svg" alt=""></div>
+        <div id="plate" class="layer"><img src="../assets/img/burger/plate.svg" alt=""></div>
 
-        <!--<div id="coke" class="layer single"><img src="../assets/img/burger1/coke.svg" alt=""></div>-->
-        <!--<div id="milkshake" class="layer single"><img src="../assets/img/burger1/milkshake.svg" alt=""></div>-->
-        <!--<div id="fries" class="layer single"><img src="../assets/img/burger1/fries.svg" alt=""></div>-->
+        <!--<div id="coke" class="layer single"><img src="../assets/img/burger_old/coke.svg" alt=""></div>-->
+        <!--<div id="milkshake" class="layer single"><img src="../assets/img/burger_old/milkshake.svg" alt=""></div>-->
+        <!--<div id="fries" class="layer single"><img src="../assets/img/burger_old/fries.svg" alt=""></div>-->
     </div>
 </template>
 
@@ -115,9 +115,11 @@
                 let outDuration = 200;
                 let postDuration = 5;
 
-                let preHeight = window.innerWidth < 991 ? '.02rem' : '.2rem';
-                let inHeight = window.innerWidth < 991 ? -1.5 : -7.5;
-                let outHeight = window.innerWidth < 991 ? '.05rem' : '.2rem';
+                let breakpoint = 768;
+
+                let preHeight = window.innerWidth < breakpoint ? '.02rem' : '.2rem';
+                let inHeight = window.innerWidth < breakpoint ? -1.5 : -7.5;
+                let outHeight = window.innerWidth < breakpoint ? '.05rem' : '.2rem';
                 let postHeight = 0;
 
                 let totalDelay = 0;
@@ -208,7 +210,7 @@
                 vm.animate();
             }, 100);
 
-            if (window.innerWidth > 991) {
+            if (window.innerWidth > 768) {
                 setTimeout(() => {
                     document.querySelector('.heatwaves').style.opacity = 1;
                     vm.animateHeatwave();
@@ -290,145 +292,74 @@
 
         #topBun {
             &.in, &.out, &.out-right {
-                height: 4.7rem;
-                width: 76%;
+                height: 6.5rem;
+                width: 78%;
                 z-index: 8;
             }
         }
         #sauce {
-            &.in, &.out, &.out-right {
-                height: .28rem;
-                width: 50%;
-                z-index: 7;
-            }
-        }
-        #cheese3 {
-            &.in, &.out, &.out-right {
-                height: .75em;
-                width: 75.5%;
-                z-index: 6;
-            }
-        }
-        #cheese2 {
-            &.in, &.out, &.out-right {
-                height: .6rem;
-                width: 76%;
-                z-index: 5;
-            }
-        }
-        #cheese1 {
             &.in, &.out, &.out-right {
                 height: .5rem;
-                width: 76%;
-                z-index: 4;
-            }
-        }
-        #tomatoes {
-            &.in, &.out, &.out-right {
-                height: .4rem;
                 width: 70%;
-                z-index: 3;
-            }
-        }
-        #salad {
-            &.in, &.out, &.out-right {
-                height: .8rem;
-                width: 80%;
-                z-index: 2;
-            }
-        }
-        #patty {
-            &.in, &.out, &.out-right {
-                height: 1.7rem;
-                width: 74%;
-                z-index: 0;
-            }
-        }
-        #bottomBun {
-            &.in, &.out, &.out-right {
-                height: 1rem;
-                width: 76%;
-                z-index: 0;
-            }
-        }
-        #plate {
-            &.in, &.out, &.out-right {
-                height: auto;
-                width: 100%;
-                z-index: 1;
-            }
-        }
-
-        /*#topBun {
-            &.in, &.out, &.out-right {
-                height: 5.3rem;
-                width: 97%;
-                z-index: 8;
-            }
-        }
-        #sauce {
-            &.in, &.out, &.out-right {
-                height: .55rem;
-                width: 58%;
                 z-index: 7;
             }
         }
         #cheese3 {
             &.in, &.out, &.out-right {
-                height: .8rem;
-                width: 94%;
+                height: .3em;
+                width: 74%;
                 z-index: 6;
             }
         }
         #cheese2 {
             &.in, &.out, &.out-right {
-                height: .8rem;
-                width: 93%;
+                height: .7rem;
+                width: 74%;
                 z-index: 5;
             }
         }
         #cheese1 {
             &.in, &.out, &.out-right {
                 height: .8rem;
-                width: 95%;
+                width: 74%;
                 z-index: 4;
             }
         }
         #tomatoes {
             &.in, &.out, &.out-right {
                 height: .9rem;
-                width: 78%;
+                width: 72.5%;
                 z-index: 3;
             }
         }
         #salad {
             &.in, &.out, &.out-right {
-                height: .9rem;
-                width: 100%;
+                height: .65rem;
+                width: 84%;
                 z-index: 2;
             }
         }
         #patty {
             &.in, &.out, &.out-right {
-                height: 2.1rem;
-                width: 95%;
-                z-index: 0;
+                height: 1.3rem;
+                width: 76%;
+                z-index: 1;
             }
         }
         #bottomBun {
             &.in, &.out, &.out-right {
-                height: 1.9rem;
-                width: 100%;
-                z-index: 1;
+                height: 2.75rem;
+                width: 76%;
+                z-index: 0;
             }
         }
         #plate {
             &.in, &.out, &.out-right {
                 height: auto;
                 width: 100%;
-                z-index: 0;
+                z-index: 1;
             }
-        }*/
+        }
     }
     @include media-breakpoint-down('md') {
         .burger-animation {
@@ -455,23 +386,23 @@
                 }
             }
 
-            #topBun { &.in, &.out, &.out-right { height: 1.05rem; width: 100%; } }
+            #topBun { &.in, &.out, &.out-right { height: 1.45rem; width: 95%; } }
 
-            #sauce { &.in, &.out, &.out-right { height: .15rem; width: 60%; } }
+            #sauce { &.in, &.out, &.out-right { height: .28rem; width: 85%; } }
 
-            #cheese3 { &.in, &.out, &.out-right { height: .25rem; width: 100%; } }
+            #cheese3 { &.in, &.out, &.out-right { height: .02rem; width: 93%; } }
 
-            #cheese2 { &.in, &.out, &.out-right { height: .2rem; width: 100%; } }
+            #cheese2 { &.in, &.out, &.out-right { height: .2rem; width: 93%; } }
 
-            #cheese1 { &.in, &.out, &.out-right { height: .18rem; width: 100%; } }
+            #cheese1 { &.in, &.out, &.out-right { height: .18rem; width: 95%; } }
 
-            #tomatoes { &.in, &.out, &.out-right { height: .35rem; width: 100%; } }
+            #tomatoes { &.in, &.out, &.out-right { height: .35rem; width: 93%; } }
 
-            #salad { &.in, &.out, &.out-right { height: .25rem; width: 100%; } }
+            #salad { &.in, &.out, &.out-right { height: .25rem; width: 103%; } }
 
-            #patty { &.in, &.out, &.out-right { height: .5rem; width: 100%; } }
+            #patty { &.in, &.out, &.out-right { height: .6rem; width: 95%; } }
 
-            #bottomBun { &.in, &.out, &.out-right { height: .4rem; width: 100%; } }
+            #bottomBun { &.in, &.out, &.out-right { height: .6rem; width: 95%; } }
 
             #plate { &.in, &.out, &.out-right { height: auto; width: 100%; } }
         }
