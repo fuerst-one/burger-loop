@@ -59,7 +59,7 @@ Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burg
                     und den Red-Hot-Chili-Burger!“ </b>
                     </p>
                     <p>
-                    Versuche zunächst den <code> einer <code>for</code> -Schleife zur Burger-Koordination!
+                    Versuche zunächst den <code>order-array</code> anzulegen und danach eine <code>for</code>-Schleife zur Burger-Koordination zu implementieren!
                     </p>
                 </template>
             </Layout>
@@ -142,10 +142,7 @@ Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burg
                     [],
                 ],
                 exercise: [
-                    [ "$order=[", "];", "“Cheeseburger“", "“Cheeseburger“", "“Hamburger“", 
-                    "“Double-Cheeseburger“", "“Red-Hot-Chili-Burger“", ",", ",", ",", ",", ";",
-                    ";", ";", ";", "{", "}", "for(", "$burgerIndex", "$burgerIndex", "$burgerIndex", "$burgerIndex", 
-                    "=", "=", "count", "($order)",  "($burger)", "++",  "$burger",  "$order",  "[$burgerIndex];", "make("]
+                    [ "$order", "=", "[", ""Hamburger"", ",", ""Cheeseburger"", ",", ""Cheeseburger"", ",", ""Double-Cheeseburger"", ",", ""Red-Hot-Chili-Burger"", ",", "]", ";", "for", "(", "$orderIndex", "=", 0, ";", "$orderIndex", "<", "count", "(", "$order", ")", ";", "$orderIndex", "++", ")", "{", "$burger", "=", "$order", "[", "$orderIndex", "]", ";", "make", "(", $burger", ")", ";" ]
                 ]
             }
         }
