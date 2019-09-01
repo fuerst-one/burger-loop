@@ -1,0 +1,20 @@
+{
+    "name": "Burger Loop",
+    "short_name": "Burger Loop",
+    "icons": [
+        {
+            "src": "/img/icons/android-chrome-192x192.png?v=PYq4oMJjKa",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/icons/android-chrome-512x512.png?v=PYq4oMJjKa",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#da532c",
+    "background_color": "#ffffff",
+    "start_url": "burger-loop.fuerst.one",
+    "display": "standalone"
+}

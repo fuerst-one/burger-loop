@@ -4,7 +4,7 @@
             <div id="content">
                 <div class="intro">
                     <h1 class="display">Burger Loop</h1>
-                    <p class="lead text-black-50">Lerne, wie man mit pr<code>0</code>grammen Burger zum Braten bringt und dabei komplizierte Probleme löst.</p>
+                    <p class="lead text-black-50">Lerne, wie man mit pr<code>0</code>grammen Burger zum Braten bringt und sich dabei das Leben leichter macht.</p>
                 </div>
 
                 <hr class="mb-5">
@@ -24,9 +24,9 @@
                         </div>
                     </div>
 
-                    <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
+                    <div v-show="introNeeded !== null" class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
                         <Animation :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event" :people="people" :force-animation-step="forceAnimationStep"></Animation>
-                        <img :class="{ show: !introDone }" @click="toggleTutorial" src="../assets/img/curtain.svg" alt="Intro Curtain" class="intro-curtain">
+                        <img v-if="!introNeeded" :class="{ show: !introDone }" @click="toggleTutorial" src="../assets/img/curtain.svg" alt="Intro Curtain" class="intro-curtain">
                     </div>
                 </div>
 
@@ -124,6 +124,7 @@
                 ],
                 tutorialIndex: 0,
                 showTutorial: false,
+                introNeeded: null,
                 introDone: false,
                 forceAnimationStep: -1,
             }
@@ -174,6 +175,10 @@
                     this.introDone = true;
                     this.$cookie.set("introDone", true, 180);
                 }, 300);
+
+                setTimeout(() => {
+                    this.introNeeded = false;
+                }, 1000);
             },
             tutorialNext() {
 
@@ -183,7 +188,6 @@
                         this.forceAnimationStep = 11;
                         setTimeout(() => {
                             this.tutorialNext();
-                            console.log("next");
                         }, 800);
 
                     } else if (this.tutorial[this.tutorialIndex+1].el === "chef") {
@@ -228,9 +232,9 @@
             }
 
             setTimeout(() => {
-                this.introDone = this.$cookie.get("introDone") ? this.$cookie.get("introDone") : false;
+                this.introDone = this.introNeeded = this.$cookie.get("introDone") ? this.$cookie.get("introDone") : false;
                 if (this.introDone) this.people = [ "barkeeper", "chef", "guest" ];
-            });
+            }, 300);
         }
     }
 </script>
@@ -258,7 +262,6 @@
             width: calc(100% + 2.5rem);
             transition: left .5s;
             z-index: 21;
-            display: none;
 
             &.show {
                 left: -2.2rem;

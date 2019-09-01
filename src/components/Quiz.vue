@@ -25,15 +25,15 @@
                         </div>
 
                         <template v-for="(line, i) in solution">
-                            <div class="canvas-line row mx-0">
+                            <div class="canvas-line row mx-0" :key="'a' + i">
                                 <template v-for="(brick, j) in line">
                                     <div class="drop-space col-auto" :class="activeBrick ? 'show' : ''" @click="dropToCanvas(i, j)" v-on:drop="dropToCanvas(i, j)" v-on:dragover="allowDrop" :key="i+'-'+j">+</div>
                                     <div class="brick col-auto" :id="'brick' + brick.id" :class="activeBrick && brick.id === activeBrick.id ? 'active' : ''" draggable="true" @click="selectBrick(brick.id, 'solution')" v-on:dragstart="selectBrick(brick.id, 'solution')" :key="i+'--'+j">{{ brick.text }}</div>
                                 </template>
-                                <div v-if="line.length > 0" class="drop-space show col" @click="dropToCanvas(i, line.length)" v-on:drop="dropToCanvas(i, line.length)" v-on:dragover="allowDrop" :key="'a'+i">+</div>
+                                <div v-if="line.length > 0" class="drop-space show col" @click="dropToCanvas(i, line.length)" v-on:drop="dropToCanvas(i, line.length)" v-on:dragover="allowDrop">+</div>
                             </div>
 
-                            <div v-if="solution.length > 0" class="canvas-line new row mx-0">
+                            <div v-if="solution.length > 0" class="canvas-line new row mx-0" :key="'b'+i">
                                 <div class="drop-space show col-12" @click="dropToCanvas(i+1, 0, i < solution.length-1)" v-on:drop="dropToCanvas(i+1, 0, i < solution.length-1)" v-on:dragover="allowDrop">+</div>
                             </div>
                         </template>
