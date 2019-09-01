@@ -18,6 +18,9 @@
             <div class="description mb-3 order-0" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ? 'col-lg-4' : 'col-lg-3'">
                 <h2>Das passiert:</h2>
                 <div class="description-wrapper" :style="{ opacity: desktopViewport && theaterMode ? .3 : 1 }">
+                    <div class="open-overlay" @click="descriptionOverlayVisible = true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M448 56v95.005c0 21.382-25.851 32.09-40.971 16.971l-27.704-27.704-107.242 107.243c-4.686 4.686-12.284 4.686-16.971 0l-22.627-22.627c-4.686-4.686-4.686-12.284 0-16.971l107.243-107.243-27.704-27.704C296.905 57.851 307.613 32 328.995 32H424c13.255 0 24 10.745 24 24zM175.917 264.485L68.674 371.728 40.97 344.024C25.851 328.905 0 339.613 0 360.995V456c0 13.255 10.745 24 24 24h95.005c21.382 0 32.09-25.851 16.971-40.971l-27.704-27.704 107.243-107.243c4.686-4.686 4.686-12.284 0-16.971l-22.627-22.627c-4.687-4.685-12.285-4.685-16.971.001z"></path></svg>
+                    </div>
                     <slot name="desc"></slot>
                 </div>
                 <b-button variant="info" class="mt-4 mb-5 d-none d-lg-block" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
@@ -33,6 +36,9 @@
             <div class="task mb-3 order-2 order-lg-0" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ? 'col-lg-4' : 'col-lg-3'">
                 <h2>Die Aufgabe:</h2>
                 <div class="task-wrapper" :style="{ opacity: desktopViewport && theaterMode ? .3 : 1 }">
+                    <div class="open-overlay" @click="descriptionOverlayVisible = true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M448 56v95.005c0 21.382-25.851 32.09-40.971 16.971l-27.704-27.704-107.242 107.243c-4.686 4.686-12.284 4.686-16.971 0l-22.627-22.627c-4.686-4.686-4.686-12.284 0-16.971l107.243-107.243-27.704-27.704C296.905 57.851 307.613 32 328.995 32H424c13.255 0 24 10.745 24 24zM175.917 264.485L68.674 371.728 40.97 344.024C25.851 328.905 0 339.613 0 360.995V456c0 13.255 10.745 24 24 24h95.005c21.382 0 32.09-25.851 16.971-40.971l-27.704-27.704 107.243-107.243c4.686-4.686 4.686-12.284 0-16.971l-22.627-22.627c-4.687-4.685-12.285-4.685-16.971.001z"></path></svg>
+                    </div>
                     <slot name="task"></slot>
                 </div>
                 <b-button variant="info" class="mt-4 mb-5" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
@@ -55,16 +61,21 @@
                 </router-link>
             </div>
         </div>
+        <description-overlay :visible="descriptionOverlayVisible" @close="descriptionOverlayVisible = false">
+            <slot v-if="mode === 'lection'" name="desc"></slot>
+            <slot v-else name="task"></slot>
+        </description-overlay>
     </div>
 </template>
 
 <script>
     import Animation from "./Animation";
     import Quiz from "./Quiz";
+    import DescriptionOverlay from "./DescriptionOverlay";
 
     export default {
         name: 'Layout',
-        components: {Quiz, Animation},
+        components: {DescriptionOverlay, Quiz, Animation},
         props: {
             sourcecodeGeneral: String,
             sourcecode: String,
@@ -78,7 +89,8 @@
                 routes: [ '/if', '/while', '/do-while', '/array', '/for', '/hash', '/foreach' ],
                 theaterMode: false,
                 mode: '',
-                badges: []
+                badges: [],
+                descriptionOverlayVisible: false
             }
         },
         computed: {
@@ -180,6 +192,28 @@
         }
     }
 
+    .description-wrapper, .task-wrapper {
+        .open-overlay {
+            position: absolute;
+            top: 3.6rem;
+            right: calc(1rem + 9px);
+            background: $info;
+            border-radius: 0 0 0 5px;
+            height: 1.5rem;
+            width: 1.4rem;
+            margin-bottom: -1.2rem;
+            padding: .2rem;
+
+            svg {
+                fill: $white;
+                height: 1rem;
+                width: 1rem;
+                position: relative;
+                top: -.3rem;
+            }
+        }
+    }
+
     .nav-buttons {
         position: fixed;
         top: 50%;
@@ -240,6 +274,11 @@
                 padding: 0 .5rem;
             }
         }
+
+        .badges img {
+            height: 2rem;
+            width: 2rem;
+        }
     }
 
     .badge {
@@ -265,6 +304,13 @@
     @include media-breakpoint-down('lg') {
         .nav-buttons {
             top: calc(50% - 3rem);
+        }
+
+        .description-wrapper, .task-wrapper {
+            .open-overlay {
+                position: absolute;
+                top: 3.65rem;
+            }
         }
     }
     @include media-breakpoint-down('md') {
@@ -299,7 +345,7 @@
             padding-bottom: 3rem;
         }
         .description-wrapper {
-            height: unset;
+            /*height: unset;*/
         }
     }
 </style>

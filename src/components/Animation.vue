@@ -58,9 +58,9 @@
             </div>
 
             <div :class="{ out: theaterMode }">
-                <div v-show="people.filter(p => p === 'barkeeper').length > 0" id="barkeeper" class="layer people"><img src="../assets/img/people/barkeeper.svg" alt=""></div>
-                <div v-show="people.filter(p => p === 'chef').length > 0" id="chef" class="layer people"><img src="../assets/img/people/chef.svg" alt=""></div>
-                <div v-show="people.filter(p => p === 'guest').length > 0" id="guest" class="layer people"><img src="../assets/img/people/guest.svg" alt=""></div>
+                <div :class="{ show: people.filter(p => p === 'barkeeper').length > 0 }" id="barkeeper" class="layer people"><img src="../assets/img/people/barkeeper.svg" alt=""></div>
+                <div :class="{ show: people.filter(p => p === 'chef').length > 0 }" id="chef" class="layer people"><img src="../assets/img/people/chef.svg" alt=""></div>
+                <div :class="{ show: people.filter(p => p === 'guest').length > 0 }" id="guest" class="layer people"><img src="../assets/img/people/guest.svg" alt=""></div>
             </div>
         </div>
 
@@ -343,6 +343,11 @@
         img {
             width: 100%;
             height: auto;
+        }
+
+        opacity: 0;
+        &.show {
+            opacity: 1;
         }
 
         .out & {

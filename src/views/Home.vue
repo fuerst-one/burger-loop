@@ -26,6 +26,7 @@
 
                     <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
                         <Animation :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event" :people="people"></Animation>
+                        <img :class="{ show: !introDone }" @click="toggleTutorial" src="../assets/img/curtain.svg" alt="Intro Curtain" class="intro-curtain">
                     </div>
                 </div>
 
@@ -101,7 +102,7 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce' ],
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce', 'topBun' ],
                 ],
-                people: [ "barkeeper", "chef", "guest" ],
+                people: [],
                 tutorial: [
                     { el: 'start-tutorial', pos: 'top', text: 'Hi! Klicke auf diese Sprechblase um fortzufahren.' },
                     { el: 'sourcecode-animation', pos: 'left', text: 'Hier haben wir den Programmiercode!' },
@@ -121,7 +122,8 @@
                     { el: 'animation-play', pos: 'top', text: 'Okay, du bist bereit! Drücke Play um die Demo zu starten!' },
                 ],
                 tutorialIndex: 0,
-                showTutorial: false
+                showTutorial: false,
+                introDone: false
             }
         },
         computed: {
@@ -159,14 +161,20 @@
                     }
                     return;
                 }
+
                 this.theaterMode = true;
+                this.people = [];
+
                 setTimeout(() => {
                     this.tutorialIndex = 0;
                     this.showTutorial = true;
+                    this.introDone = true;
+                    this.$cookie.set("introDone", true, 180);
                 }, 300);
             },
             tutorialNext() {
                 if (this.tutorialIndex < this.tutorial.length - 3) {
+                    let peopleVisible = false;
                     if (this.tutorial[this.tutorialIndex+2].el === "chef") {
                         this.people = [];
                     } else if (this.tutorial[this.tutorialIndex+1].el === "chef") {
@@ -175,7 +183,9 @@
                         this.people = ["chef", "barkeeper"];
                     } else if (this.tutorial[this.tutorialIndex+1].el === "guest") {
                         this.people = ["chef", "barkeeper", "guest"];
-                    } else {
+                        peopleVisible = true;
+                    }
+                    if (peopleVisible) {
                         this.people = [ "barkeeper", "chef", "guest" ];
                     }
                 }
@@ -204,6 +214,10 @@
             if (window.innerWidth < 992) {
                 this.tutorial.splice(3, 0, { el: 'animation-tooltip', pos: window.innerWidth < 768 ? 'bottom' : 'top', text: 'Hier wird jeder Code-Schritt einzeln erklärt!' });
             }
+
+            setTimeout(() => {
+                this.introDone = this.$cookie.get("introDone") ? this.$cookie.get("introDone") : false;
+            });
         }
     }
 </script>
@@ -223,6 +237,19 @@
         position: relative;
         transition: opacity .3s, flex .3s, max-width .3s;
         min-height: 25rem;
+
+        .intro-curtain {
+            position: absolute;
+            top: -3.5rem;
+            left: 110%;
+            width: calc(100% + 2.5rem);
+            transition: left .5s;
+            z-index: 21;
+
+            &.show {
+                left: -2.2rem;
+            }
+        }
     }
 
     .btn-cta {

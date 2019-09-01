@@ -34,13 +34,14 @@
 
                 <template slot="task">
                     <p>
-              Nur für die richtig harten gibt es den Schärfsten unter unseren Burgern: den <code>redHotChilliBurger</code>. Um richtig scharfe <code>burger</code>  zu belegen müssen wir unsere <code>while</code> -Schleife zu einer <code>do-while</code> -Schleife abändern. 
-             
+                        Nur für die richtig Harten gibt es den Schärfsten unter unseren Burgern: den <code>redHotChilliBurger</code>. Um richtig scharfe <code>burger</code>  zu belegen, müssen wir unsere <code>while</code>-Schleife zu einer <code>do-while</code>-Schleife abändern.
                     </p>
-                    <p> <b> „Einmal den Red-Hot-Chili-Burger, aber pronto!“ </b>
-                   Und los geht‘s! Der <code>redHotChiliBurger</code>  hat den Schärfegrad 3. Zusätzlich zu den <code>jalapenos</code>  bekommt er noch <code>redChilis</code>  und <code>cheese</code>  oben drauf. Versuche dich mit der <code>do-while</code> -Schleife und baue auf Grundlage der normalen <code>Base</code>  den <code>redHotChiliBurger</code>  zusammen. Nutze dazu wieder unseren <code>hotCount</code>. 
-                   </p>
-                  
+                    <p>
+                        <b> „Einmal den Red-Hot-Chili-Burger, aber pronto!“ </b> <br>
+                       Und los geht‘s! Der <code>redHotChiliBurger</code>  hat den Schärfegrad <code>3</code>. Du kann den <code>hotCount</code> steigern, indem du den Burger mit <code>jalapenos</code> belegst! Zusätzlich zu den <code>jalapenos</code>  bekommt er noch <code>redChilis</code>,<code>cheese</code>  und <code>sourCream</code> oben drauf. <code>topBun</code> drauf und fertig! <br>
+                       Versuche dich mit der <code>do-while</code>-Schleife und würze den heißen Klassiker! Nutze dazu wieder unseren <code>hotCount</code> um die Schärfegrade zu steigern. <br> Let's heat it up!
+                    </p>
+
                 </template>
             </Layout>
         </div>
@@ -109,9 +110,16 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'cheese3', 'sauce', 'topBun' ],
                 ],
                 exercise: [
-                    [ "$hotCount",  "$hotCount",  "$hotCount",  "$hotCount", "=", "=", "=", "=", ";", ";", ";", ";", "add(",
-                    "add(", "add(", "add(", "Base",  "jalapenos",  "sauce", "topBun", "cheese",  "redChilis", ")", ")", ")", 
-                    ")", "while(", 2, 3]
+                    [ "$hotCount", "=", "0",";" ],
+                    [ "do", "{" ],
+                    [ "add(jalapenos)", ";" ],
+                    [ "$hotCount", "++", ";" ],
+                    [ "}" ],
+                    [ "while", "(", "$hotCount", "<", "4", ")", ";"  ],
+                    [ "add(redChilis)", ";" ],
+                    [ "add(cheese)", ";" ],
+                    [ "add(sourCream)", ";" ],
+                    [ "add(topBun)", ";" ]
                 ],
                 people: [ "chef" ]
             }
