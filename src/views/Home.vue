@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
-                        <Animation :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event" :people="people"></Animation>
+                        <Animation :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event" :people="people" :force-animation-step="forceAnimationStep"></Animation>
                         <img :class="{ show: !introDone }" @click="toggleTutorial" src="../assets/img/curtain.svg" alt="Intro Curtain" class="intro-curtain">
                     </div>
                 </div>
@@ -107,14 +107,15 @@
                     { el: 'start-tutorial', pos: 'top', text: 'Hi! Klicke auf diese Sprechblase um fortzufahren.' },
                     { el: 'sourcecode-animation', pos: 'left', text: 'Hier haben wir den Programmiercode!' },
                     { el: 'line-indicator', pos: window.innerWidth < 768 ? 'right' : 'left', text: 'Hier siehst du die aktuelle Zeile.' },
-                    { el: 'burger-animation', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Anhand dieses Burgers zeigen wir dir was vorgeht!' },
+                    { el: 'burger-animation', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: '' },
+                    { el: 'burger-animation', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Das ist unser Code-Burger, der dir zeigt was vorgeht!' },
                     { el: 'chef', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Das ist unser Koch, er brät unsere deliziösen Code-Burger,' },
                     { el: 'barkeeper', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'Unser Barkeeper bereitet Drinks zu  und bedient Gäste,' },
                     { el: 'guest', pos: window.innerWidth < 768 ? 'bottom' : 'left', text: 'So wie diese nette Dame! Das ist unser Burger Loop Dreamteam.' },
-                    { el: 'animation-play', pos: 'top', text: 'Hier kann die Animation gestartet und pausiert werden' },
+                    { el: 'animation-play', pos: 'top', text: 'Wir führen dich anhand einer Animation durch den Code. Hier kann sie gestartet und pausiert werden' },
                     { el: 'animation-next', pos: 'top', text: 'Hier gelangst du schrittweise voran.' },
                     { el: 'animation-prev', pos: 'top', text: 'Drücke hier, um einen Schritt zurück zu gehen.' },
-                    { el: 'animation-far-prev', pos: 'top', text: 'Hier, um zur vorherigen Zeile im Code zu gelangen...' },
+                    { el: 'animation-far-prev', pos: 'top', text: 'Hier, um zur vorherigen Zeile im Code zu springen...' },
                     { el: 'animation-frequency-slider', pos: 'top', text: 'Hier kannst du die Geschwindigkeit einstellen.' },
                     { el: 'animation-frequency-faster', pos: 'top', text: 'Bewege den Slider hierhin, um die Animation zu beschleunigen...' },
                     { el: 'animation-frequency-slower', pos: 'top', text: '...oder hierhin, um sie zu verlangsamen.' },
@@ -123,7 +124,8 @@
                 ],
                 tutorialIndex: 0,
                 showTutorial: false,
-                introDone: false
+                introDone: false,
+                forceAnimationStep: -1,
             }
         },
         computed: {
@@ -164,6 +166,7 @@
 
                 this.theaterMode = true;
                 this.people = [];
+                this.forceAnimationStep = 0;
 
                 setTimeout(() => {
                     this.tutorialIndex = 0;
@@ -173,14 +176,22 @@
                 }, 300);
             },
             tutorialNext() {
+
                 if (this.tutorialIndex < this.tutorial.length - 3) {
                     let peopleVisible = false;
-                    if (this.tutorial[this.tutorialIndex+2].el === "chef") {
-                        this.people = [];
+                    if (this.tutorial[this.tutorialIndex+1].el === "burger-animation" && this.tutorial[this.tutorialIndex].el !== "burger-animation") {
+                        this.forceAnimationStep = 11;
+                        setTimeout(() => {
+                            this.tutorialNext();
+                            console.log("next");
+                        }, 800);
+
                     } else if (this.tutorial[this.tutorialIndex+1].el === "chef") {
                         this.people = ["chef"];
+
                     } else if (this.tutorial[this.tutorialIndex+1].el === "barkeeper") {
                         this.people = ["chef", "barkeeper"];
+
                     } else if (this.tutorial[this.tutorialIndex+1].el === "guest") {
                         this.people = ["chef", "barkeeper", "guest"];
                         peopleVisible = true;
@@ -203,6 +214,7 @@
 
                 } else {
                     this.showTutorial = false;
+                    this.forceAnimationStep = -1;
 
                     for (let bubble of this.tutorial) {
                         document.getElementById(bubble.el).style.pointerEvents = '';
@@ -217,6 +229,7 @@
 
             setTimeout(() => {
                 this.introDone = this.$cookie.get("introDone") ? this.$cookie.get("introDone") : false;
+                if (this.introDone) this.people = [ "barkeeper", "chef", "guest" ];
             });
         }
     }
@@ -241,10 +254,11 @@
         .intro-curtain {
             position: absolute;
             top: -3.5rem;
-            left: 110%;
+            left: 120%;
             width: calc(100% + 2.5rem);
             transition: left .5s;
             z-index: 21;
+            display: none;
 
             &.show {
                 left: -2.2rem;
@@ -299,6 +313,11 @@
         }
     }
 
+    @include media-breakpoint-up('lg') {
+        .animation .intro-curtain {
+            left: 75vw;
+        }
+    }
     @include media-breakpoint-down('lg') {
         .nav-button {
             position: fixed;

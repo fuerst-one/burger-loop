@@ -40,20 +40,28 @@
 
                 <template slot="task">
                     <p>
-                     
-Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burger</code>  in der Küche geholfen hast, sollst du nun die <code>orders</code>  managen. Dazu muss eine <code>for</code> -Schleife implementiert werden, mittels der die Kücher erkennen kann, wie viele <code>burger</code>  noch raus gehen müssen. Wir wollen weder <code>burger</code>  verschwenden noch einen hungrigen Kunden mit knurrendem Magen zurück lassen. 
-
-                    </p>
-                    <p> <b> „Einmal Double-, zwei Mal Cheese-, drei Mal Hamburger ..oder waren es doch 5?!“  </b>
-                    
+                        Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burger</code>  in der Küche geholfen hast, sollst du nun die <code>orders</code>  managen. Dazu muss eine <code>for</code>-Schleife implementiert werden, mittels der die Küche erkennen kann, wie viele <code>burger</code>  noch raus gehen müssen. Wir wollen weder <code>burger</code>  verschwenden, noch einen hungrigen Kunden mit knurrendem Magen zurück lassen.
                     </p>
                     <p>
-                    Um immer den Überblick zu behalten versuche mit der <code>for</code> -Schleife und unter Einbezug des <code>$burgerIndex</code>  die <code>orders</code>  zu koordinieren. Vergiss dabei nicht die drei Parameter zu Schleifen-Beginn festzulegen. Haben wir am Ende genau die richtige Anzahl an <code>burgern</code>  stimmt alles – also einen kühlen Kopf bewahren, die erste <code>order</code>  kommt rein: 
+                        <b>
+                            „Einmal Double-, <br>
+                            zwei Mal Cheese-, <br>
+                            drei Mal Hamburger <br>
+                            ..oder waren es doch 5?!“
+                        </b>
+                    </p>
+                    <p>
+                        Um immer den Überblick zu behalten, versuche mit der <code>for</code>-Schleife und unter Einbezug des <code>$burgerIndex</code>  die <code>orders</code>  zu koordinieren. Vergiss dabei nicht die drei Parameter am Schleifen-Beginn festzulegen. Haben wir am Ende genau die richtige Anzahl an <code>burger</code> stimmt alles – also einen kühlen Kopf bewahren, die erste <code>order</code>  kommt rein:
                     <br>
-                    <b> „Hamburger, zwei Mal den Cheeseburger, einen Double-Cheeseburger und den Red-Hot-Chili-Burger!“ </b>
+                        <b>
+                            „Einen Hamburger, <br>
+                            einen Cheeseburger, <br>
+                            und den Red-Hot-Chili-Burger!“
+                        </b>
                     </p>
                     <p>
-                    Versuche dich mit Hilfe der Codebausteine an einer <code>for</code> -Schleife zur Burger-Koordination!
+                        Versuche zunächst den <code>order-array</code> anzulegen und danach eine <code>for</code>-Schleife zur Burger-Koordination zu implementieren!
+                        Erstelle hierzu für jeden Durchgang den <code>$burger</code> des Arrays <code>$order</code> an der jeweiligen <code>$orderIndex</code>-Stelle und brate die Burger mit <code>make()</code>.
                     </p>
                 </template>
             </Layout>
@@ -138,10 +146,13 @@ Es wird immer komplizierter. Nachdem du nun fleißig beim Belegen der <code>burg
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                 ],
                 exercise: [
-                    [ "$order=[", "];", "“Cheeseburger“", "“Cheeseburger“", "“Hamburger“", 
-                    "“Double-Cheeseburger“", "“Red-Hot-Chili-Burger“", ",", ",", ",", ",", ";",
-                    ";", ";", ";", "{", "}", "for(", "$burgerIndex", "$burgerIndex", "$burgerIndex", "$burgerIndex", 
-                    "=", "=", "count", "($order)",  "($burger)", "++",  "$burger",  "$order",  "[$burgerIndex];", "make("]
+                    [ "$order", "=", "[", ],
+                    [ "\"Hamburger\", \"Cheeseburger\", \"Red-Hot-Chili-Burger\"" ],
+                    [ "]", ";" ],
+                    [ "for", "(", "$orderIndex", "=", "0", ";", "$orderIndex", "<", "count(", "$order", ")", ";", "$orderIndex++", ")", "{", ],
+                    [ "$burger", "=", "$order", "[", "$orderIndex", "]", ";", ],
+                    [ "make(", "$burger", ")", ";" ],
+                    [ "}" ]
                 ],
                 people: [ "barkeeper" ]
             }

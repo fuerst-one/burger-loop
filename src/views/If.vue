@@ -39,18 +39,17 @@
 
                 <template slot="task">
                     <p>
-                    Jetzt bist du an der Reihe! Die Küche in unserem <code>BurgerLoop</code> braucht bei der Vielzahl an <code>orders</code> deine Unterstützung um die Burger zu belegen. Wie in der Lektion gezeigt soll hierfür die <code>ifelse</code>-Schleife verwendet werden. 
-                    Die ersten <code>orders</code> kommen rein – genug gechillt, jetzt geht’s an die Arbeit! 
-
+                        <b>Jetzt bist du an der Reihe!</b> <br>
+                        Die Küche in unserem <code>BurgerLoop</code> braucht bei der Vielzahl an <code>orders</code> deine Unterstützung um die <code>burger</code> zu belegen. Wie in der Lektion gezeigt soll hierfür ein <code>if</code>-Block verwendet werden.
+                        Die ersten <code>orders</code> kommen rein – genug gechillt, jetzt geht’s an die Arbeit!
                     </p>
                     <p>
-                    <b>„Bitte einen Double-Cheeseburger und einen Hamburger aber pronto!“</b>
-                    Für den Double-Cheeseburger benötigst du für die Base: <br>
-                    ein <code>bottomBun</code>, ein <code>patty</code>, einmal <code>salad</code>, einmal <code>tomatoes</code>. Dann kommt der <code>cheese</code>  und die <code>sauce</code>  drauf. Zum Schluss noch ein <code>topBun</code>. Thats it!
-                    Der Hamburger ist nochmal leichter: Die Base bleibt die gleiche. Statt <code>cheese</code>  und <code>sauce</code>  kommt hier noch die <code>sauce</code>  drauf, dann der <code>topBun</code>.
+                        <b>„Hey, Pablo! Ich hätte gerne einen Double-Cheeseburger und einen Hamburger.“</b> <br>
+                        Für den Double-Cheeseburger benötigst du zuerst die <code>$base</code>, so wie in der Lektion. Diese fügst du mit <code>add()</code> hinzu. Dann kommt zwei Mal <code>cheese</code> und ein Mal <code>sauce</code> oben drauf. Zum Schluss noch ein <code>topBun</code>. Thats it!
+                        Der Hamburger ist sogar noch leichter: Die Base bleibt die gleiche. Statt <code>cheese</code> und <code>sauce</code> kommt hier nur <code>sauce</code> drauf, dann der <code>topBun</code>.
                     </p>
                     <p>
-                    Versuche dich selbst und baue den <code>burger</code> mit Hilfe der Codebausteine zusammen. 
+                        Versuche dich selbst und baue den <code>burger</code> mit Hilfe der Codebausteine zusammen.
                     </p>
                     
                 </template>
@@ -155,12 +154,19 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'sauce', 'topBun' ],
                 ],
                 exercise: [
-                    [ "add(", "add(", "if(", ")", ")", ")", ")", "{", "{", "{", "{", "}", "}", "}", "}", 
-                    "elseif(", "else(", ";", ";", ";", ";", ",", ",", ",", ",", "bottomBun", "patty",  
-                    "salad", "tomatoes", "cheese", "cheese", "sauce", "sauce","‘Double-Cheeseburger‘", 
-                    "‘Hamburger‘", "$recipe==", "$recipe==", "fries", "‘Cheeseburger‘", "while ("]
+                    [ "if", "(", "$recipe == \"Double-Cheeseburger\"", ")", "{" ],
+                    [ "add($base);" ],
+                    [ "add(cheese);" ],
+                    [ "add(cheese);" ],
+                    [ "add(sauce);" ],
+                    [ "add(topBun);" ],
+                    [ "}", "else", "if", "(", "$recipe == \"Hamburger\"", ")",  "{" ],
+                    [ "add($base);" ],
+                    [ "add(sauce);" ],
+                    [ "add(topBun);" ],
+                    [ "}" ]
                 ],
-                people: [ "chef" ]
+                people: [ "guest" ]
             }
         }
     }

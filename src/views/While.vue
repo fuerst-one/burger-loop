@@ -42,12 +42,15 @@
 
                 <template slot="task">
                     <p>
-                        Im <code>BurgerLoop</code>  gibt es seit neustem ein Special auf der Karte: feurig scharfe Burger. Dabei kann jeder bereits existierende Burger mit <code>jalapenos</code>  belegt werden. Es gibt verschiedene Schärfegrade von <code>0</code>  bis <code>3</code>. Wie in unserer Lektion davor sollst du nun die <code>burger</code>  mit den feurig scharfen jalapenos</code>  belegen, bis der gewünschte Schärfegrad erreicht ist. Nutze dazu die <code>while</code> -Schleife. 
-                       
+                        <b> It's gettin' hot in here!</b> <br>
+                        Im <code>BurgerLoop</code>  gibt es seit neustem ein Special auf der Karte: feurig scharfe <code>burger</code>. Dabei kann jeder bereits existierende <code>burger</code> mit <code>jalapenos</code>  belegt werden. Es gibt verschiedene Schärfegrade von <code>0</code>  bis <code>3</code>.
+                        Wie in unserer Lektion sollst du nun die <code>burger</code>  mit den feurig scharfen <code>jalapenos</code> belegen, bis der gewünschte Schärfegrad erreicht ist. Nutze dazu die <code>while</code>-Schleife.
                     </p>
-                    <p> <b> „Einen Cheeseburger doppelt scharf und einen Hamburger leicht scharf!“ </b>
-                    
-                    Die Bestellung ist da, ran an die <code>burger</code>! Doppelter Schärfegrad steht für 2, leicht ist die 1. Nutze für den Schärfegrad den Codebaustein <code>hotCount</code>. Die <code>Base</code>  kommt wieder zuerst, dann wird’s scharf. Bevor der <code>burger</code>  raus geht solltest du noch <code>sauce</code>  und den <code>topBun</code>  hinzufügen. Jetzt beeil dich, die Kunden haben Hunger! 
+                    <p>
+                        <b> „Einen Cheeseburger doppelt scharf, bitte!“ </b> <br>
+                        Die <code>order</code> ist da, ran an die <code>burger</code>! Doppelter Schärfegrad steht für <code>2</code>.
+                        Erstelle für den Schärfegrad zuerst den Codebaustein <code>hotCount</code>.
+                        Die <code>$base</code> kommt direkt danach, dann die Jalapeños (denk daran, es sind mehrere). Bevor der <code>burger</code>  raus geht solltest du noch <code>cheese</code>, <code>sauce</code> und den <code>topBun</code>  hinzufügen. Jetzt beeil dich, die Kunden haben Hunger!
                     </p>
                     
                 </template>
@@ -131,10 +134,15 @@
                     [ 'bottomBun', 'patty', 'salad', 'tomatoes', 'cheese1', 'cheese2', 'sauce', 'topBun' ],
                 ],
                 exercise: [
-                    ["$hotCount", "$hotCount", "$hotCount", "$hotCount", "=", "=", "=", "=", 
-                    ";", ";", ";", ";", "add", "add", "add","add", "Base",  "jalapenos",  
-                    "sauce", "topBun",  ")", ")", ")", ")",  "while(",  "=", "=", "=", "=",
-                    "+1", 2, 1, "{", "{", "{", "{", "}", "}", "}", "}"]
+                    [ "$hotCount", "=", "0", ";" ],
+                    [ "add($base);" ],
+                    [ "while", "(", "$hotCount", "<", "2", ")", "{" ],
+                    [ "add(jalapenos);" ],
+                    [ "$hotCount", "=", "$hotCount + 1", ";" ],
+                    [ "}" ],
+                    [ "add(cheese);" ],
+                    [ "add(sauce);" ],
+                    [ "add(topBun);" ]
                 ],
                 people: [ "chef" ]
             }

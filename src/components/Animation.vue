@@ -114,7 +114,8 @@
             sourcecode: String,
             animation: Array,
             burgerAnimation: Array,
-            people: Array
+            people: Array,
+            forceAnimationStep: Number
         },
         data() {
             return {
@@ -163,6 +164,9 @@
                 return this.animation[this.animationStep];
             },
             burgerAnimationTask() {
+                if (this.forceAnimationStep >= 0) {
+                    return this.burgerAnimation[this.animation[this.forceAnimationStep][2]];
+                }
                 if (this.animationStep === 0 && !this.started) {
                     return this.burgerAnimation[this.animation[this.animation.length - 1][2]]
                 }
@@ -363,8 +367,8 @@
         width: 10.5rem;
     }
     #guest {
-        left: 43%;
-        width: 7.7rem;
+        left: 31%;
+        width: 10rem;
         bottom: -.5rem;
     }
 
@@ -591,8 +595,8 @@
             bottom: -.2rem;
         }
         #guest {
-            left: 53%;
-            width: 2.4rem;
+            left: 40%;
+            width: 3.1rem;
             bottom: -.2rem;
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div @click="jump" id="burger-animation" class="burger-animation no-select">
-        <div v-show="showHeatwaves" class="heatwaves">
+        <div v-show="showHeatwaves && burgerAnimationTask.length > 0" class="heatwaves">
             <svg id="heatwave1"><path d=""></path></svg>
             <svg id="heatwave2"><path d=""></path></svg>
             <svg id="heatwave3"><path d=""></path></svg>

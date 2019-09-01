@@ -125,7 +125,7 @@
         }
     }
     .navbar-nav {
-        max-width: calc(100vw - 11.5rem);
+        max-width: calc(100vw - 14.5rem);
         flex-basis: 0 0;
         overflow-x: auto;
         scrollbar-color: $black $dark;

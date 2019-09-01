@@ -24,17 +24,20 @@
                             <div class="drop-space show col-12" @click="dropToCanvas(-1, 0)" v-on:drop="dropToCanvas(-1, 0)" v-on:dragover="allowDrop">+</div>
                         </div>
 
-                        <div v-for="(line, i) in solution" class="canvas-line row mx-0" :key="i">
-                            <template v-for="(brick, j) in line">
-                                <div class="drop-space col-auto" :class="activeBrick ? 'show' : ''" @click="dropToCanvas(i, j)" v-on:drop="dropToCanvas(i, j)" v-on:dragover="allowDrop" :key="i+'-'+j">+</div>
-                                <div class="brick col-auto" :id="'brick' + brick.id" :class="activeBrick && brick.id === activeBrick.id ? 'active' : ''" draggable="true" @click="selectBrick(brick.id, 'solution')" v-on:dragstart="selectBrick(brick.id, 'solution')" :key="i+'--'+j">{{ brick.text }}</div>
-                            </template>
-                            <div v-if="line.length > 0" class="drop-space show col" :class="activeBrick ? 'show' : ''" @click="dropToCanvas(i, line.length)" v-on:drop="dropToCanvas(i, line.length)" v-on:dragover="allowDrop" :key="'a'+i">+</div>
-                        </div>
+                        <template v-for="(line, i) in solution">
+                            <div class="canvas-line row mx-0">
+                                <template v-for="(brick, j) in line">
+                                    <div class="drop-space col-auto" :class="activeBrick ? 'show' : ''" @click="dropToCanvas(i, j)" v-on:drop="dropToCanvas(i, j)" v-on:dragover="allowDrop" :key="i+'-'+j">+</div>
+                                    <div class="brick col-auto" :id="'brick' + brick.id" :class="activeBrick && brick.id === activeBrick.id ? 'active' : ''" draggable="true" @click="selectBrick(brick.id, 'solution')" v-on:dragstart="selectBrick(brick.id, 'solution')" :key="i+'--'+j">{{ brick.text }}</div>
+                                </template>
+                                <div v-if="line.length > 0" class="drop-space show col" @click="dropToCanvas(i, line.length)" v-on:drop="dropToCanvas(i, line.length)" v-on:dragover="allowDrop" :key="'a'+i">+</div>
+                            </div>
 
-                        <div v-if="solution.length > 0" class="canvas-line row mx-0">
-                            <div class="drop-space show col-12" @click="dropToCanvas(solution.length, 0)" v-on:drop="dropToCanvas(solution.length, 0)" v-on:dragover="allowDrop">+</div>
-                        </div>
+                            <div v-if="solution.length > 0" class="canvas-line new row mx-0">
+                                <div class="drop-space show col-12" @click="dropToCanvas(i+1, 0, i < solution.length-1)" v-on:drop="dropToCanvas(i+1, 0, i < solution.length-1)" v-on:dragover="allowDrop">+</div>
+                            </div>
+                        </template>
+
                     </div>
 
                     <div v-if="solution.length > 0" class="progress">
@@ -122,7 +125,7 @@
                 this.activeBrick = this.activeBrick ? null : { id, source };
                 event.stopPropagation();
             },
-            dropToCanvas(line, index) {
+            dropToCanvas(line, index, createRow) {
                 if (this.activeBrick === null) return;
 
                 let brick;
@@ -149,6 +152,8 @@
                 if (line === -1) {
                     this.solution.splice(0, 0, []);
                     line++;
+                } else if (createRow) {
+                    this.solution.splice(line, 0, []);
                 } else if (!this.solution[line]) {
                     this.solution[line] = [];
                 }
@@ -331,10 +336,18 @@
             overflow-x: scroll;
             flex-wrap: nowrap;
 
-            &:hover .drop-space {
+            /*&:hover .drop-space {
                 max-width: 100%;
                 width: 1rem;
                 visibility: visible;
+            }*/
+
+            &.new:not(:last-of-type) {
+                .drop-space {
+                    height: .5rem;
+                    border-radius: 3px;
+                    transition: width .1s, height .1s;
+                }
             }
 
             .drop-space {
@@ -368,8 +381,20 @@
     .canvas-wrapper.dropping .drop-space, .pool-wrapper.dropping {
         cursor: copy;
     }
-    .canvas-wrapper.dropping .drop-space {
-        background: $gray-800;
+    .canvas-wrapper.dropping .canvas-line {
+        &.new:not(:last-of-type) {
+            .drop-space {
+                &:hover {
+                    height: 2rem;
+                }
+            }
+        }
+        .drop-space {
+            transition: width .1s;
+            &:hover {
+                min-width: 2rem;
+            }
+        }
     }
 
     .pool-wrapper {
