@@ -79,6 +79,7 @@
         methods: {
             blockRouteTransition() {
                 window.blockRouteTransition = true;
+                window.dispatchEvent(new Event("navbarLinkClick"));
             },
             navItemColor(pathName) {
                 return this.$route.path === pathName ? this.navbarItemActiveColor : this.navbarItemDefaultColor;

@@ -23,12 +23,13 @@
                     </div>
                     <slot name="desc"></slot>
                 </div>
-                <b-button variant="info" class="mt-4 mb-5 d-none d-lg-block" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
+                <b-button v-if="!hideQuiz" variant="info" class="mt-4 mb-5 d-none d-lg-block" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
 
             <div class="animation" :class="hideBurgerOnIdle && !theaterMode ? 'col-lg-6' : !theaterMode ?  'col-lg-8' : 'col-lg-9'">
-                <Animation :sourcecode="sourcecode" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event" :people="people"></Animation>
-                <b-button variant="info" class="mt-4 mb-5 d-lg-none" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
+                <Animation :sourcecode="sourcecode" :animation="animation" :burger-animation="burgerAnimation" @theaterMode="theaterMode = $event" :people="people" @switchMode="switchMode"></Animation>
+
+                <b-button v-if="!hideQuiz" variant="info" class="mt-4 mb-5 d-lg-none" @click="switchMode">{{ mode === 'lection' ? 'Zum Quiz' : 'Zurück zur Lektion' }}</b-button>
             </div>
         </div>
 
@@ -82,7 +83,8 @@
             animation: Array,
             burgerAnimation: Array,
             exercise: Array,
-            people: Array
+            people: Array,
+            hideQuiz: false
         },
         data() {
             return {
@@ -112,8 +114,12 @@
         },
         methods: {
             switchMode() {
-                this.mode = this.mode === 'lection' ? 'quiz' : 'lection';
+                this.setMode(this.mode === 'lection' ? 'quiz' : 'lection');
+            },
+            setMode(mode) {
+                this.mode = mode;
                 window['layoutMode'] = this.mode;
+                this.theaterMode = false;
                 this.$cookie.set("layoutMode", this.mode, 180);
             },
             addBadge() {
@@ -138,6 +144,12 @@
             setTimeout(() => {
                 this.badges = window['badges'] ? window['badges'] : [];
             }, 300);
+
+            addEventListener("navbarLinkClick", () => {
+                setTimeout(() => {
+                    this.setMode("lection");
+                }, 100);
+            });
         }
     }
 </script>
@@ -265,6 +277,7 @@
             border-radius: $border-radius;
             box-shadow: $light-box-shadow;
             overflow: auto;
+            margin: 0 0 1rem 0;
 
             code {
                 position: relative;

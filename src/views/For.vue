@@ -77,7 +77,7 @@
         data() {
             return {
                 sourcecodeGeneral: [
-                    'for ( $count = 0 ; $condition ; $count++ ) {',
+                    'for ($count = 0; $condition; $count++) {',
                     '   // Code',
                     '}'
                 ],

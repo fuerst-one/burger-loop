@@ -67,7 +67,7 @@
         data() {
             return {
                 sourcecodeGeneral: [
-                    'while ( $condition ) {',
+                    'while ($condition) {',
                     '   // Code',
                     '}',
                 ],

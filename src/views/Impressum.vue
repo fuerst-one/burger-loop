@@ -2,7 +2,7 @@
     <div id="array" class="content-wrapper">
         <div class="container">
 
-            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people">
+            <Layout :sourcecode-general="sourcecodeGeneral.join('\n')" :sourcecode="sourcecode.join('\n')" :animation="animation" :burger-animation="burgerAnimation" :exercise="exercise" :people="people" :hide-quiz="true">
                 <template slot="intro">
                     <h1>Impressum</h1>
                     <p class="lead text-black-50">Mit freundlicher Unterstützung durch</p>

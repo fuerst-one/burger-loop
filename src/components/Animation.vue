@@ -37,9 +37,12 @@
                                 <div @click="reset()" class="reset">
                                     <span>Zurück auf Anfang</span>
                                 </div>
-                                <router-link :to="nextRoute" class="next">
-                                    <span>{{ nextRoute === '/' ? 'Fertig!' : nextRoute === '/if' ? 'Zur ersten Lektion!' : 'Zur nächsten Lektion' }}</span>
+                                <router-link v-if="nextRoute === '/if'" to="/if" class="next">
+                                    <span>Zur ersten Lektion!</span>
                                 </router-link>
+                                <div v-else @click="finishLection" class="next">
+                                    <span>Weiter zum Quiz!</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -297,6 +300,10 @@
                     this.pause();
                     this.play();
                 }
+            },
+            finishLection() {
+                this.reset();
+                this.$emit('switchMode');
             }
         },
         mounted() {

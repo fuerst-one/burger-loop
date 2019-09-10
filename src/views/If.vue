@@ -66,7 +66,7 @@
         data() {
             return {
                 sourcecodeGeneral: [
-                    'if ( $condition ) {',
+                    'if ($condition) {',
                     '   // Code',
                     '} else {',
                     '   // Code',

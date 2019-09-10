@@ -3,22 +3,29 @@
 
         <div class="canvas col-md-8 order-3 order-md-0">
             <h2 @click="check">
-                Spielfeld:
-                <span class="status">
-                    <svg v-if="correctCount === totalCount" height="17px" class="mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
-                    <span> {{ correctCount !== totalCount ? (correctCount + ' / ' + totalCount) : 'Geschafft' }}</span>
+                Code-Editor:
+                <span v-if="correctCount === totalCount && totalCount > 0" class="status">
+                    <svg height="17px" class="mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>
+                    <span> Geschafft!</span>
+                </span>
+                <span v-else class="status">
+                    <span>{{ correctCount + ' / ' + totalCount }}</span>
                 </span>
             </h2>
 
             <div class="canvas-wrapper row" :class="{ dropping: activeBrick }">
                 <div class="canvas-lines-wrapper container-fluid">
+
                     <div class="canvas-lines">
 
-                        <h1 v-if="finished" class="end-screen">
-                            <a href="javascript:" @click="toNextRoute" class="next">
-                                <span>{{ nextRoute === '/' ? 'Fertig!' : nextRoute === '/if' ? 'Zur ersten Aufgabe!' : 'Zur nächsten Aufgabe' }}</span>
-                            </a>
-                        </h1>
+                        <div :class="{ active: finished && !endScreenDismissed }" class="end-screen">
+                            <div @click="endScreenDismissed = true" class="reset">
+                                <span>Zurück zur Aufgabe</span>
+                            </div>
+                            <div @click="finishQuiz" class="next">
+                                <span>{{ nextRoute === '/' ? 'Fertig!' : 'Zur nächsten Lektion' }}</span>
+                            </div>
+                        </div>
 
                         <div class="canvas-line row mx-0">
                             <div class="drop-space show col-12" @click="dropToCanvas(-1, 0)" v-on:drop="dropToCanvas(-1, 0)" v-on:dragover="allowDrop">+</div>
@@ -37,7 +44,6 @@
                                 <div class="drop-space show col-12" @click="dropToCanvas(i+1, 0, i < solution.length-1)" v-on:drop="dropToCanvas(i+1, 0, i < solution.length-1)" v-on:dragover="allowDrop">+</div>
                             </div>
                         </template>
-
                     </div>
 
                     <div v-if="solution.length > 0" class="progress">
@@ -45,15 +51,15 @@
                         <div class="progress-bar bg-success" :style="correct"></div>
                     </div>
 
-                    <span v-if="bricks.length === 0" @click="removeBadge" :class="remove ? 'text-danger' : ''">
+                    <!--<span v-if="bricks.length === 0" @click="removeBadge" :class="remove ? 'text-danger' : ''">
                         {{ remove ? 'Aufgabe zurücksetzen' : 'Aufgabe zurücksetzen' }}
-                    </span>
+                    </span>-->
                     <span v-if="remove" @click="remove = false"> / Weiter</span>
                 </div>
             </div>
         </div>
         <div class="pool col-md-4 order-3 order-md-0">
-            <h2 class="d-none d-md-block">Puzzleteile:</h2>
+            <h2 class="d-none d-md-block">Bausteine:</h2>
 
             <div @click="dropToPool" v-on:drop="dropToPool" v-on:dragover="allowDrop" class="pool-wrapper container-fluid" :class="{ dropping: activeBrick }">
                 <span :class="{ show: activeBrick && activeBrick.source !== 'bricks' }" class="trash-screen">
@@ -81,7 +87,7 @@
         },
         data() {
             return {
-                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/map', '/foreach' ],
+                routes: [ '/if', '/while', '/do-while', '/array', '/for', '/hash', '/foreach' ],
                 bricks: [],
                 solution: [],
                 activeBrick: null,
@@ -92,7 +98,8 @@
                 exitIntent: false,
                 correctCount: 0,
                 setCount: 0,
-                totalCount: 0
+                totalCount: 0,
+                endScreenDismissed: false
             }
         },
         computed: {
@@ -271,9 +278,14 @@
                     this.remove = false;
                 }
                 else this.remove = true;
+            },
+            finishQuiz() {
+                window.dispatchEvent(new Event("navbarLinkClick"));
+                this.$router.push(this.nextRoute);
             }
         },
         mounted() {
+            this.totalCount = this.template.reduce((arr, con) => arr.concat(con), []).length;
             setTimeout(() => {
                 this.finished = window['badges'] && window['badges'].find(badge => badge === this.$route.name);
                 this.reset(this.finished);
@@ -299,15 +311,57 @@
         .end-screen {
             position: absolute;
             top: 0;
-            left: 1.5rem;
-            right: calc(1rem - 1px);
-            bottom: 1rem;
+            left: 0;
+            right: 0;
+            bottom: 0;
             border-radius: $border-radius;
             overflow: hidden;
 
             opacity: 0;
             pointer-events: none;
             transition: opacity .3s;
+
+            &.active {
+                opacity: 1;
+                pointer-events: unset;
+                z-index: 20;
+            }
+
+            .next, .reset {
+                display: block;
+                position: relative;
+                height: 50%;
+                width: 100%;
+                color: $white;
+                text-align: center;
+                font-size: 1.2rem;
+                font-weight: 500;
+                cursor: pointer;
+                opacity: .9;
+
+                transition: opacity .3s;
+
+                span {
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 100%;
+                    transform: translateY(-50%);
+                }
+
+                &:hover {
+                    opacity: 1;
+                    text-decoration: underline;
+                }
+            }
+
+            .next {
+                background: $primary;
+            }
+
+            .reset {
+                background: $dark;
+            }
         }
 
         scrollbar-color: $gray-800 $dark;
@@ -480,6 +534,7 @@
         color: $white;
         border-radius: $border-radius;
         box-shadow: 0 1px 3px 0 rgba($dark, .3);
+        cursor: pointer;
 
         &:hover, .canvas-wrapper & {
             background: $info;
@@ -487,6 +542,12 @@
 
         &.active, .canvas-wrapper &:hover {
             background: darken($info, 20);
+        }
+
+        .pool-brick-wrapper & {
+            overflow-x: auto;
+            text-overflow: ellipsis;
+            height: auto;
         }
     }
 

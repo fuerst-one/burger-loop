@@ -14,8 +14,8 @@
                         <h2>Leg' jetzt los:</h2>
 
                         <blockquote class="blockquote bg-light rounded py-2 px-3">
-                            <p>"Ich habe mit Burger-Loop so schnell und einfach die Basics gelernt, ich kann es absolut jedem empfehlen!"</p>
-                            <footer class="blockquote-footer">Jeder E-Commerce Student im 1. Semester</footer>
+                            <p>&raquo; Ich habe mit Burger Loop so schnell und einfach die Basics gelernt, ich kann es absolut jedem empfehlen! &laquo;</p>
+                            <footer class="blockquote-footer">Nahezu jeder E-Commerce Student im 1. Semester</footer>
                         </blockquote>
 
                         <div class="pl-2">

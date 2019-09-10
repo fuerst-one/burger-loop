@@ -79,7 +79,7 @@
                     '$hash = [',
                     '   $key => $value ,',
                     '   $key2 => $value2 // etc.',
-                    '] ;'
+                    '];'
                 ],
                 sourcecode: [
                     '// In der Küche kommen einige Bestellungen mit Tischnummern.',
