@@ -97,7 +97,7 @@
                     [0, 1, 0, 'Die Bestellung beinhaltet:'],
                     [3, 0, 1, '1 x Cheeseburger']
                     [4, 0, 2, '1 x Double-Cheeseburger']
-                    [5, 0, 3, '...und noch 'n Hamburger']
+                    [5, 0, 3, '...und noch \'n Hamburger']
                     [5, 0, 3, 'Lecker!']
                     [5, 1, 0, 'Um die Bestellung jetzt an die Küche zu geben...']
                     [2, 0, 0, '...verwendest du einfach den Array']
@@ -113,7 +113,7 @@
                     [9, 0, 0, 'Für uns aber kein Problem!']
                     [9, 0, 0, 'Mittels Index einfach das Feld bestimmen und - ']
                     [11, 0, 0, 'Einfach auslesen!']
-                    [13, 2, 3, 'Kein Ding für 'n King!']
+                    [13, 2, 3, 'Kein Ding für \'n King!']
                     [16, 0, 0, 'Darf es noch etwas sein?']
 
                 ],
