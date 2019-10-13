@@ -103,13 +103,31 @@
                     '',
                     '// *DING* Alle neuen Kunden bedient. Es läuft!'
                 ],
-                animation: [
-                    [0, 0, 0, 'TBD' ],
-                    [0, 0, 1, 'Cheeseburger' ],
-                    [0, 0, 2, 'Double-Cheeseburger' ],
-                    [0, 0, 3, 'Hamburger' ],
-                    [0, 0, 1, 'Cheeseburger' ],
-                    [6, 0, 1, 'Hamburger & Cheeseburger' ],
+                  animation: [
+	                    [0, 0, 0, 'Behalte einfach den Überblick']
+	                    [0, 1, 0, 'Aber wie?'],
+	                    [2, 0, 0, 'Mit einem Hash 0 Problemo!'],
+	                    [2, 0, 0, 'Die Bestellungen landen darin']
+	                    [3, 0, 0, 'Und bekommen Tischnummern zugewiesen']
+	                    [3, 1, 0, 'Welche Nummer?']
+	                    [3, 2, 0, 'Hier die 12!']
+	                    [3, 0, 0, 'Drin sind:']
+	                    [4, 0, 1, '1 x Cheeseburger']
+	                    [5, 0, 2, '...und 1 x Double-Cheeseburger']
+	                    [7, 1, 0, 'Was bekommt Tisch 8?']
+	                    [7, 1, 0, 'War da ein Milkshake dabei?']
+	                    [7, 0, 0, 'Schauen wir mal nach']
+	                    [8, 3, 3, '1 x Hamburger']
+	                    [9, 3, 1, '1 x Cheeseburger']
+	                    [10, 3, 0, '...']
+	                    [10, 3, 0, 'Oh no!']
+	                    [10, 3, 0, 'Wir brauchen hier keinen Milkshake!']
+	                    [10, 1, 1, 'Aber der Burger muss noch an den Tisch']
+	                    [13, 0, 1, 'Jetzt aber pronto!']
+	                    [15, 0, 0, 'Bestellung geht raus!']
+	                    
+	                ],
+
                 ],
                 burgerAnimation: [
                     [],
